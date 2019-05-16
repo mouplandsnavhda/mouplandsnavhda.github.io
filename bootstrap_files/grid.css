@@ -31,3 +31,11 @@
   width: 100%;
 }
 
+.wht {
+  background-color: white;
+  border: 1px solid rgba(0,0,0,.125);
+}
+
+.card-header {
+  background-color: white;
+}
