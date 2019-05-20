@@ -9,13 +9,11 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="./scripts/running_order.js"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -41,83 +39,34 @@
         <h2 class="mt-4">Running Order</h2>
         <p>The running order is subject to change at any time! Handlers will be notified when we know exactly which date
             you are running! </p>
+
         <h4 class="mt-4">Test Day 1</h4>
-
         <div class="row">
-            <div class="accordion hundo" id="accordionExample">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                UT Whitfield
-                            </button>
-                        </h5>
-                    </div>
+            <!-- update all rows to containers and remove top level container -->
+            <div class="table-responsive">
+                <table id="dayOne" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Test</th>
+                            <th scope="col">Breed</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Age(months)</th>
+                            <th scope="col">Handler</th>
+                            <th scope="col">Owner</th>
+                            <th scope="col">Paid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Handler: Brandon Whitfield <br />
-                            Owner: Brandon Whitfield <br />
-                            Name: Too Much Jager <br />
-                            Breed: GS <br />
-                            Age: 32 <br />
-                            Paid: Yes <br />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header" id="headingTwo">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                UT Ubbelode
-                            </button>
-                        </h5>
-                    </div>
-
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Handler: Bob Ubbelode <br />
-                            Owner: Bob Ubbelode <br />
-                            Name: Tessie <br />
-                            Breed: GS <br />
-                            Age: 42 <br />
-                            Paid: Yes <br />
-                        </div>
-                    </div>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
 
         <h4 class="mt-4">Test Day 2</h4>
 
         <div class="row">
-            <div class="accordion hundo" id="accordionExampletwo">
-                <div class="card">
-                    <div class="card-header" id="headingThree">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
-                                data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                NA Smith
-                            </button>
-                        </h5>
-                    </div>
 
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                        data-parent="#accordionExampletwo">
-                        <div class="card-body">
-                            Handler: Kyle Smith <br />
-                            Owner: Kyle Smith <br />
-                            Name: Cooper <br />
-                            Breed: VZ <br />
-                            Age: 9 <br />
-                            Paid: No <br />
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <h2 class="mt-4">Pre Test Responsibilities</h2>
