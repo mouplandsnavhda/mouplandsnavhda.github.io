@@ -13,7 +13,7 @@ var dogEntryUrl = 'https://mouplandsnavhda.github.io/data';//document.URL + "dat
 
 
 $.ajax({
-    url: dogEntryUrl,
+    url: "https://mouplandsnavhda.github.io/data",
     method: 'GET',
     cache: false,
     dataType: "json",
