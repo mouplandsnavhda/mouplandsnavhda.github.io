@@ -29,7 +29,17 @@
             "ownerName": "Kyle Smith",
             "ageInMonths": 11,
             "hasPaid": false
-        }
+        },
+        {
+            "id": 4,
+            "test": "UT",
+            "breed": "GS",
+            "name": "Doc",
+            "handlerName": "Tim Reynolds",
+            "ownerName": "Tim Reynolds",
+            "ageInMonths": 104,
+            "hasPaid": true
+         }
     ]
 
 }
