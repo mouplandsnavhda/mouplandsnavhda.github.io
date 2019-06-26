@@ -18,7 +18,7 @@
             "handlerName": "Tim Reynolds",
             "ownerName": "Tim Reynolds",
             "ageInMonths": 32,
-            "hasPaid": truec
+            "hasPaid": true
         },
         {
             "id": 3,
@@ -28,7 +28,7 @@
             "handlerName": "Kyle Smith",
             "ownerName": "Kyle Smith",
             "ageInMonths": 11,
-            "hasPaid": truec
+            "hasPaid": true
         },
         {
             "id": 4,
@@ -38,7 +38,7 @@
             "handlerName": "Tim Reynolds",
             "ownerName": "Tim Reynolds",
             "ageInMonths": 104,
-            "hasPaid": truec
+            "hasPaid": true
          },
          {
             "id": 5,
@@ -48,7 +48,7 @@
             "handlerName": "Gary Richard",
             "ownerName": "Gary Richard",
             "ageInMonths": 11,
-            "hasPaid": truec
+            "hasPaid": true
           },
           {
             "id": 6,
@@ -68,7 +68,7 @@
             "handlerName": "Eric Eyler",
             "ownerName": "Eric Eyler",
             "ageInMonths": 14,
-            "hasPaid": truep
+            "hasPaid": true
            }
              ]
 
