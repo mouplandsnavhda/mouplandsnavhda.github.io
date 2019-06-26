@@ -38,7 +38,7 @@
             "handlerName": "Tim Reynolds",
             "ownerName": "Tim Reynolds",
             "ageInMonths": 104,
-            "hasPaid": true
+            "hasPaid": "true_check"
          },
          {
             "id": 5,
