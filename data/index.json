@@ -50,7 +50,7 @@
             "ageInMonths": 11,
             "hasPaid": true
           }
-        {
+          {
             "id": 6,
             "test": "NA",
             "breed": "PP",
@@ -59,7 +59,7 @@
             "ownerName": "Billy Wundrack",
             "ageInMonths": 8,
             "hasPaid": true
-         },
+           },
              ]
 
 }
