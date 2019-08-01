@@ -89,7 +89,17 @@
             "ownerName": "Chris Jackson",
             "ageInMonths": 9,
             "hasPaid": true
-           }  
+           },
+           {
+        "id": 10,
+            "test": "NA",
+            "breed": "BS",
+            "name": "Oz",
+            "handlerName": "Tim Pleskac",
+            "ownerName": "Tim Pleskac",
+            "ageInMonths": 10,
+            "hasPaid": true
+           }
              ]
 
 }
