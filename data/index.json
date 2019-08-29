@@ -8,7 +8,8 @@
             "handlerName": "Brandon Whitfield",
             "ownerName": "Brandon Whitfield",
             "ageInMonths": 32,
-            "hasPaid": false
+            "hasPaid": false,
+            "day": "saturday"
         },
         {
             "id": 2,
@@ -18,7 +19,8 @@
             "handlerName": "Tim Reynolds",
             "ownerName": "Tim Reynolds",
             "ageInMonths": 32,
-            "hasPaid": true
+            "hasPaid": true,
+            "day": "saturday"
         },
         {
             "id": 3,
@@ -28,7 +30,8 @@
             "handlerName": "Kyle Smith",
             "ownerName": "Kyle Smith",
             "ageInMonths": 11,
-            "hasPaid": true
+            "hasPaid": true,
+            "day": "sunday"
         },
         {
             "id": 4,
@@ -38,7 +41,8 @@
             "handlerName": "Tim Reynolds",
             "ownerName": "Tim Reynolds",
             "ageInMonths": 104,
-            "hasPaid": "true_check"
+            "hasPaid": "true_check",
+            "day": "saturday"
          },
          {
             "id": 5,
@@ -48,7 +52,8 @@
             "handlerName": "Gary Richard",
             "ownerName": "Gary Richard",
             "ageInMonths": 11,
-            "hasPaid": true
+            "hasPaid": true,
+            "day": "sunday"
           },
           {
             "id": 6,
@@ -58,7 +63,8 @@
             "handlerName": "Billy Wundrack",
             "ownerName": "Billy Wundrack",
             "ageInMonths": 8,
-            "hasPaid": true
+            "hasPaid": true,
+            "day": "sunday"
            },  
            {
             "id": 7,
@@ -68,7 +74,8 @@
             "handlerName": "Eric Eyler",
             "ownerName": "Eric Eyler",
             "ageInMonths": 14,
-            "hasPaid": true
+            "hasPaid": true,
+            "day": "sunday"
            },  
            {
             "id": 8,
@@ -78,7 +85,8 @@
             "handlerName": "Sean Timmens",
             "ownerName": "Sean Timmens",
             "ageInMonths": 27,
-            "hasPaid": false
+            "hasPaid": false,
+            "day": "saturday"
            },
            {
             "id": 9,
@@ -88,7 +96,8 @@
             "handlerName": "Chris Jackson",
             "ownerName": "Chris Jackson",
             "ageInMonths": 9,
-            "hasPaid": true
+            "hasPaid": true,
+            "day": "sunday"
            },
            {
         "id": 10,
@@ -98,7 +107,8 @@
             "handlerName": "Tim Pleskac",
             "ownerName": "Tim Pleskac",
             "ageInMonths": 10,
-            "hasPaid": true
+            "hasPaid": true,
+            "day": "sunday"
            },
            {
         "id": 11,
@@ -108,7 +118,8 @@
             "handlerName": "Adam Michael Lee",
             "ownerName": "Adam Michael Lee",
             "ageInMonths": 1,
-            "hasPaid": true
+            "hasPaid": true,
+            "day": "sunday"
            },
            {
         "id": 12,
@@ -118,7 +129,8 @@
             "handlerName": "Tommy Ishmael",
             "ownerName": "Robin Ishmael",
             "ageInMonths": 15,
-            "hasPaid": true
+            "hasPaid": true,
+            "day": "sunday"
            },
            {
         "id": 13,
@@ -128,7 +140,8 @@
             "handlerName": "Jeff House",
             "ownerName": "Jeff House",
             "ageInMonths":28,
-            "hasPaid": true
+            "hasPaid": true,
+            "day": "saturday"
            },
            {
         "id": 14,
@@ -138,7 +151,8 @@
             "handlerName": "Don Semple",
             "ownerName": "Don Semple",
             "ageInMonths":12,
-            "hasPaid": true
+            "hasPaid": true,
+            "day": "sunday"
            }
              ]
 
