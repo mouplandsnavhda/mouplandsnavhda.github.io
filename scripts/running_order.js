@@ -33,7 +33,14 @@ function doIt(data){
                     .replace("@handler", value.handlerName)
                     .replace("@owner", value.ownerName)
                     .replace("@paid", value.hasPaid);
-        $("#dayOne > tbody").append(newTemplate);
+
+        if(value.day === "saturday"){
+            $("#saturday > tbody").append(newTemplate);
+        }
+        if(value.day === "sunday"){
+            $("#sunday > tbody").append(newTemplate);
+        }
+        
     });
 }
 
