@@ -80,11 +80,11 @@
            {
             "id": 8,
             "test": "UT",
-            "breed": "VS",
-            "name": "Rags",
-            "handlerName": "Sean Timmens",
-            "ownerName": "Sean Timmens",
-            "ageInMonths": 27,
+            "breed": "GS",
+            "name": "Ike",
+            "handlerName": "Tim Materkowski",
+            "ownerName": "Tim Materkowski",
+            "ageInMonths": 0,
             "hasPaid": false,
             "day": "saturday"
            },
