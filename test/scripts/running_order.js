@@ -9,7 +9,7 @@ var dogEntryTemplate = ' \
     <td>@paid</td> \
 </tr> \
 ';
-var dogEntryUrl = document.URL.includes('localhost') ? `${document.URL}data/index.json` : 'https://mouplands.org/test/data';//document.URL + "data";
+var dogEntryUrl = document.URL.includes('localhost') ? `${document.URL}data/index.json` : 'https://www.mouplands.org/test/data';//document.URL + "data";
 
 
 $.ajax({
