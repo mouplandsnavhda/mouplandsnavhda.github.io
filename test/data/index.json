@@ -7,8 +7,8 @@
             "name": "Jaeger",
             "handlerName": "Billy Wundrack",
             "ownerName": "Billy Wundrack",
-            "ageInMonths": 0,
-            "hasPaid": false,
+            "ageInMonths": 37,
+            "hasPaid": true,
             "day": "saturday"
         },
         {
@@ -18,8 +18,8 @@
             "name": "Ripley",
             "handlerName": "Billy Wundrack",
             "ownerName": "Billy Wundrack",
-            "ageInMonths": 0,
-            "hasPaid": false,
+            "ageInMonths": 13,
+            "hasPaid": true,
             "day": "sunday"
         }
     ]
