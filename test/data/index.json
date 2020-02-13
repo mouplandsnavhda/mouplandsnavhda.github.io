@@ -32,6 +32,6 @@
             "ageInMonths":13 ,
             "hasPaid": true,
             "day": "saturday"
-        },
+        }
     ]
 }
