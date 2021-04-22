@@ -43,6 +43,8 @@
             Mallard Valley<br />
             26886 Monroe Rd. 1103 Madison, MO 65260
         </p>
+        <p id="days-until-test"></p>
+        <p id="weeks-until-test"></p>
 
         <h2 class="mt-4">Payment Options</h2>
         <p>Before you pay please contact our test secretary to make sure there is an opening! Refunds will not be granted if you drop within 30 days of the test.</p>
@@ -268,5 +270,23 @@
         <span class="badge badge-primary">v0.6.3</span>
     </div>
 </body>
+<script>
+    function daysIntoYear(date){
+        return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
+    }
+
+    var today = daysIntoYear(new Date());
+    var test = daysIntoYear(new Date('09/25/2021'));
+
+    var daysUntilTest = test - today;
+    var weeksUntilTest = Math.trunc(daysUntilTest/7);
+
+    var daysElement = document.getElementById('days-until-test');
+    daysElement.innerHTML += 'days until test:' + daysUntilTest
+    
+    var weeksElement = document.getElementById('weeks-until-test');
+    weeksElement.innerHTML += 'weeks until test:' + weeksUntilTest
+
+</script>
 
 </html>
