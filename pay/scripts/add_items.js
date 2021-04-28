@@ -14,6 +14,7 @@ var cardTemplate = ' \
 </div> \
 ';
 var dogEntryUrl = document.URL.includes('localhost') ? `${document.URL}data/index.json` : 'https://www.mouplands.org/pay/data';//document.URL + "data";
+// var dogEntryUrl = `${document.URL}data/index.json`
 
 
 $.ajax({

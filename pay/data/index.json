@@ -2,43 +2,75 @@
     "data": [
         {
             "row": "swag",
-            "buttonId": "yeti-bowl",
-            "itemTitle": "yeti bowl (test)",
+            "buttonId": "t-shirt",
+            "itemTitle": "T-shirt",
             "itemImageName": "not found",
-            "itemDescription": "small over priced bowl",
-            "cost": 60.00
+            "itemDescription": "sizes S-XXL",
+            "cost": 20.00
         },
         {
             "row": "swag",
-            "buttonId": "leather-leash",
-            "itemTitle": "leather leash (test)",
+            "buttonId": "hoodie",
+            "itemTitle": "Hoodie",
             "itemImageName": "not found",
-            "itemDescription": "1/2 inch leather lead",
-            "cost": 40.00
+            "itemDescription": "sizes S-XXL",
+            "cost": 35.00
         },
         {
-            "row": "test-entry",
-            "buttonId": "invitational",
-            "itemTitle": "invitational (test)",
+            "row": "swag",
+            "buttonId": "artic-cup",
+            "itemTitle": "Artic Cup",
             "itemImageName": "not found",
-            "itemDescription": "entry fee for the invitational",
-            "cost": 500.00
+            "itemDescription": "24oz",
+            "cost": 35.00
         },
         {
-            "row": "test-entry",
-            "buttonId": "fake",
-            "itemTitle": "fake (test)",
+            "row": "swag",
+            "buttonId": "sticker",
+            "itemTitle": "Sticker",
             "itemImageName": "not found",
-            "itemDescription": "a",
-            "cost": 500.00
+            "itemDescription": "5x7\"",
+            "cost": 5.00
         },
         {
             "row": "membership",
-            "buttonId": "legacy",
-            "itemTitle": "legacy (test)",
+            "buttonId": "annual-membership",
+            "itemTitle": "Annual Membership",
             "itemImageName": "not found",
-            "itemDescription": "this is for old people",
-            "cost": 10.00
+            "itemDescription": "Annual membership to be paid at the first of the year.",
+            "cost": 35.00
+        },
+        {
+            "row": "test-entry",
+            "buttonId": "member-na",
+            "itemTitle": "Member NA",
+            "itemImageName": "not found",
+            "itemDescription": "NA test entry for members",
+            "cost": 125.00
+        },
+        {
+            "row": "test-entry",
+            "buttonId": "member-ut-upt",
+            "itemTitle": "Member UT/UPT",
+            "itemImageName": "not found",
+            "itemDescription": "UT/UPT test entry for members",
+            "cost": 150.00
+        },
+        {
+            "row": "test-entry",
+            "buttonId": "non-member-na",
+            "itemTitle": "Non-Member NA",
+            "itemImageName": "not found",
+            "itemDescription": "NA test entry for non-members",
+            "cost": 150.00
+        },
+        {
+            "row": "test-entry",
+            "buttonId": "non-member-ut-upt",
+            "itemTitle": "Non-Member UT/UPT",
+            "itemImageName": "not found",
+            "itemDescription": "UT/UPT test entry for non-members",
+            "cost": 185.00
         }
     ]
 }
