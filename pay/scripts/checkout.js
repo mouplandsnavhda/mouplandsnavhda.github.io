@@ -1,0 +1,7 @@
+function loadCheckoutModal(){
+
+}
+
+function deleteItem(){
+    
+}

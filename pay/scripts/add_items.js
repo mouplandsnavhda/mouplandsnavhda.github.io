@@ -37,8 +37,6 @@ function doIt(data){
                     .replace("@itemDescription", value.itemDescription)
                     .replace("@buttonId", value.buttonId);
         
-        var row = document.getElementById(value.row);
-        
         $(`#${value.row}`).append(newTemplate);
         
         
