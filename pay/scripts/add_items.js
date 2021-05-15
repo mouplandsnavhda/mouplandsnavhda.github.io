@@ -13,12 +13,12 @@ var cardTemplate = ' \
     </div> \
 </div> \
 ';
-var dogEntryUrl = document.URL.includes('localhost') ? `${document.URL}data/index.json` : 'https://www.mouplands.org/pay/data';//document.URL + "data";
-// var dogEntryUrl = `${document.URL}data/index.json`
+var itemsUrl = document.URL.includes('localhost') ? `${document.URL}data/index.json` : 'https://www.mouplands.org/pay/data';//document.URL + "data";
+// var itemsUrl = `${document.URL}data/index.json`
 
 
 $.ajax({
-    url: dogEntryUrl,
+    url: itemsUrl,
     method: 'GET',
     cache: false,
     dataType: "json",
