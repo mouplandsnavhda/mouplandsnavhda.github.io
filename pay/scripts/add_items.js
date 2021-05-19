@@ -8,7 +8,7 @@ var cardTemplate = ' \
         <div class="card-body"> \
             <h5 class="card-title">$@cost</h5> \
             <h6 class="card-subtitle mb-2 text-muted">@itemDescription</h6> \
-            <button id="@buttonId" type="button" class="btn btn-outline-primary">Add to cart</button> \
+            <button id="@buttonId" type="button" data-id="@theId" class="btn btn-outline-primary">Add to cart</button> \
         </div> \
     </div> \
 </div> \
@@ -35,7 +35,8 @@ function doIt(data){
                     .replace("@itemTitle", value.itemTitle)
                     .replace("@cost", value.cost)
                     .replace("@itemDescription", value.itemDescription)
-                    .replace("@buttonId", value.buttonId);
+                    .replace("@buttonId", value.buttonId)
+                    .replace("@theId", value.id);
         
         $(`#${value.row}`).append(newTemplate);
         
@@ -49,7 +50,6 @@ function doIt(data){
             }
             cart.items.push({"id": value.buttonId, "date": new Date().toLocaleDateString()});
             sessionStorage.setItem("cart", JSON.stringify(cart));
-            // alert(x.srcElement.id + 'was put into the session storage');
         }
     });
 }

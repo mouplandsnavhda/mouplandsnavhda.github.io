@@ -2,7 +2,7 @@ var checkoutRow = '<div class="row" style="padding-bottom:3px;"> \
     <div class="col">@itemTitle</div> \
     <div class="col">@cost</div> \
     <div class="col text-right"> \
-        <button type="button" class="btn btn-danger"> \
+        <button id="@buttonId" type="button" class="btn btn-danger"> \
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"> \
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/> \
                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/> \
@@ -50,25 +50,27 @@ function loadCheckoutModal(){
 
         var newRow = checkoutRow
                     .replace("@itemTitle", checkoutItem.itemTitle)
-                    .replace("@cost", checkoutItem.cost);
+                    .replace("@cost", checkoutItem.cost)
+                    .replace("@buttonId", `${checkoutItem.buttonId}-co`);
         
         $('#checkout-container').append(newRow);
 
 
        
         
-        // var buttonn = document.getElementById(value.buttonId);
+        var buttonn = document.getElementById(`${checkoutItem.buttonId}-co`);
         
-        // buttonn.onclick = (x) => {
-        //     //remove the item from the grid, and remove it from the sessionStorage
-        //     var cart = JSON.parse(sessionStorage.getItem("cart"));
-        //     if(!cart){
-        //         cart = {items: []};
-        //     }
-        //     cart.items.push({"id": value.buttonId, "date": new Date().toLocaleDateString()});
-        //     sessionStorage.setItem("cart", JSON.stringify(cart));
-        //     // alert(x.srcElement.id + 'was put into the session storage');
-        // }
+        buttonn.onclick = (x) => {
+            //remove the item from the grid, and remove it from the sessionStorage
+            var cart = JSON.parse(sessionStorage.getItem("cart"));
+            if(!cart){
+                cart = {items: []};
+            }
+            var newitems = cart.items.filter((x) => x.id!=checkoutItem.buttonId);
+            cart.items = newitems;
+            sessionStorage.setItem("cart", JSON.stringify(cart));
+            
+        }
     });
 
     var globalItemButtonIds = globalItems.map(gItem => {return gItem.buttonId});
