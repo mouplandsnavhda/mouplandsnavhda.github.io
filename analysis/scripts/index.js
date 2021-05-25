@@ -15,6 +15,7 @@ function genTicks() {
 
 var options = {
     legend: { position: 'none' },
+    trendlines: { 0: { type: 'exponential', color: 'red' } },
     hAxis: {
         viewWindow: {
             min: 0,
@@ -36,16 +37,16 @@ var options = {
 };
 
 async function begin() {
-    try{
+    try {
         await gethistograms();
         populateTestByYear();
         populatePrizesByYear();
-    }catch(e){
+    } catch (e) {
         console.log(e.responseText);
     }
 }
 
-async function gethistograms(){
+async function gethistograms() {
     await $.ajax({
         url: gs2010,
         method: 'GET',
@@ -66,12 +67,12 @@ async function gethistograms(){
 function calc10(data) {
     gdata.push(...data.data);
     var slimData = slimDatas(data);
-    populateHistogram(slimData, 'gs_2010', 'GS Utility scores from 10 - 15')
+    populateHistogram(slimData, 'gs_2010', 'GS Utility scores from 2010 - 2015')
 }
 function calc15(data) {
     gdata.push(...data.data);
     var slimData = slimDatas(data);
-    populateHistogram(slimData, 'gs_2015', 'GS Utility scores from 16 - 21')
+    populateHistogram(slimData, 'gs_2015', 'GS Utility scores from 2016 - (spring)2021')
 }
 
 function slimDatas(data) {
@@ -105,33 +106,57 @@ function populateTestByYear() {
                 min: 2010,
                 max: 2022
             },
-            ticks: [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022]
+            ticks: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
         },
     };
-    byYearOptions.title = `dogs tested by year. total: ${datas.length -1}`
-    
+    byYearOptions.title = `dogs tested by year. total: ${datas.length - 1}`
+
     google.charts.load("current", { packages: ["corechart"] });
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
         var data = google.visualization.arrayToDataTable(datas);
         var chart = new google.visualization.Histogram(document.getElementById('gs_by_year'));
-        
+
         chart.draw(data, byYearOptions);
     }
 }
 
+var graphData = [];
 function populatePrizesByYear() {
     var datas = gdata.map((x) => {
         return [x[1], new Date(x[18]).getFullYear(), x[21]]
     });
-    
-    var p1 = datas.filter(x => x[2] == 'I').map(y => {return [y[0],y[1]]});
+    // dog, year, prize
+    var years = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021];
+
+    years.forEach(year => {
+
+        var yearList = datas.filter(x => x[1] == year);
+        var dogsTestedInYear = yearList.length;
+
+        var p1ct = yearList.filter(x => x[2] == 'I').length;
+        var p2ct = yearList.filter(x => x[2] == 'II').length;
+        var p3ct = yearList.filter(x => x[2] == 'III').length;
+        var p0ct = yearList.filter(x => x[2].toLowerCase() == 'none').length;
+        graphData.push(
+            [
+                year.toString(),
+                p1ct/dogsTestedInYear*100,
+                p2ct/dogsTestedInYear*100,
+                p3ct/dogsTestedInYear*100,
+                p0ct/dogsTestedInYear*100,
+            ]
+        );
+    });
+    graphData = [['year', 'p1', 'p2', 'p3', 'p0'], ...graphData];
+
+    var p1 = datas.filter(x => x[2] == 'I').map(y => { return [y[0], y[1]] });
     p1 = [['dog', 'prize'], ...p1];
-    var p2 = datas.filter(x => x[2] == 'II').map(y => {return [y[0],y[1]]});
+    var p2 = datas.filter(x => x[2] == 'II').map(y => { return [y[0], y[1]] });
     p2 = [['dog', 'prize'], ...p2];
-    var p3 = datas.filter(x => x[2] == 'III').map(y => {return [y[0],y[1]]});
+    var p3 = datas.filter(x => x[2] == 'III').map(y => { return [y[0], y[1]] });
     p3 = [['dog', 'prize'], ...p3];
-    var p0 = datas.filter(x => x[2].toLowerCase() == 'none').map(y => {return [y[0],y[1]]});
+    var p0 = datas.filter(x => x[2].toLowerCase() == 'none').map(y => { return [y[0], y[1]] });
     p0 = [['dog', 'prize'], ...p0];
 
     var byYearOptions = {
@@ -141,16 +166,16 @@ function populatePrizesByYear() {
                 min: 2010,
                 max: 2022
             },
-            ticks: [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022]
+            ticks: years
         },
     };
-    
+
     google.charts.load("current", { packages: ["corechart"] });
     google.charts.setOnLoadCallback(drawChart1);
     function drawChart1() {
         var data = google.visualization.arrayToDataTable(p1);
         var chart = new google.visualization.Histogram(document.getElementById('gs_prize1_by_year'));
-        
+
         byYearOptions.title = `Prize 1 by year. total: ${p1.length}`
         chart.draw(data, byYearOptions);
     }
@@ -160,29 +185,46 @@ function populatePrizesByYear() {
     function drawChart2() {
         var data = google.visualization.arrayToDataTable(p2);
         var chart = new google.visualization.Histogram(document.getElementById('gs_prize2_by_year'));
-        
+
         byYearOptions.title = `Prize 2 by year. total: ${p2.length}`
         chart.draw(data, byYearOptions);
     }
-    
+
     google.charts.load("current", { packages: ["corechart"] });
     google.charts.setOnLoadCallback(drawChart3);
     function drawChart3() {
         var data = google.visualization.arrayToDataTable(p3);
         var chart = new google.visualization.Histogram(document.getElementById('gs_prize3_by_year'));
-        
+
         byYearOptions.title = `Prize 3 by year. total: ${p3.length}`
         chart.draw(data, byYearOptions);
     }
-    
+
     google.charts.load("current", { packages: ["corechart"] });
     google.charts.setOnLoadCallback(drawChart0);
     function drawChart0() {
         var data = google.visualization.arrayToDataTable(p0);
         var chart = new google.visualization.Histogram(document.getElementById('gs_prize0_by_year'));
-        
+
         byYearOptions.title = `Prize None by year. total: ${p0.length}`
         chart.draw(data, byYearOptions);
     }
+
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChartPrizePercentage);
+    function drawChartPrizePercentage() {
+        var data = google.visualization.arrayToDataTable(graphData);
+
+        var options = {
+          chart: {
+            title: 'Prize Breakdown',
+            subtitle: 'Expressed in percentages',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('gs_prize_percentages_by_year'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
 }
 
