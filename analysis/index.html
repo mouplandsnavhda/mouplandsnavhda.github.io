@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>MoUplands - NAVHDA Test</title>
+    <link rel="icon" href="https://www.navhda.org/wp-content/uploads/2019/09/cropped-logo_sm-192x192.png" sizes="192x192">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- <script src="./scripts/running_order.js"></script> -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="../mouplands_cover_files/grid.css" rel="stylesheet">
+</head>
+
+<body class="py-4">
+    <div class="container">
+        <div class="jumbotron wht">
+            <h1 class="display-3">Utility Analysis</h1>
+            <p>
+                Quick and not comprehensive analysis of 10 years worth of utility data.
+            </p>
+        </div>
+    </div> <!-- Jumbotron container -->
+    
+    
+    <div class="container">
+        <div id="gs_all"></div>
+        <div id="gs_no_parent"></div>
+        <div id="gs_one_parent"></div>
+        <div id="gs_both_parent"></div>
+    </div> <!-- /container -->
+    
+</body>
+<script>
+    google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Dog', 'UT Score'],
+          ['Acrocanthosaurus (top-spined lizard)', 200],
+          ['Albertosaurus (Alberta lizard)', 183],
+          ['Allosaurus (other lizard)', 134],
+          ['Apatosaurus (deceptive lizard)', 204],
+          ['Archaeopteryx (ancient wing)', 202],
+          ['Argentinosaurus (Argentina lizard)', 201],
+          ['Baryonyx (heavy claws)', 202],
+          ['Brachiosaurus (arm lizard)', 132],
+          ['Ceratosaurus (horned lizard)', 176],
+          ['Coelophysis (hollow form)', 198],
+          ['Compsognathus (elegant jaw)', 175],
+          ['Deinonychus (terrible claw)', 186],
+          ['Diplodocus (double beam)', 200],
+          ['Dromicelomimus (emu mimic)', 100],
+          ['Gallimimus (fowl mimic)', 199],
+          ['Mamenchisaurus (Mamenchi lizard)', 199],
+          ['Megalosaurus (big lizard)', 145],
+          ['Microvenator (small hunter)', 155],
+          ['Ornithomimus (bird mimic)', 168],
+          ['Oviraptor (egg robber)', 135],
+          ['Plateosaurus (flat lizard)', 111],
+          ['Sauronithoides (narrow-clawed lizard)', 200],
+          ['Seismosaurus (tremor lizard)', 203],
+          ['Spinosaurus (spiny lizard)', 204],
+          ['Supersaurus (super lizard)', 197],
+          ['Tyrannosaurus (tyrant lizard)', 196],
+          ['Ultrasaurus (ultra lizard)', 199],
+          ['Velociraptor (swift robber)', 198]]);
+
+        var tickss = [];
+        var ct = 1;
+        while(ct <= 204){
+            tickss.push(ct);
+            ct++;
+        }
+        var options = {
+          title: 'GS utility test scores',
+          legend: { position: 'none' },
+          hAxis: {
+            viewWindow: {
+                min: 0,
+                max: 204
+            },
+            // ticks: tickss, // display labels every 25
+        },
+                histogram: {
+                    bucketSize: 2,
+                    maxNumBuckets: 102,
+                    // minValue: 1,
+                    maxValue: 102
+                }
+        };
+        /*
+        <div id="gs_all"></div>
+        <div id="gs_no_parent"></div>
+        <div id="gs_one_parent"></div>
+        <div id="gs_both_parent"></div>
+        */
+        var chart = new google.visualization.Histogram(document.getElementById('gs_all'));
+        options.title="gs utility test scores"
+        chart.draw(data, options);
+        var chart = new google.visualization.Histogram(document.getElementById('gs_no_parent'));
+        options.title="gs utility test scores where neither parent was tested"
+        chart.draw(data, options);
+        var chart = new google.visualization.Histogram(document.getElementById('gs_one_parent'));
+        options.title="gs utility test scores where one parent was tested"
+        chart.draw(data, options);
+        var chart = new google.visualization.Histogram(document.getElementById('gs_both_parent'));
+        options.title="gs utility test scores where both parents were tested"
+        chart.draw(data, options);
+      }
+</script>
+
+</html>
