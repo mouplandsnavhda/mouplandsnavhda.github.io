@@ -92,22 +92,9 @@ function populateHistogram(datas, divId, title) {
 }
 
 function populateTestByYear() {
-    console.log(gdata.length);
     var datas = gdata.map((x) => {
-        if(isNaN(new Date(x[18]))){
-            console.log(x);
-        }
         return [x[1], new Date(x[18]).getFullYear()]
     });
-    var arr = datas.map(x => {return x[1]});
-    const countUnique = arr => {
-        const counts = {};
-        for (var i = 0; i < arr.length; i++) {
-           counts[arr[i]] = 1 + (counts[arr[i]] || 0);
-        };
-        return counts;
-     };
-     console.log(countUnique(arr));
 
     datas = [['dog', 'year tested'], ...datas];
     var byYearOptions = {
@@ -131,4 +118,32 @@ function populateTestByYear() {
         chart.draw(data, byYearOptions);
     }
 }
+
+// function populatePrizesByYear() {
+//     var datas = gdata.map((x) => {
+//         return [x[1], new Date(x[18]).getFullYear()]
+//     });
+
+//     datas = [['dog', 'year tested'], ...datas];
+//     var byYearOptions = {
+//         legend: { position: 'none' },
+//         hAxis: {
+//             viewWindow: {
+//                 min: 2010,
+//                 max: 2022
+//             },
+//             ticks: [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022]
+//         },
+//     };
+//     byYearOptions.title = `dogs tested by year. total: ${datas.length}`
+    
+//     google.charts.load("current", { packages: ["corechart"] });
+//     google.charts.setOnLoadCallback(drawChart);
+//     function drawChart() {
+//         var data = google.visualization.arrayToDataTable(datas);
+//         var chart = new google.visualization.Histogram(document.getElementById('gs_by_year'));
+        
+//         chart.draw(data, byYearOptions);
+//     }
+// }
 
