@@ -41,8 +41,14 @@ async function begin() {
         await gethistograms();
         populateTestByYear();
         populatePrizesByYear();
-        populateBreeders();
-        populateSires();
+        populateBreeders('I', 'gs_prize1_breeders');
+        populateBreeders('II', 'gs_prize2_breeders');
+        populateBreeders('III', 'gs_prize3_breeders');
+        populateBreeders('None', 'gs_prize0_breeders');
+        populateSires('I', 'gs_prize1_sires');
+        populateSires('II', 'gs_prize2_sires');
+        populateSires('III', 'gs_prize3_sires');
+        populateSires('None', 'gs_prize0_sires');
     } catch (e) {
         console.log(e.responseText);
     }
@@ -231,14 +237,14 @@ function populatePrizesByYear() {
 }
 
 
-function populateBreeders() {
+function populateBreeders(prize, tag) {
     google.charts.load('current', { 'packages': ['table'] });
     google.charts.setOnLoadCallback(drawTable);
 
     function drawTable() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Name');
-        data.addColumn('number', 'P1 Dogs');
+        data.addColumn('number', 'Prize Count');
 
         const countUnique = arr => {
             const counts = {};
@@ -248,7 +254,7 @@ function populateBreeders() {
             return counts;
         };
 
-        var p1Breeders = gdata.filter(x => x[21] == 'I').map(x => x[7]);
+        var p1Breeders = gdata.filter(x => x[21] == prize).map(x => x[7]);
         var breedersObj = countUnique(p1Breeders);
 
         var breedersarr = [];
@@ -258,20 +264,20 @@ function populateBreeders() {
 
         data.addRows(breedersarr);
 
-        var table = new google.visualization.Table(document.getElementById('gs_prize1_breeders'));
+        var table = new google.visualization.Table(document.getElementById(tag));
 
         table.draw(data, {page: 'enable', showRowNumber: true, width: '100%', height: '100%' });
     }
 }
 
-function populateSires() {
+function populateSires(prize, tag) {
     google.charts.load('current', { 'packages': ['table'] });
     google.charts.setOnLoadCallback(drawTable);
 
     function drawTable() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Name');
-        data.addColumn('number', 'P1 Dogs');
+        data.addColumn('number', 'Prize Count');
 
         const countUnique = arr => {
             const counts = {};
@@ -281,7 +287,7 @@ function populateSires() {
             return counts;
         };
 
-        var p1Breeders = gdata.filter(x => x[21] == 'I').map(x => x[3]);
+        var p1Breeders = gdata.filter(x => x[21] == prize).map(x => x[3]);
         var breedersObj = countUnique(p1Breeders);
 
         var breedersarr = [];
@@ -291,7 +297,7 @@ function populateSires() {
 
         data.addRows(breedersarr);
 
-        var table = new google.visualization.Table(document.getElementById('gs_prize1_sires'));
+        var table = new google.visualization.Table(document.getElementById(tag));
 
         table.draw(data, {page: 'enable', showRowNumber: true, width: '100%', height: '100%' });
     }
