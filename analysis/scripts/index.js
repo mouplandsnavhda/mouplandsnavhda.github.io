@@ -41,14 +41,9 @@ async function begin() {
         await gethistograms();
         populateTestByYear();
         populatePrizesByYear();
-        populateBreeders('I', 'gs_prize1_breeders');
-        populateBreeders('II', 'gs_prize2_breeders');
-        populateBreeders('III', 'gs_prize3_breeders');
-        populateBreeders('None', 'gs_prize0_breeders');
-        populateSires('I', 'gs_prize1_sires');
-        populateSires('II', 'gs_prize2_sires');
-        populateSires('III', 'gs_prize3_sires');
-        populateSires('None', 'gs_prize0_sires');
+        populateBreeders();
+        populateSires();
+        
     } catch (e) {
         console.log(e.responseText);
     }
@@ -237,14 +232,17 @@ function populatePrizesByYear() {
 }
 
 
-function populateBreeders(prize, tag) {
+function populateBreeders() {
     google.charts.load('current', { 'packages': ['table'] });
     google.charts.setOnLoadCallback(drawTable);
 
     function drawTable() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Name');
-        data.addColumn('number', 'Prize Count');
+        data.addColumn('number', 'Prize 1'); 
+        data.addColumn('number', 'Prize 2'); 
+        data.addColumn('number', 'Prize 3'); 
+        data.addColumn('number', 'Prize 0'); 
 
         const countUnique = arr => {
             const counts = {};
@@ -254,30 +252,45 @@ function populateBreeders(prize, tag) {
             return counts;
         };
 
-        var p1Breeders = gdata.filter(x => x[21] == prize).map(x => x[7]);
-        var breedersObj = countUnique(p1Breeders);
+        var breeders = gdata.map(x => x[7]);
+        var distinctBreeders = [...new Set(breeders)];
 
-        var breedersarr = [];
-        for (const property in breedersObj) {
-            breedersarr.push([property, breedersObj[property]]);
-        }
 
-        data.addRows(breedersarr);
 
-        var table = new google.visualization.Table(document.getElementById(tag));
+        var p1 = countUnique(gdata.filter(x => x[21] == "I").map(x => x[7]));
+        var p2 = countUnique(gdata.filter(x => x[21] == "II").map(x => x[7]));
+        var p3 = countUnique(gdata.filter(x => x[21] == "III").map(x => x[7]));
+        var p0 = countUnique(gdata.filter(x => x[21] == "None").map(x => x[7]));
+
+        var sireRollup = [];
+
+        sireRollup = distinctBreeders.map(uSire => [
+            uSire,
+            p1[uSire] ?? 0,
+            p2[uSire] ?? 0,
+            p3[uSire] ?? 0,
+            p0[uSire] ?? 0,
+        ]);
+
+        data.addRows(sireRollup);
+
+        var table = new google.visualization.Table(document.getElementById('gs_prize_breeders'));
 
         table.draw(data, {page: 'enable', showRowNumber: true, width: '100%', height: '100%' });
     }
 }
 
-function populateSires(prize, tag) {
+function populateSires() {
     google.charts.load('current', { 'packages': ['table'] });
     google.charts.setOnLoadCallback(drawTable);
 
     function drawTable() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Name');
-        data.addColumn('number', 'Prize Count');
+        data.addColumn('number', 'Prize 1'); 
+        data.addColumn('number', 'Prize 2'); 
+        data.addColumn('number', 'Prize 3'); 
+        data.addColumn('number', 'Prize 0'); 
 
         const countUnique = arr => {
             const counts = {};
@@ -287,17 +300,29 @@ function populateSires(prize, tag) {
             return counts;
         };
 
-        var p1Breeders = gdata.filter(x => x[21] == prize).map(x => x[3]);
-        var breedersObj = countUnique(p1Breeders);
+        var sires = gdata.map(x => x[3]);
+        var distinctSires = [...new Set(sires)];
 
-        var breedersarr = [];
-        for (const property in breedersObj) {
-            breedersarr.push([property, breedersObj[property]]);
-        }
 
-        data.addRows(breedersarr);
 
-        var table = new google.visualization.Table(document.getElementById(tag));
+        var p1Sires = countUnique(gdata.filter(x => x[21] == "I").map(x => x[3]));
+        var p2Sires = countUnique(gdata.filter(x => x[21] == "II").map(x => x[3]));
+        var p3Sires = countUnique(gdata.filter(x => x[21] == "III").map(x => x[3]));
+        var p0Sires = countUnique(gdata.filter(x => x[21] == "None").map(x => x[3]));
+
+        var sireRollup = [];
+
+        sireRollup = distinctSires.map(uSire => [
+            uSire,
+            p1Sires[uSire] ?? 0,
+            p2Sires[uSire] ?? 0,
+            p3Sires[uSire] ?? 0,
+            p0Sires[uSire] ?? 0,
+        ]);
+
+        data.addRows(sireRollup);
+
+        var table = new google.visualization.Table(document.getElementById('gs_prize_sires'));
 
         table.draw(data, {page: 'enable', showRowNumber: true, width: '100%', height: '100%' });
     }
