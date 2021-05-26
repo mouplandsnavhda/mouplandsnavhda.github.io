@@ -43,6 +43,7 @@ async function begin() {
         populatePrizesByYear();
         populateBreeders();
         populateSires();
+        populateDams();
         
     } catch (e) {
         console.log(e.responseText);
@@ -323,6 +324,54 @@ function populateSires() {
         data.addRows(sireRollup);
 
         var table = new google.visualization.Table(document.getElementById('gs_prize_sires'));
+
+        table.draw(data, {page: 'enable', showRowNumber: true, width: '100%', height: '100%' });
+    }
+}
+
+function populateDams() {
+    google.charts.load('current', { 'packages': ['table'] });
+    google.charts.setOnLoadCallback(drawTable);
+
+    function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Name');
+        data.addColumn('number', 'Prize 1'); 
+        data.addColumn('number', 'Prize 2'); 
+        data.addColumn('number', 'Prize 3'); 
+        data.addColumn('number', 'Prize 0'); 
+
+        const countUnique = arr => {
+            const counts = {};
+            for (var i = 0; i < arr.length; i++) {
+                counts[arr[i]] = 1 + (counts[arr[i]] || 0);
+            };
+            return counts;
+        };
+
+        var sires = gdata.map(x => x[8]);
+        var distinctSires = [...new Set(sires)];
+
+
+
+        var p1Sires = countUnique(gdata.filter(x => x[21] == "I").map(x => x[8]));
+        var p2Sires = countUnique(gdata.filter(x => x[21] == "II").map(x => x[8]));
+        var p3Sires = countUnique(gdata.filter(x => x[21] == "III").map(x => x[8]));
+        var p0Sires = countUnique(gdata.filter(x => x[21] == "None").map(x => x[8]));
+
+        var sireRollup = [];
+
+        sireRollup = distinctSires.map(uSire => [
+            uSire,
+            p1Sires[uSire] ?? 0,
+            p2Sires[uSire] ?? 0,
+            p3Sires[uSire] ?? 0,
+            p0Sires[uSire] ?? 0,
+        ]);
+
+        data.addRows(sireRollup);
+
+        var table = new google.visualization.Table(document.getElementById('gs_prize_dams'));
 
         table.draw(data, {page: 'enable', showRowNumber: true, width: '100%', height: '100%' });
     }
