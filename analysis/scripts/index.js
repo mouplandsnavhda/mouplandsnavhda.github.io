@@ -44,6 +44,7 @@ async function begin() {
         populateBreeders();
         populateSires();
         populateDams();
+        populateVCs();
         
     } catch (e) {
         console.log(e.responseText);
@@ -372,6 +373,55 @@ function populateDams() {
         data.addRows(sireRollup);
 
         var table = new google.visualization.Table(document.getElementById('gs_prize_dams'));
+
+        table.draw(data, {page: 'enable', showRowNumber: true, width: '100%', height: '100%' });
+    }
+}
+
+function populateVCs() {
+    google.charts.load('current', { 'packages': ['table'] });
+    google.charts.setOnLoadCallback(drawTable);
+
+    function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Name');
+        data.addColumn('number', 'Prize 1'); 
+        data.addColumn('number', 'Prize 2'); 
+        data.addColumn('number', 'Prize 3'); 
+        data.addColumn('number', 'Prize 0'); 
+
+        const countUnique = arr => {
+            const counts = {};
+            for (var i = 0; i < arr.length; i++) {
+                counts[arr[i]] = 1 + (counts[arr[i]] || 0);
+            };
+            return counts;
+        };
+        var vcdata = gdata.filter(x => x[1].startsWith('VC'));
+        var vcs = vcdata.map(x => x[1]);
+        
+        var distinctVCs = [...new Set(vcs)];
+
+
+
+        var p1vc = countUnique(vcdata.filter(x => x[21] == "I").map(x => x[1]));
+        var p2vc = countUnique(vcdata.filter(x => x[21] == "II").map(x => x[1]));
+        var p3vc = countUnique(vcdata.filter(x => x[21] == "III").map(x => x[1]));
+        var p0vc = countUnique(vcdata.filter(x => x[21] == "None").map(x => x[1]));
+
+        var vcRollup = [];
+
+        vcRollup = distinctVCs.map(uSire => [
+            uSire,
+            p1vc[uSire] ?? 0,
+            p2vc[uSire] ?? 0,
+            p3vc[uSire] ?? 0,
+            p0vc[uSire] ?? 0,
+        ]);
+
+        data.addRows(vcRollup);
+
+        var table = new google.visualization.Table(document.getElementById('gs_vc_prize'));
 
         table.draw(data, {page: 'enable', showRowNumber: true, width: '100%', height: '100%' });
     }
