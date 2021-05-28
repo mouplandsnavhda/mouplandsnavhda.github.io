@@ -45,7 +45,7 @@ async function begin() {
         populateSires();
         populateDams();
         populateVCs();
-        
+
     } catch (e) {
         console.log(e.responseText);
     }
@@ -241,10 +241,15 @@ function populateBreeders() {
     function drawTable() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Name');
-        data.addColumn('number', 'Prize 1'); 
-        data.addColumn('number', 'Prize 2'); 
-        data.addColumn('number', 'Prize 3'); 
-        data.addColumn('number', 'Prize 0'); 
+        data.addColumn('number', 'Unique Dogs');
+        data.addColumn('number', 'Prize 1');
+        data.addColumn('number', 'Prize 2');
+        data.addColumn('number', 'Prize 3');
+        data.addColumn('number', 'Prize 0');
+        data.addColumn('number', 'Prize 1%');
+        data.addColumn('number', 'Prize 2%');
+        data.addColumn('number', 'Prize 3%');
+        data.addColumn('number', 'Prize 0%');
 
         const countUnique = arr => {
             const counts = {};
@@ -257,6 +262,8 @@ function populateBreeders() {
         var breeders = gdata.map(x => x[7]);
         var distinctBreeders = [...new Set(breeders)];
 
+        
+
 
 
         var p1 = countUnique(gdata.filter(x => x[21] == "I").map(x => x[7]));
@@ -266,19 +273,35 @@ function populateBreeders() {
 
         var sireRollup = [];
 
-        sireRollup = distinctBreeders.map(uSire => [
-            uSire,
-            p1[uSire] ?? 0,
-            p2[uSire] ?? 0,
-            p3[uSire] ?? 0,
-            p0[uSire] ?? 0,
-        ]);
+        sireRollup = distinctBreeders.map((uSire) => {
+            console.log(uSire);
+            var allRuns = gdata.filter(x => x[7] == uSire).map(x => x[1]);
+            var uniqDogs = [...new Set(allRuns)].length
+            var p1ct = p1[uSire] ?? 0;
+            var p2ct = p2[uSire] ?? 0;
+            var p3ct = p3[uSire] ?? 0;
+            var p0ct = p0[uSire] ?? 0;
+            var pTotal = p1ct + p2ct + p3ct + p0ct;
+            var arr = [
+                uSire,
+                uniqDogs,
+                p1ct,
+                p2ct,
+                p3ct,
+                p0ct,
+                Math.round(p1ct / pTotal * 100),
+                Math.round(p2ct / pTotal * 100),
+                Math.round(p3ct / pTotal * 100),
+                Math.round(p0ct / pTotal * 100)
+            ]
+            return arr;
+        });
 
         data.addRows(sireRollup);
 
         var table = new google.visualization.Table(document.getElementById('gs_prize_breeders'));
 
-        table.draw(data, {page: 'enable', showRowNumber: true, width: '100%', height: '100%' });
+        table.draw(data, { page: 'enable', showRowNumber: true, width: '100%', height: '100%',alternatingRowStyle: true, cssClassNames: {oddTableRow: "analysis-table"} });
     }
 }
 
@@ -289,10 +312,10 @@ function populateSires() {
     function drawTable() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Name');
-        data.addColumn('number', 'Prize 1'); 
-        data.addColumn('number', 'Prize 2'); 
-        data.addColumn('number', 'Prize 3'); 
-        data.addColumn('number', 'Prize 0'); 
+        data.addColumn('number', 'Prize 1');
+        data.addColumn('number', 'Prize 2');
+        data.addColumn('number', 'Prize 3');
+        data.addColumn('number', 'Prize 0');
 
         const countUnique = arr => {
             const counts = {};
@@ -326,7 +349,7 @@ function populateSires() {
 
         var table = new google.visualization.Table(document.getElementById('gs_prize_sires'));
 
-        table.draw(data, {page: 'enable', showRowNumber: true, width: '100%', height: '100%' });
+        table.draw(data, { page: 'enable', showRowNumber: true, width: '100%', height: '100%',alternatingRowStyle: true, cssClassNames: {oddTableRow: "analysis-table"} });
     }
 }
 
@@ -337,10 +360,10 @@ function populateDams() {
     function drawTable() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Name');
-        data.addColumn('number', 'Prize 1'); 
-        data.addColumn('number', 'Prize 2'); 
-        data.addColumn('number', 'Prize 3'); 
-        data.addColumn('number', 'Prize 0'); 
+        data.addColumn('number', 'Prize 1');
+        data.addColumn('number', 'Prize 2');
+        data.addColumn('number', 'Prize 3');
+        data.addColumn('number', 'Prize 0');
 
         const countUnique = arr => {
             const counts = {};
@@ -374,7 +397,7 @@ function populateDams() {
 
         var table = new google.visualization.Table(document.getElementById('gs_prize_dams'));
 
-        table.draw(data, {page: 'enable', showRowNumber: true, width: '100%', height: '100%' });
+        table.draw(data, { page: 'enable', showRowNumber: true, width: '100%', height: '100%',alternatingRowStyle: true, cssClassNames: {oddTableRow: "analysis-table"} });
     }
 }
 
@@ -385,10 +408,10 @@ function populateVCs() {
     function drawTable() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Name');
-        data.addColumn('number', 'Prize 1'); 
-        data.addColumn('number', 'Prize 2'); 
-        data.addColumn('number', 'Prize 3'); 
-        data.addColumn('number', 'Prize 0'); 
+        data.addColumn('number', 'Prize 1');
+        data.addColumn('number', 'Prize 2');
+        data.addColumn('number', 'Prize 3');
+        data.addColumn('number', 'Prize 0');
 
         const countUnique = arr => {
             const counts = {};
@@ -399,7 +422,7 @@ function populateVCs() {
         };
         var vcdata = gdata.filter(x => x[1].startsWith('VC'));
         var vcs = vcdata.map(x => x[1]);
-        
+
         var distinctVCs = [...new Set(vcs)];
 
 
@@ -423,7 +446,7 @@ function populateVCs() {
 
         var table = new google.visualization.Table(document.getElementById('gs_vc_prize'));
 
-        table.draw(data, {page: 'enable', showRowNumber: true, width: '100%', height: '100%' });
+        table.draw(data, { page: 'enable', showRowNumber: true, width: '100%', height: '100%',alternatingRowStyle: true, cssClassNames: {oddTableRow: "analysis-table"} });
     }
 }
 
