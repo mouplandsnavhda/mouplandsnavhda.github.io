@@ -42,7 +42,7 @@
                 the goal of analytics is to do that in a short timeframe.
             </p>
             <p>
-                If you rotate your screen or resize the window, refresh the page so the charts will redraw. Also, please wait a few seconds for the material chart to render - I've done zero speed optimizations on this page and for that I'm sorry. 
+                If you rotate your screen or resize the window, refresh the page so the charts will redraw. Also, please wait a few seconds for the charts to render - I've done zero speed optimizations on this page and for that I'm sorry. 
             </p>
             <p>Cheers,</br>
                 Brandon Whitfield
@@ -90,17 +90,25 @@
         <p>For every dog with the VC prefix, here is their Utility run rollups. These are raw scores, so if a single dog attains 4 prize 1's, then the prize 1 record will increase by 4. Click on the headers to sort if you're curious</p>
         <div id="gs_vc_prize"></div>
         
+        <h3>Breeder Timeseries</h3>
+        <p>Select a breeder and see the utility scores of dogs they bred.</p>
+        <div class="row justify-content-md-center">
+            <input id="breeder-selector" list="brow" style="height:30px; overflow-y: auto;">
+            <datalist id="brow" style="height:30px; overflow-y: auto;"></datalist> 
+        </div>
+        <div id="breeder_column"></div>
+        
         
         
     </div> <!-- /container -->
     
-    <div class="container">
-        <span class="badge badge-primary">v1.10.0</span>
+    <div class="container border-top" style="margin-top:20px;">
+        <span class="badge badge-primary">v1.11.0</span>
     </div>
 </body>
 <script>
       begin();
-
+      wireUpChange();
 </script>
 
 </html>

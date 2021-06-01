@@ -45,6 +45,8 @@ async function begin() {
         populateSires();
         populateDams();
         populateVCs();
+        breederColumn("chip");
+        populateBreederSelect();
 
     } catch (e) {
         console.log(e.responseText);
@@ -274,7 +276,6 @@ function populateBreeders() {
         var sireRollup = [];
 
         sireRollup = distinctBreeders.map((uSire) => {
-            console.log(uSire);
             var allRuns = gdata.filter(x => x[7] == uSire).map(x => x[1]);
             var uniqDogs = [...new Set(allRuns)].length
             var p1ct = p1[uSire] ?? 0;
@@ -417,6 +418,7 @@ function populateVCs() {
             const counts = {};
             for (var i = 0; i < arr.length; i++) {
                 counts[arr[i]] = 1 + (counts[arr[i]] || 0);
+
             };
             return counts;
         };
@@ -449,4 +451,92 @@ function populateVCs() {
         table.draw(data, { page: 'enable', showRowNumber: true, width: '100%', height: '100%',alternatingRowStyle: true, cssClassNames: {oddTableRow: "analysis-table"} });
     }
 }
+
+function breederColumn(breederName){
+    //https://stackoverflow.com/questions/30151633/jquery-event-for-html5-datalist-when-item-is-selected-or-typed-input-match-with
+    
+    var years = ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021']
+
+
+    //
+    const countUnique = arr => {
+        const counts = {};
+        for (var i = 0; i < arr.length; i++) {
+            counts[arr[i]] = 1 + (counts[arr[i]] || 0);
+
+        };
+        return counts;
+    };
+    var breederAllScores = gdata.filter(x => x[7] == breederName);
+
+    var breederTableData = [];
+
+    years.forEach(year => {
+        var yearScores = breederAllScores.filter(x => new Date(x[18]).getFullYear() == year);
+        var p1 = yearScores.filter(x => x[21] == "I").length;
+        var p2 = yearScores.filter(x => x[21] == "II").length;
+        var p3 = yearScores.filter(x => x[21] == "III").length;
+        var p0 = yearScores.filter(x => x[21] == "None").length;
+        breederTableData.push([
+            year, 
+            p1, 
+            p2,
+            p3,
+            p0
+        ]);
+    });
+    
+
+
+
+    //
+
+
+
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Year", "Prize 1", "Prize 2", "Prize 3", "Prize 0(None)"],
+        ...breederTableData
+      ]);
+
+      var options = {
+        chart: {
+          title: 'Breeder Prizes over time',
+          subtitle: '2010 - (spring) 2021',
+        }
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('breeder_column'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+  }
+}
+
+function populateBreederSelect(){
+    console.log(gdata.length);
+    var breeders = gdata.map(x => x[7]);
+    var distinctBreeders = [...new Set(breeders)].sort();
+
+    distinctBreeders.forEach(breeder => {
+        var option = $('<option value="'+breeder+'">');
+        $('#brow').append(option);
+    });
+}
+
+function wireUpChange(){
+    
+
+    $("#breeder-selector").change(function () {
+        var val = this.value;
+        if($('#brow option').filter(() => {
+            return this.value.toUpperCase() === val.toUpperCase();        
+        }).length) {
+           console.log(this.value);
+           breederColumn(this.value);
+        }
+    });
+}
+
 
