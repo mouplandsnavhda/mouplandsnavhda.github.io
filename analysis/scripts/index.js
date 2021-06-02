@@ -3,6 +3,25 @@ var gs2015 = document.URL.includes('localhost') ? `${document.URL}data/gs2.json`
 var gw2010 = document.URL.includes('localhost') ? `${document.URL}data/gw1.json` : 'https://www.mouplands.org/analysis/data/gw1.json';
 var gw2015 = document.URL.includes('localhost') ? `${document.URL}data/gw2.json` : 'https://www.mouplands.org/analysis/data/gw2.json';
 var gdata = [];
+
+var legend = {
+    "breed": 0,
+    "name": 1,
+    "whelped": 2,
+    "sire": 3,
+    "owner": 6,
+    "breeder": 7,
+    "dam": 8,
+    "coat": 15,
+    "chapter": 16,
+    "test": 17, 
+    "date": 18,
+    "ageFormat": 19,
+    "score": 20,
+    "prize": 21,
+    "temperment": 22
+}
+
 function genTicks() {
     var tickss = [];
     var ct = 1;
@@ -38,6 +57,10 @@ var options = {
 
 async function begin() {
     try {
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.load('current', { 'packages': ['bar'] });
+        google.charts.load('current', { 'packages': ['table'] });
+
         await gethistograms();
         populateTestByYear();
         populatePrizesByYear();
@@ -90,7 +113,7 @@ function slimDatas(data) {
 }
 
 function populateHistogram(datas, divId, title) {
-    google.charts.load("current", { packages: ["corechart"] });
+    
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
         var data = google.visualization.arrayToDataTable(datas);
@@ -118,7 +141,7 @@ function populateTestByYear() {
     };
     byYearOptions.title = `dogs tested by year. total: ${datas.length - 1}`
 
-    google.charts.load("current", { packages: ["corechart"] });
+    
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
         var data = google.visualization.arrayToDataTable(datas);
@@ -177,7 +200,7 @@ function populatePrizesByYear() {
         },
     };
 
-    google.charts.load("current", { packages: ["corechart"] });
+    
     google.charts.setOnLoadCallback(drawChart1);
     function drawChart1() {
         var data = google.visualization.arrayToDataTable(p1);
@@ -187,7 +210,7 @@ function populatePrizesByYear() {
         chart.draw(data, byYearOptions);
     }
 
-    google.charts.load("current", { packages: ["corechart"] });
+    
     google.charts.setOnLoadCallback(drawChart2);
     function drawChart2() {
         var data = google.visualization.arrayToDataTable(p2);
@@ -197,7 +220,7 @@ function populatePrizesByYear() {
         chart.draw(data, byYearOptions);
     }
 
-    google.charts.load("current", { packages: ["corechart"] });
+    
     google.charts.setOnLoadCallback(drawChart3);
     function drawChart3() {
         var data = google.visualization.arrayToDataTable(p3);
@@ -207,7 +230,7 @@ function populatePrizesByYear() {
         chart.draw(data, byYearOptions);
     }
 
-    google.charts.load("current", { packages: ["corechart"] });
+    
     google.charts.setOnLoadCallback(drawChart0);
     function drawChart0() {
         var data = google.visualization.arrayToDataTable(p0);
@@ -217,7 +240,7 @@ function populatePrizesByYear() {
         chart.draw(data, byYearOptions);
     }
 
-    google.charts.load('current', { 'packages': ['bar'] });
+    
     google.charts.setOnLoadCallback(drawChartPrizePercentage);
     function drawChartPrizePercentage() {
         var data = google.visualization.arrayToDataTable(graphData);
@@ -236,8 +259,8 @@ function populatePrizesByYear() {
 }
 
 
-function populateBreeders() {
-    google.charts.load('current', { 'packages': ['table'] });
+function populateBreeders(breeder) {
+    
     google.charts.setOnLoadCallback(drawTable);
 
     function drawTable() {
@@ -307,7 +330,7 @@ function populateBreeders() {
 }
 
 function populateSires() {
-    google.charts.load('current', { 'packages': ['table'] });
+    
     google.charts.setOnLoadCallback(drawTable);
 
     function drawTable() {
@@ -355,7 +378,7 @@ function populateSires() {
 }
 
 function populateDams() {
-    google.charts.load('current', { 'packages': ['table'] });
+    
     google.charts.setOnLoadCallback(drawTable);
 
     function drawTable() {
@@ -403,7 +426,7 @@ function populateDams() {
 }
 
 function populateVCs() {
-    google.charts.load('current', { 'packages': ['table'] });
+    
     google.charts.setOnLoadCallback(drawTable);
 
     function drawTable() {
@@ -475,7 +498,7 @@ function breederColumn(breederName){
         ]);
     });
 
-    google.charts.load('current', {'packages':['bar']});
+    
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
