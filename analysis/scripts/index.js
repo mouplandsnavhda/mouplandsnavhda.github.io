@@ -64,7 +64,7 @@ async function begin() {
         await gethistograms();
         populateTestByYear();
         populatePrizesByYear();
-        populateBreeders();
+        populateBreeders(legend.breeder);
         populateSires();
         populateDams();
         populateVCs();
@@ -259,7 +259,7 @@ function populatePrizesByYear() {
 }
 
 
-function populateBreeders(breeder) {
+function populateBreeders(tablePK) {
     
     google.charts.setOnLoadCallback(drawTable);
 
@@ -284,7 +284,7 @@ function populateBreeders(breeder) {
             return counts;
         };
 
-        var breeders = gdata.map(x => x[7]);
+        var breeders = gdata.map(x => x[tablePK]);
         var distinctBreeders = [...new Set(breeders)];
 
         
