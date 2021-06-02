@@ -453,20 +453,9 @@ function populateVCs() {
 }
 
 function breederColumn(breederName){
-    //https://stackoverflow.com/questions/30151633/jquery-event-for-html5-datalist-when-item-is-selected-or-typed-input-match-with
     
     var years = ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021']
 
-
-    //
-    const countUnique = arr => {
-        const counts = {};
-        for (var i = 0; i < arr.length; i++) {
-            counts[arr[i]] = 1 + (counts[arr[i]] || 0);
-
-        };
-        return counts;
-    };
     var breederAllScores = gdata.filter(x => x[7] == breederName);
 
     var breederTableData = [];
@@ -485,13 +474,6 @@ function breederColumn(breederName){
             p0
         ]);
     });
-    
-
-
-
-    //
-
-
 
     google.charts.load('current', {'packages':['bar']});
     google.charts.setOnLoadCallback(drawChart);
@@ -537,6 +519,8 @@ function wireUpChange(){
            breederColumn(this.value);
         }
     });
+
+    $("#breeder-selector").click(function () { $("#breeder-selector").val('') })
 }
 
 
