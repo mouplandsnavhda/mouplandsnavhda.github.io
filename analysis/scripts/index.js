@@ -64,7 +64,7 @@ async function begin() {
         await gethistograms();
         populateTestByYear();
         populatePrizesByYear();
-        populateBreeders(legend.breeder);
+        populateBreeders(legend.breeder, 'gs_prize_breeders');
         populateSires();
         populateDams();
         populateVCs();
@@ -259,7 +259,7 @@ function populatePrizesByYear() {
 }
 
 
-function populateBreeders(tablePK) {
+function populateBreeders(tablePK, chartId) {
     
     google.charts.setOnLoadCallback(drawTable);
 
@@ -284,31 +284,27 @@ function populateBreeders(tablePK) {
             return counts;
         };
 
-        var breeders = gdata.map(x => x[tablePK]);
-        var distinctBreeders = [...new Set(breeders)];
+        var keys = gdata.map(x => x[tablePK]);
+        var distinctKeys = [...new Set(keys)];
 
-        
+        var p1 = countUnique(gdata.filter(x => x[legend.prize] == "I").map(x => x[7]));
+        var p2 = countUnique(gdata.filter(x => x[legend.prize] == "II").map(x => x[7]));
+        var p3 = countUnique(gdata.filter(x => x[legend.prize] == "III").map(x => x[7]));
+        var p0 = countUnique(gdata.filter(x => x[legend.prize] == "None").map(x => x[7]));
 
+        var rollup = [];
 
-
-        var p1 = countUnique(gdata.filter(x => x[21] == "I").map(x => x[7]));
-        var p2 = countUnique(gdata.filter(x => x[21] == "II").map(x => x[7]));
-        var p3 = countUnique(gdata.filter(x => x[21] == "III").map(x => x[7]));
-        var p0 = countUnique(gdata.filter(x => x[21] == "None").map(x => x[7]));
-
-        var sireRollup = [];
-
-        sireRollup = distinctBreeders.map((uSire) => {
-            var allRuns = gdata.filter(x => x[7] == uSire).map(x => x[1]);
-            var uniqDogs = [...new Set(allRuns)].length
-            var p1ct = p1[uSire] ?? 0;
-            var p2ct = p2[uSire] ?? 0;
-            var p3ct = p3[uSire] ?? 0;
-            var p0ct = p0[uSire] ?? 0;
+        rollup = distinctKeys.map((key) => {
+            var allRuns = gdata.filter(x => x[tablePK] == key).map(x => x[1]);
+            var uniqProgeny = [...new Set(allRuns)].length
+            var p1ct = p1[key] ?? 0;
+            var p2ct = p2[key] ?? 0;
+            var p3ct = p3[key] ?? 0;
+            var p0ct = p0[key] ?? 0;
             var pTotal = p1ct + p2ct + p3ct + p0ct;
-            var arr = [
-                uSire,
-                uniqDogs,
+            var tableRow = [
+                key,
+                uniqProgeny,
                 p1ct,
                 p2ct,
                 p3ct,
@@ -318,12 +314,12 @@ function populateBreeders(tablePK) {
                 Math.round(p3ct / pTotal * 100),
                 Math.round(p0ct / pTotal * 100)
             ]
-            return arr;
+            return tableRow;
         });
 
-        data.addRows(sireRollup);
+        data.addRows(rollup);
 
-        var table = new google.visualization.Table(document.getElementById('gs_prize_breeders'));
+        var table = new google.visualization.Table(document.getElementById(chartId));
 
         table.draw(data, { page: 'enable', showRowNumber: true, width: '100%', height: '100%',alternatingRowStyle: true, cssClassNames: {oddTableRow: "analysis-table"} });
     }
