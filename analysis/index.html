@@ -50,18 +50,30 @@
         </div>
     </div> <!-- Jumbotron container -->
     
+    <div class="container">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="gs" id="flexRadioDefault1" checked>
+            <label class="form-check-label" for="flexRadioDefault1">
+              GS
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="gw" id="flexRadioDefault2" >
+            <label class="form-check-label" for="flexRadioDefault2">
+              GWP
+            </label>
+          </div>
+    </div>
     
     <div class="container">
         <h3>Total Score</h3>
         <p>
-            From 2016 to spring of 2021 there is a definite drop in dogs tested, which I would not have guessed. 
-            After adding an exponential trendline, it appears that the data might be flattening out.
             From my experience with large time series data sets, changing how data is grouped can change the visuals, and sometimes tell a different story... In a future release I'd like to make this dynamic so you can shape the data.  
         </p>
         <div id="gs_2010"></div>
         <div id="gs_2015"></div>
-        <h3>Data grouped by year</h3>
-        <p>Here we can more clearly see that the amount of dogs tested between 2016 and (spring)2021 decreased. 
+        <h3>Utility Tests per year</h3>
+        <p> 
             I'm not exactly sure how we tested that many dogs during COVID, but I'm just the messenger. 
         </p>
         <div id="gs_by_year"></div>
@@ -70,6 +82,7 @@
         <div id="gs_prize2_by_year"></div>
         <div id="gs_prize3_by_year"></div>
         <div id="gs_prize0_by_year"></div>
+        <div id="ut1_sex"></div>
         
         <h3>Breeder progeny Utility scores rollup</h3>
         <p>
@@ -103,11 +116,14 @@
     </div> <!-- /container -->
     
     <div class="container border-top" style="margin-top:20px;">
-        <span class="badge badge-primary">v1.12.0</span>
+        <span class="badge badge-primary">v1.13.0</span>
     </div>
 </body>
 <script>
-      begin();
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.load('current', { 'packages': ['bar'] });
+      google.charts.load('current', { 'packages': ['table'] });
+      begin('gs');
       wireUpChange();
 </script>
 

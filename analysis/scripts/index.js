@@ -55,16 +55,14 @@ var options = {
     }
 };
 
-async function begin() {
+async function begin(breedPrefix) {
     try {
-        google.charts.load("current", { packages: ["corechart"] });
-        google.charts.load('current', { 'packages': ['bar'] });
-        google.charts.load('current', { 'packages': ['table'] });
-
-        await gethistograms();
+        gdata = [];
+        await gethistograms(breedPrefix);
         populateTestByYear();
         populatePrizesByYear();
-        
+        utSex();
+
         populateStatsTable(legend.breeder, 'gs_prize_breeders');
         populateStatsTable(legend.sire, 'gs_prize_sires');
         populateStatsTable(legend.dam, 'gs_prize_dams');
@@ -78,16 +76,16 @@ async function begin() {
     }
 }
 
-async function gethistograms() {
+async function gethistograms(breedPrefix) {
     await $.ajax({
-        url: gs2010,
+        url: breedPrefix == 'gs' ? gs2010 : gw2010,
         method: 'GET',
         cache: false,
         dataType: "json",
         success: calc10
     });
     await $.ajax({
-        url: gs2015,
+        url: breedPrefix == 'gs' ? gs2015 : gw2015,
         method: 'GET',
         cache: false,
         dataType: "json",
@@ -153,8 +151,8 @@ function populateTestByYear() {
     }
 }
 
-var graphData = [];
 function populatePrizesByYear() {
+    var graphData = [];
     var datas = gdata.map((x) => {
         return [x[1], new Date(x[18]).getFullYear(), x[21]]
     });
@@ -249,8 +247,8 @@ function populatePrizesByYear() {
 
         var options = {
             chart: {
-                title: 'Prize Breakdown',
-                subtitle: 'Expressed in percentages',
+                title: 'Prize Breakdown in %',
+                subtitle: 'Click the legend to bring data to the forefront.',
             }
         };
 
@@ -258,6 +256,29 @@ function populatePrizesByYear() {
 
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
+}
+
+function utSex(){
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var sexes = gdata.filter(x => x[legend.prize] == "I").map(x => x[legend.name].replace(/.*\(/,'').replace(/\).*/,''));
+        var mCount = sexes.filter(x => x == 'Male').length;
+        var fCount = sexes.filter(x => x == 'Female').length;
+        var data = google.visualization.arrayToDataTable([
+          ['Sex', 'Count'],
+          ['Male', mCount],
+          ['Female', fCount]
+        ]);
+
+        var options = {
+          title: 'Utility Prize I by sex',
+          pieHole: 0.0,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('ut1_sex'));
+        chart.draw(data, options);
+      }
 }
 
 
@@ -422,6 +443,7 @@ function breederColumn(breederName){
 }
 
 function populateBreederSelect(){
+    $('#brow').empty();
     console.log(gdata.length);
     var breeders = gdata.map(x => x[7]);
     var distinctBreeders = [...new Set(breeders)].sort();
@@ -444,7 +466,11 @@ function wireUpChange(){
         }
     });
 
-    $("#breeder-selector").click(function () { $("#breeder-selector").val('') })
+    $("#breeder-selector").click(function () { $("#breeder-selector").val('') });
+
+    $('.form-check-input').change(x => {
+        begin($(x.target).val());
+    });
 }
 
 
