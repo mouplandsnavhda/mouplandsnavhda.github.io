@@ -138,6 +138,9 @@ function populateTestByYear() {
             },
             ticks: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
         },
+        histogram: {
+            bucketSize: 1,
+        }
     };
     byYearOptions.title = `dogs tested by year. total: ${datas.length - 1}`
 
@@ -198,6 +201,9 @@ function populatePrizesByYear() {
             },
             ticks: years
         },
+        histogram: {
+            bucketSize: 1,
+        }
     };
 
     
@@ -223,6 +229,7 @@ function populatePrizesByYear() {
     
     google.charts.setOnLoadCallback(drawChart3);
     function drawChart3() {
+        console.log(p3);
         var data = google.visualization.arrayToDataTable(p3);
         var chart = new google.visualization.Histogram(document.getElementById('gs_prize3_by_year'));
 
