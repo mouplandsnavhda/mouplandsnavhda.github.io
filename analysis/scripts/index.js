@@ -97,12 +97,12 @@ async function gethistograms(breedPrefix) {
 function calc10(data) {
     gdata.push(...data.data);
     var slimData = slimDatas(data);
-    populateHistogram(slimData, 'gs_2010', 'GS Utility scores from 2010 - 2015')
+    populateHistogram(slimData, 'gs_2010', 'Utility scores from 2010 - 2015')
 }
 function calc15(data) {
     gdata.push(...data.data);
     var slimData = slimDatas(data);
-    populateHistogram(slimData, 'gs_2015', 'GS Utility scores from 2016 - (spring)2021')
+    populateHistogram(slimData, 'gs_2015', 'Utility scores from 2016 - (spring)2021')
 }
 
 function slimDatas(data) {
