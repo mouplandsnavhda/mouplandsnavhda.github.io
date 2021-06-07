@@ -49,41 +49,56 @@
             </p>
         </div>
     </div> <!-- Jumbotron container -->
+        <div class="container">
+            
+                <div class="form-check col">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" value="gs" id="flexRadioDefault1" checked>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      GS
+                    </label>
+                  </div>
+                  <div class="form-check col">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" value="gw" id="flexRadioDefault2" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      GWP
+                    </label>
+                  </div>
     
+            
+        </div>
+        <div class="container mt-5 mb-5 text-center">
+                <h3>Test Score Histogram</h3>
+                <p class="px-5">
+                    From my experience with large time series data sets, changing how data is grouped can change the visuals, and sometimes tell a different story... In a future release I'd like to make this dynamic so you can shape the data.  
+                </p>
+        </div>
+
     <div class="container">
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" value="gs" id="flexRadioDefault1" checked>
-            <label class="form-check-label" for="flexRadioDefault1">
-              GS
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" value="gw" id="flexRadioDefault2" >
-            <label class="form-check-label" for="flexRadioDefault2">
-              GWP
-            </label>
-          </div>
-    </div>
-    
-    <div class="container">
-        <h3>Total Score</h3>
-        <p>
-            From my experience with large time series data sets, changing how data is grouped can change the visuals, and sometimes tell a different story... In a future release I'd like to make this dynamic so you can shape the data.  
-        </p>
         <div id="gs_2010"></div>
         <div id="gs_2015"></div>
+    </div>
+    <div class="container mt-5 mb-5 text-center">
         <h3>Utility Tests per year</h3>
         <p> 
             I'm not exactly sure how we tested that many dogs during COVID, but I'm just the messenger. 
         </p>
+    </div>
+    <div class="container">
         <div id="gs_by_year"></div>
         <div id="gs_prize_percentages_by_year"></div>
         <div id="gs_prize1_by_year"></div>
         <div id="gs_prize2_by_year"></div>
         <div id="gs_prize3_by_year"></div>
         <div id="gs_prize0_by_year"></div>
-        <div id="ut1_sex"></div>
-        
+        <div class="row">
+
+            <div id="ut1_sex" class="col-sm"></div>
+            <div id="ut2_sex" class="col-sm"></div>
+            <div id="ut3_sex" class="col-sm"></div>
+            <div id="ut0_sex" class="col-sm"></div>
+        </div>
+    </div>
+    <div class="container mt-5 mb-5 text-center">
         <h3>Breeder progeny Utility scores rollup</h3>
         <p>
             Using Clyde Vetter as an example. He was listed as the breeder on 88 dogs that have ran utility. 
@@ -92,8 +107,10 @@
             Remember, dogs can run the utility test many times. If a given dog runs 3 times, and gets 3 Prize 1's, then the Prize 1 score will be incremented 3 times. 
             Also, if a given dog attempts to attain a prize 1 by running over and over, it will be reflected in the percentages. 
             Click on the headers to sort if you're curious</p>
-        <div id="gs_prize_breeders"></div>
-        <h3>Sire progeny Utility scores rollup</h3>
+    </div>
+    <div id="gs_prize_breeders" class="container"></div>
+    <div class="container">
+        <h3>Progeny UT rollup by Sire</h3>
         <p>For every Utility run from 2010 - (Spring)2021, this is the distinct list of sires and the corresponding scores. These are raw scores, so if a single dog attains 4 prize 1's, then the prize 1 record will increase by 4. Click on the headers to sort if you're curious</p>
         <div id="gs_prize_sires"></div>
         <h3>Dam progeny Utility scores rollup</h3>
@@ -116,7 +133,7 @@
     </div> <!-- /container -->
     
     <div class="container border-top" style="margin-top:20px;">
-        <span class="badge badge-primary">v1.13.0</span>
+        <span class="badge badge-primary">v1.14.0</span>
     </div>
 </body>
 <script>

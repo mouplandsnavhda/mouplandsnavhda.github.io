@@ -279,6 +279,66 @@ function utSex(){
         var chart = new google.visualization.PieChart(document.getElementById('ut1_sex'));
         chart.draw(data, options);
       }
+
+      google.charts.setOnLoadCallback(drawChart2);
+      function drawChart2() {
+        var sexes = gdata.filter(x => x[legend.prize] == "II").map(x => x[legend.name].replace(/.*\(/,'').replace(/\).*/,''));
+        var mCount = sexes.filter(x => x == 'Male').length;
+        var fCount = sexes.filter(x => x == 'Female').length;
+        var data = google.visualization.arrayToDataTable([
+          ['Sex', 'Count'],
+          ['Male', mCount],
+          ['Female', fCount]
+        ]);
+
+        var options = {
+          title: 'Utility Prize II by sex',
+          pieHole: 0.0,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('ut2_sex'));
+        chart.draw(data, options);
+      }
+
+      google.charts.setOnLoadCallback(drawChart3);
+      function drawChart3() {
+        var sexes = gdata.filter(x => x[legend.prize] == "III").map(x => x[legend.name].replace(/.*\(/,'').replace(/\).*/,''));
+        var mCount = sexes.filter(x => x == 'Male').length;
+        var fCount = sexes.filter(x => x == 'Female').length;
+        var data = google.visualization.arrayToDataTable([
+          ['Sex', 'Count'],
+          ['Male', mCount],
+          ['Female', fCount]
+        ]);
+
+        var options = {
+          title: 'Utility Prize III by sex',
+          pieHole: 0.0,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('ut3_sex'));
+        chart.draw(data, options);
+      }
+
+      google.charts.setOnLoadCallback(drawChart0);
+      function drawChart0() {
+        var sexes = gdata.filter(x => x[legend.prize] == "None").map(x => x[legend.name].replace(/.*\(/,'').replace(/\).*/,''));
+        var mCount = sexes.filter(x => x == 'Male').length;
+        var fCount = sexes.filter(x => x == 'Female').length;
+        var data = google.visualization.arrayToDataTable([
+          ['Sex', 'Count'],
+          ['Male', mCount],
+          ['Female', fCount]
+        ]);
+
+        var options = {
+          title: 'Utility Prize 0 by sex',
+          pieHole: 0.0,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('ut0_sex'));
+        chart.draw(data, options);
+      }
 }
 
 
