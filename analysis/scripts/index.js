@@ -95,6 +95,12 @@ function getDataUrl(breedPrefix){
         case 'gw':
           url = document.URL.includes('localhost') ? `${document.URL}data/gw10_21.json` : 'https://www.mouplands.org/analysis/data/gw10_21.json';
           break;
+        case 'vi':
+          url = document.URL.includes('localhost') ? `${document.URL}data/vi.json` : 'https://www.mouplands.org/analysis/data/vi.json';
+          break;
+        case 'pp':
+          url = document.URL.includes('localhost') ? `${document.URL}data/pp.json` : 'https://www.mouplands.org/analysis/data/pp.json';
+          break;
         default:
           console.log(`The Breed ${url} is unrecognizable.`);
       }
