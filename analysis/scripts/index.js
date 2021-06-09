@@ -18,6 +18,14 @@ var legend = {
     "temperment": 22
 }
 
+const countUnique = arr => {
+    const counts = {};
+    for (var i = 0; i < arr.length; i++) {
+        counts[arr[i]] = 1 + (counts[arr[i]] || 0);
+    };
+    return counts;
+};
+
 function genTicks() {
     var tickss = [];
     var ct = 1;
@@ -69,6 +77,8 @@ async function begin(breedPrefix) {
         
         populateVCs();
         breederColumn("chip");
+        breederTestLocation("empty");
+        breederCoat("empty");
         populateBreederSelect();
 
     } catch (e) {
@@ -267,7 +277,6 @@ function populatePrizesByYear() {
 }
 
 function utSex(){
-      google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var sexes = gdata.filter(x => x[legend.prize] == "I").map(x => x[legend.name].replace(/.*\(/,'').replace(/\).*/,''));
@@ -366,14 +375,6 @@ function populateStatsTable(tablePK, chartId) {
         data.addColumn('number', 'Prize 2%');
         data.addColumn('number', 'Prize 3%');
         data.addColumn('number', 'Prize 0%');
-
-        const countUnique = arr => {
-            const counts = {};
-            for (var i = 0; i < arr.length; i++) {
-                counts[arr[i]] = 1 + (counts[arr[i]] || 0);
-            };
-            return counts;
-        };
 
         var keys = gdata.map(x => x[tablePK]);
         var distinctKeys = [...new Set(keys)];
@@ -489,6 +490,7 @@ function breederColumn(breederName){
         ]);
     });
 
+
     
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
@@ -510,8 +512,51 @@ function breederColumn(breederName){
   }
 }
 
+function breederTestLocation(breederName){
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var locations = gdata.filter(x => x[legend.breeder] == breederName).map(x => x[legend.chapter]);
+        var locationCount = countUnique(locations);
+
+        var data = google.visualization.arrayToDataTable([
+          ['Test Location', 'Count'],
+          ...Object.entries(locationCount)
+        ]);
+
+        var options = {
+          title: 'Test Locations',
+          pieHole: 0.0,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('breeder_test_location'));
+        chart.draw(data, options);
+      }
+}
+
+function breederCoat(breederName){
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var locations = gdata.filter(x => x[legend.breeder] == breederName).map(x => x[legend.coat]);
+      var locationCount = countUnique(locations);
+
+      var data = google.visualization.arrayToDataTable([
+        ['Coat', 'Count'],
+        ...Object.entries(locationCount)
+      ]);
+
+      var options = {
+        title: 'Coat Scores',
+        pieHole: 0.0,
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('breeder_coat'));
+      chart.draw(data, options);
+    }
+}
+
 function populateBreederSelect(){
     $('#brow').empty();
+    $('#breeder-selector').val('');
     var breeders = gdata.map(x => x[7]);
     var distinctBreeders = [...new Set(breeders)].sort();
 
@@ -528,8 +573,9 @@ function wireUpChange(){
         if($('#brow option').filter(() => {
             return this.value.toUpperCase() === val.toUpperCase();        
         }).length) {
-           console.log(this.value);
            breederColumn(this.value);
+           breederTestLocation(this.value);
+           breederCoat(this.value);
         }
     });
 
