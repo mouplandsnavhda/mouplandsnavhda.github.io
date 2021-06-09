@@ -1,7 +1,3 @@
-var gs2010 = document.URL.includes('localhost') ? `${document.URL}data/gs1.json` : 'https://www.mouplands.org/analysis/data/gs1.json';
-var gs2015 = document.URL.includes('localhost') ? `${document.URL}data/gs2.json` : 'https://www.mouplands.org/analysis/data/gs2.json';
-var gw2010 = document.URL.includes('localhost') ? `${document.URL}data/gw1.json` : 'https://www.mouplands.org/analysis/data/gw1.json';
-var gw2015 = document.URL.includes('localhost') ? `${document.URL}data/gw2.json` : 'https://www.mouplands.org/analysis/data/gw2.json';
 var gdata = [];
 
 var legend = {
@@ -58,7 +54,11 @@ var options = {
 async function begin(breedPrefix) {
     try {
         gdata = [];
-        await gethistograms(breedPrefix);
+        await getGData(breedPrefix);
+        
+        populateHistogram(gdata, 'gs_2010', 'Utility scores from 2010 - 2015', [2010,2011,2012,2013,2014,2015])
+        populateHistogram(gdata, 'gs_2015', 'Utility scores from 2016 - (spring)2021', [2016,2017,2018,2019,2020,2021])
+
         populateTestByYear();
         populatePrizesByYear();
         utSex();
@@ -76,49 +76,33 @@ async function begin(breedPrefix) {
     }
 }
 
-async function gethistograms(breedPrefix) {
+async function getGData(breedPrefix) {
+    var gs2010 = document.URL.includes('localhost') ? `${document.URL}data/gs10_21.json` : 'https://www.mouplands.org/analysis/data/gs10_21.json';
+    var gw2010 = document.URL.includes('localhost') ? `${document.URL}data/gw10_21.json` : 'https://www.mouplands.org/analysis/data/gw10_21.json';
+
     await $.ajax({
         url: breedPrefix == 'gs' ? gs2010 : gw2010,
         method: 'GET',
         cache: false,
         dataType: "json",
-        success: calc10
-    });
-    await $.ajax({
-        url: breedPrefix == 'gs' ? gs2015 : gw2015,
-        method: 'GET',
-        cache: false,
-        dataType: "json",
-        success: calc15
+        success: pushToGData
     });
 }
 
 
-function calc10(data) {
+function pushToGData(data) {
     gdata.push(...data.data);
-    var slimData = slimDatas(data);
-    populateHistogram(slimData, 'gs_2010', 'Utility scores from 2010 - 2015')
-}
-function calc15(data) {
-    gdata.push(...data.data);
-    var slimData = slimDatas(data);
-    populateHistogram(slimData, 'gs_2015', 'Utility scores from 2016 - (spring)2021')
 }
 
-function slimDatas(data) {
-    var d = data.data.map((x) => {
-        return [x[1], x[20]]
-    });
-    return d;
-}
 
-function populateHistogram(datas, divId, title) {
+function populateHistogram(datas, divId, title, years) {
+    var slimData = gdata.filter(x => years.includes(new Date(x[18]).getFullYear())).map(x => [x[1], x[20]]);
     
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
-        var data = google.visualization.arrayToDataTable(datas);
+        var data = google.visualization.arrayToDataTable(slimData);
         var chart = new google.visualization.Histogram(document.getElementById(divId));
-        options.title = `${title}. dogs tested: ${datas.length}`
+        options.title = `${title}. dogs tested: ${slimData.length}`
         chart.draw(data, options);
     }
 }
