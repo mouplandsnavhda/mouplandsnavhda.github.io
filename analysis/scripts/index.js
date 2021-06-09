@@ -94,6 +94,7 @@ function getDataUrl(breedPrefix){
           break;
         case 'gw':
           url = document.URL.includes('localhost') ? `${document.URL}data/gw10_21.json` : 'https://www.mouplands.org/analysis/data/gw10_21.json';
+          break;
         default:
           console.log(`The Breed ${url} is unrecognizable.`);
       }
@@ -103,7 +104,6 @@ function getDataUrl(breedPrefix){
 
 function pushToGData(data) {
     gdata.push(...data.data);
-    console.log(`pushed. ${gdata.length}`)
 }
 
 
@@ -506,7 +506,6 @@ function breederColumn(breederName){
 
 function populateBreederSelect(){
     $('#brow').empty();
-    console.log(gdata.length);
     var breeders = gdata.map(x => x[7]);
     var distinctBreeders = [...new Set(breeders)].sort();
 
@@ -532,7 +531,6 @@ function wireUpChange(){
 
     $('.form-check-input').change(x => {
         begin($(x.target).val());
-        console.log($(x.target).val())
     });
 }
 
