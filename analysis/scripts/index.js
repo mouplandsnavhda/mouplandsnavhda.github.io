@@ -77,11 +77,8 @@ async function begin(breedPrefix) {
 }
 
 async function getGData(breedPrefix) {
-    var gs2010 = document.URL.includes('localhost') ? `${document.URL}data/gs10_21.json` : 'https://www.mouplands.org/analysis/data/gs10_21.json';
-    var gw2010 = document.URL.includes('localhost') ? `${document.URL}data/gw10_21.json` : 'https://www.mouplands.org/analysis/data/gw10_21.json';
-
     await $.ajax({
-        url: breedPrefix == 'gs' ? gs2010 : gw2010,
+        url: getDataUrl(breedPrefix),
         method: 'GET',
         cache: false,
         dataType: "json",
@@ -89,9 +86,24 @@ async function getGData(breedPrefix) {
     });
 }
 
+function getDataUrl(breedPrefix){
+    var url
+    switch (breedPrefix) {
+        case 'gs':
+          url = document.URL.includes('localhost') ? `${document.URL}data/gs10_21.json` : 'https://www.mouplands.org/analysis/data/gs10_21.json';
+          break;
+        case 'gw':
+          url = document.URL.includes('localhost') ? `${document.URL}data/gw10_21.json` : 'https://www.mouplands.org/analysis/data/gw10_21.json';
+        default:
+          console.log(`The Breed ${url} is unrecognizable.`);
+      }
+      return url;
+}
+
 
 function pushToGData(data) {
     gdata.push(...data.data);
+    console.log(`pushed. ${gdata.length}`)
 }
 
 
@@ -213,7 +225,6 @@ function populatePrizesByYear() {
     
     google.charts.setOnLoadCallback(drawChart3);
     function drawChart3() {
-        console.log(p3);
         var data = google.visualization.arrayToDataTable(p3);
         var chart = new google.visualization.Histogram(document.getElementById('gs_prize3_by_year'));
 
@@ -521,6 +532,7 @@ function wireUpChange(){
 
     $('.form-check-input').change(x => {
         begin($(x.target).val());
+        console.log($(x.target).val())
     });
 }
 
