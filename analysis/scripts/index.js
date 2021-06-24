@@ -47,10 +47,10 @@ var options = {
         ticks: genTicks()
     },
     vAxis: {
-        viewWindowMode: 'explicit',
-        viewWindow: {
-            max: 150
-        }
+        viewWindowMode: 'maximized',
+        // viewWindow: {
+        //     max: 150
+        // }
     },
     histogram: {
         bucketSize: 2,
