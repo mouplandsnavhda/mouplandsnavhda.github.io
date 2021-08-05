@@ -79,6 +79,7 @@ async function begin(breedPrefix) {
         breederColumn("chip");
         breederTestLocation("empty");
         breederCoat("empty");
+        breederInfluence("CLYDE E VETTER")
         populateBreederSelect();
 
     } catch (e) {
@@ -554,6 +555,49 @@ function breederCoat(breederName){
     }
 }
 
+var bidata;
+function breederInfluence(breederName){
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart(){
+        bidata = gdata.map(x =>{
+            var bidatarec = [
+                x[legend.breeder] == breederName ? parseInt(x[legend.score]) : null,
+                x[legend.breeder] != breederName ? parseInt(x[legend.score]) : null,
+            ];
+            return bidatarec;
+        });
+        
+        var data = google.visualization.arrayToDataTable([
+            ['Breeder Total', 'Breed Total'],
+            ...bidata
+          ]);
+
+        var hoptions = {
+        title: 'Breeder Influence',
+        legend: { position: 'top', maxLines: 2 },
+        colors: ['#5C3292', '#1A8763'],
+        interpolateNulls: false,
+        hAxis: {
+            viewWindow: {
+                min: 0,
+                max: 204
+            },
+            ticks: genTicks()
+        },
+        vAxis: {
+            viewWindowMode: 'maximized',
+        },
+        histogram: {
+            bucketSize: 2,
+            maxNumBuckets: 102,
+            maxValue: 102
+        }
+        };
+        var chart = new google.visualization.Histogram(document.getElementById('breeder_influence'));
+        chart.draw(data, hoptions);
+    }
+}
+
 function populateBreederSelect(){
     $('#brow').empty();
     $('#breeder-selector').val('');
@@ -576,6 +620,7 @@ function wireUpChange(){
            breederColumn(this.value);
            breederTestLocation(this.value);
            breederCoat(this.value);
+           breederInfluence(this.value)
         }
     });
 
