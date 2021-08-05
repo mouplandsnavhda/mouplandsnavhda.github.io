@@ -79,7 +79,8 @@ async function begin(breedPrefix) {
         breederColumn("chip");
         breederTestLocation("empty");
         breederCoat("empty");
-        breederInfluence("CLYDE E VETTER")
+        breederInfluence("empty");
+        breederInfluenceScatter("empty");
         populateBreederSelect();
 
     } catch (e) {
@@ -573,29 +574,65 @@ function breederInfluence(breederName){
           ]);
 
         var hoptions = {
-        title: 'Breeder Influence',
-        legend: { position: 'top', maxLines: 2 },
-        colors: ['#5C3292', '#1A8763'],
-        interpolateNulls: false,
-        hAxis: {
-            viewWindow: {
-                min: 0,
-                max: 204
+            title: 'Breeder Scores',
+            legend: { position: 'top', maxLines: 2 },
+            colors: ['#5C3292', '#1A8763'],
+            interpolateNulls: false,
+            hAxis: {
+                viewWindow: {
+                    min: 90,
+                    max: 204
+                },
+                ticks: genTicks()
             },
-            ticks: genTicks()
-        },
-        vAxis: {
-            viewWindowMode: 'maximized',
-        },
-        histogram: {
-            bucketSize: 2,
-            maxNumBuckets: 102,
-            maxValue: 102
-        }
+            vAxis: {
+                viewWindowMode: 'maximized',
+            },
         };
         var chart = new google.visualization.Histogram(document.getElementById('breeder_influence'));
         chart.draw(data, hoptions);
     }
+}
+
+function breederInfluenceScatter(breederName){
+    google.charts.load('current', {'packages':['corechart', 'scatter']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+        var biscatdata = gdata.map(x =>{
+            var bidatarec = [
+                new Date(x[18]).getFullYear(),
+                x[legend.breeder] != breederName ? parseInt(x[legend.score]) : null,
+                x[legend.breeder] == breederName ? parseInt(x[legend.score]) : null,
+            ];
+            return bidatarec;
+        });
+
+          var data = new google.visualization.DataTable();
+          data.addColumn('number', 'Year');
+          data.addColumn('number', 'Breed');
+          data.addColumn('number', 'Breeder');
+          
+          data.addRows([
+              ...biscatdata
+            ]);
+            
+        var classicOptions = {
+            legend: { position: 'bottom' },
+            title: 'Breeder Scores over time',
+            hAxis: {
+                viewWindowMode: 'maximized'
+            },
+            vAxis: {
+                ticks: [0,25,50,75,100,125,150,175,200,225] 
+            }
+        };
+        
+        
+        var chartDiv = document.getElementById('breeder_influence_scatter');
+        var classicChart = new google.visualization.ScatterChart(chartDiv);
+        classicChart.draw(data, classicOptions);
+    };
 }
 
 function populateBreederSelect(){
@@ -621,6 +658,7 @@ function wireUpChange(){
            breederTestLocation(this.value);
            breederCoat(this.value);
            breederInfluence(this.value)
+           breederInfluenceScatter(this.value)
         }
     });
 
