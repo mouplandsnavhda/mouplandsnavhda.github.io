@@ -197,70 +197,6 @@ function populatePrizesByYear() {
     });
     graphData = [['year', 'p1', 'p2', 'p3', 'p0'], ...graphData];
 
-    var p1 = datas.filter(x => x[2] == 'I').map(y => { return [y[0], y[1]] });
-    p1 = [['dog', 'prize'], ...p1];
-    var p2 = datas.filter(x => x[2] == 'II').map(y => { return [y[0], y[1]] });
-    p2 = [['dog', 'prize'], ...p2];
-    var p3 = datas.filter(x => x[2] == 'III').map(y => { return [y[0], y[1]] });
-    p3 = [['dog', 'prize'], ...p3];
-    var p0 = datas.filter(x => x[2].toLowerCase() == 'none').map(y => { return [y[0], y[1]] });
-    p0 = [['dog', 'prize'], ...p0];
-
-    var byYearOptions = {
-        legend: { position: 'none' },
-        hAxis: {
-            viewWindow: {
-                min: 2010,
-                max: 2022
-            },
-            ticks: years
-        },
-        histogram: {
-            bucketSize: 1,
-        }
-    };
-
-    
-    google.charts.setOnLoadCallback(drawChart1);
-    function drawChart1() {
-        var data = google.visualization.arrayToDataTable(p1);
-        var chart = new google.visualization.Histogram(document.getElementById('gs_prize1_by_year'));
-
-        byYearOptions.title = `Prize 1 by year. total: ${p1.length}`
-        chart.draw(data, byYearOptions);
-    }
-
-    
-    google.charts.setOnLoadCallback(drawChart2);
-    function drawChart2() {
-        var data = google.visualization.arrayToDataTable(p2);
-        var chart = new google.visualization.Histogram(document.getElementById('gs_prize2_by_year'));
-
-        byYearOptions.title = `Prize 2 by year. total: ${p2.length}`
-        chart.draw(data, byYearOptions);
-    }
-
-    
-    google.charts.setOnLoadCallback(drawChart3);
-    function drawChart3() {
-        var data = google.visualization.arrayToDataTable(p3);
-        var chart = new google.visualization.Histogram(document.getElementById('gs_prize3_by_year'));
-
-        byYearOptions.title = `Prize 3 by year. total: ${p3.length}`
-        chart.draw(data, byYearOptions);
-    }
-
-    
-    google.charts.setOnLoadCallback(drawChart0);
-    function drawChart0() {
-        var data = google.visualization.arrayToDataTable(p0);
-        var chart = new google.visualization.Histogram(document.getElementById('gs_prize0_by_year'));
-
-        byYearOptions.title = `Prize None by year. total: ${p0.length}`
-        chart.draw(data, byYearOptions);
-    }
-
-    
     google.charts.setOnLoadCallback(drawChartPrizePercentage);
     function drawChartPrizePercentage() {
         var data = google.visualization.arrayToDataTable(graphData);
@@ -431,14 +367,6 @@ function populateVCs() {
         data.addColumn('number', 'Prize 3');
         data.addColumn('number', 'Prize 0');
 
-        const countUnique = arr => {
-            const counts = {};
-            for (var i = 0; i < arr.length; i++) {
-                counts[arr[i]] = 1 + (counts[arr[i]] || 0);
-
-            };
-            return counts;
-        };
         var vcdata = gdata.filter(x => x[1].startsWith('VC'));
         var vcs = vcdata.map(x => x[1]);
 
@@ -536,30 +464,28 @@ function breederTestLocation(breederName){
 }
 
 function breederCoat(breederName){
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var locations = gdata.filter(x => x[legend.breeder] == breederName).map(x => x[legend.coat]);
-      var locationCount = countUnique(locations);
-
-      var data = google.visualization.arrayToDataTable([
-        ['Coat', 'Count'],
-        ...Object.entries(locationCount)
-      ]);
-
-      var options = {
-        title: 'Coat Scores',
-        pieHole: 0.0,
-      };
-
-      var chart = new google.visualization.PieChart(document.getElementById('breeder_coat'));
-      chart.draw(data, options);
-    }
+    google.charts.setOnLoadCallback(() => {
+        var locations = gdata.filter(x => x[legend.breeder] == breederName).map(x => x[legend.coat]);
+        var locationCount = countUnique(locations);
+    
+        var data = google.visualization.arrayToDataTable([
+          ['Coat', 'Count'],
+          ...Object.entries(locationCount)
+        ]);
+    
+        var options = {
+          title: 'Coat Scores',
+          pieHole: 0.0,
+        };
+    
+        var chart = new google.visualization.PieChart(document.getElementById('breeder_coat'));
+        chart.draw(data, options);
+    });
 }
 
 var bidata;
 function breederInfluence(breederName){
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart(){
+    google.charts.setOnLoadCallback(() => {
         bidata = gdata.map(x =>{
             var bidatarec = [
                 x[legend.breeder] == breederName ? parseInt(x[legend.score]) : null,
@@ -569,7 +495,7 @@ function breederInfluence(breederName){
         });
         
         var data = google.visualization.arrayToDataTable([
-            ['Breeder Total', 'Breed Total'],
+            ['Breeder', 'Breed (Without Breeder)'],
             ...bidata
           ]);
 
@@ -591,7 +517,7 @@ function breederInfluence(breederName){
         };
         var chart = new google.visualization.Histogram(document.getElementById('breeder_influence'));
         chart.draw(data, hoptions);
-    }
+    });
 }
 
 function breederInfluenceScatter(breederName){
