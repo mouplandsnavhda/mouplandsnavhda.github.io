@@ -82,10 +82,14 @@
         <div class="container text-center py-5 border-bottom">
                 <h3>Test Score Histogram</h3>
                 <p class="px-5">
-                    From my experience with large time series data sets, changing how data is grouped can change the visuals, and sometimes tell a different story... In a future release I'd like to make this dynamic so you can shape the data.  
+                    From my experience with large time series data sets, changing how data is grouped can change the visuals, and sometimes tell a different story...  
                 </p>
-                <div id="gs_2010"></div>
-                <div id="gs_2015"></div>
+                <!-- <div id="gs_2010"></div>
+                <div id="gs_2015"></div> -->
+
+                <label id="gs_all_hist_label" for="gs_all_hist_input" class="form-label">Grouped by 2 years</label>
+                <input id="gs_all_hist_input" type="range" class="form-range" min="1" max="10" step="1" value="2" style="width:75%">
+                <div id="gs_all_hist"></div>
         </div>
 
     <div class="container text-center py-5 border-bottom">
@@ -95,10 +99,6 @@
         </p>
         <div id="gs_by_year"></div>
         <div id="gs_prize_percentages_by_year"></div>
-        <div id="gs_prize1_by_year"></div>
-        <div id="gs_prize2_by_year"></div>
-        <div id="gs_prize3_by_year"></div>
-        <div id="gs_prize0_by_year"></div>
         <div class="row">
     
             <div id="ut1_sex" class="col-sm"></div>

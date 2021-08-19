@@ -64,8 +64,10 @@ async function begin(breedPrefix) {
         gdata = [];
         await getGData(breedPrefix);
         
-        populateHistogram(gdata, 'gs_2010', 'Utility scores from 2010 - 2015', [2010,2011,2012,2013,2014,2015])
-        populateHistogram(gdata, 'gs_2015', 'Utility scores from 2016 - (spring)2021', [2016,2017,2018,2019,2020,2021])
+        // populateHistogram(gdata, 'gs_2010', 'Utility scores from 2010 - 2015', [2010,2011,2012,2013,2014,2015])
+        // populateHistogram(gdata, 'gs_2015', 'Utility scores from 2016 - (spring)2021', [2016,2017,2018,2019,2020,2021])
+        
+        populateHistogram(gdata, 'gs_all_hist', 'Utility scores from 2010 - (spring)2021', [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021])
 
         populateTestByYear();
         populatePrizesByYear();
@@ -593,6 +595,15 @@ function wireUpChange(){
     $('.form-check-input').change(x => {
         begin($(x.target).val());
     });
+    $("#gs_all_hist_input").change(x => {
+        var val = $("#gs_all_hist_input").val();
+        options.histogram.bucketSize = val;
+        options.histogram.maxNumBuckets = Math.round(204/val);
+        options.histogram.maxValue = Math.round(204/val);
+        var val = $("#gs_all_hist_label").text("Grouped by " + val + " years");
+
+        populateHistogram(gdata, 'gs_all_hist', 'Utility scores from 2010 - (spring)2021', [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021]);
+      });
 }
 
 
