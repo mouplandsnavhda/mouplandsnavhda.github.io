@@ -71,6 +71,7 @@ async function begin(breedPrefix) {
 
         populateTestByYear();
         populatePrizesByYear();
+        populatePrizesByAge();
         utSex();
 
         populateStatsTable(legend.breeder, 'gs_prize_breeders');
@@ -211,6 +212,53 @@ function populatePrizesByYear() {
         };
 
         var chart = new google.charts.Bar(document.getElementById('gs_prize_percentages_by_year'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+}
+
+function populatePrizesByAge() {
+    var graphData = [];
+    
+    var ages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    
+    var ageDatas = gdata.map(x => {
+        return [
+            parseInt(x[legend.ageFormat].replace(/ .*/i, '')), 
+            x[legend.prize]
+        ]
+    });
+
+    ages.forEach(age => {
+        var ageData = ageDatas.filter(x => x[0]==age);
+        var p1 = ageData.filter(x => x[1] == "I").length;
+        var p2 = ageData.filter(x => x[1] == "II").length;
+        var p3 = ageData.filter(x => x[1] == "III").length;
+        var p0 = ageData.filter(x => x[1] == "None").length;
+        graphData.push(
+            [
+                age.toString(),
+                p1,
+                p2,
+                p3,
+                p0
+            ]
+        );
+    });
+    graphData = [['age', 'p1', 'p2', 'p3', 'p0'], ...graphData];
+
+    google.charts.setOnLoadCallback(drawChartPrizePercentage);
+    function drawChartPrizePercentage() {
+        var data = google.visualization.arrayToDataTable(graphData);
+
+        var options = {
+            chart: {
+                title: 'Prize Breakdown by age',
+                subtitle: 'Click the legend to bring data to the forefront.',
+            }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('gs_prize_percentages_by_age'));
 
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
