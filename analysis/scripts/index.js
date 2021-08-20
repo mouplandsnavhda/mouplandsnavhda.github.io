@@ -199,7 +199,7 @@ function populatePrizesByYear() {
             ]
         );
     });
-    graphData = [['year', 'p1', 'p2', 'p3', 'p0'], ...graphData];
+    graphData = [['year', 'Prize 1', 'Prize 2', 'Prize 3', 'Prize 0(None)'], ...graphData];
 
     google.charts.setOnLoadCallback(drawChartPrizePercentage);
     function drawChartPrizePercentage() {
@@ -246,7 +246,7 @@ function populatePrizesByAge() {
             ]
         );
     });
-    graphData = [['age', 'p1', 'p2', 'p3', 'p0'], ...graphData];
+    graphData = [['age', 'Prize 1', 'Prize 2', 'Prize 3', 'Prize 0(None)'], ...graphData];
 
     google.charts.setOnLoadCallback(drawChartPrizePercentage);
     function drawChartPrizePercentage() {
@@ -640,7 +640,7 @@ function populatePrizesByAgeBreeder(breederName) {
             ]
         );
     });
-    graphData = [['age', 'p1', 'p2', 'p3', 'p0'], ...graphData];
+    graphData = [['age', 'Prize 1', 'Prize 2', 'Prize 3', 'Prize 0(None)'], ...graphData];
 
     google.charts.setOnLoadCallback(drawChartPrizePercentage);
     function drawChartPrizePercentage() {
