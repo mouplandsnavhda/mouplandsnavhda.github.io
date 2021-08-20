@@ -697,7 +697,7 @@ function wireUpChange(){
         options.histogram.bucketSize = val;
         options.histogram.maxNumBuckets = Math.round(204/val);
         options.histogram.maxValue = Math.round(204/val);
-        var val = $("#gs_all_hist_label").text("Grouped by " + val + " years");
+        var val = $("#gs_all_hist_label").text("Grouped by " + val + " points");
 
         populateHistogram(gdata, 'gs_all_hist', 'Utility scores from 2010 - (spring)2021', [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021]);
       });
