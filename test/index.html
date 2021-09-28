@@ -210,21 +210,21 @@
     </div>
 </body>
 <script>
-    function daysIntoYear(date){
-        return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
-    }
+    // function daysIntoYear(date){
+    //     return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
+    // }
 
-    var today = daysIntoYear(new Date());
-    var test = daysIntoYear(new Date('04/23/2022'));
+    // var today = daysIntoYear(new Date());
+    // var test = daysIntoYear(new Date('04/23/2022'));
 
-    var daysUntilTest = test - today;
-    var weeksUntilTest = Math.trunc(daysUntilTest/7);
+    // var daysUntilTest = test - today;
+    // var weeksUntilTest = Math.trunc(daysUntilTest/7);
 
-    var daysElement = document.getElementById('days-until-test');
-    daysElement.innerHTML += 'Days:' + daysUntilTest
+    // var daysElement = document.getElementById('days-until-test');
+    // daysElement.innerHTML += 'Days:' + daysUntilTest
     
-    var weeksElement = document.getElementById('weeks-until-test');
-    weeksElement.innerHTML += 'Weeks:' + weeksUntilTest
+    // var weeksElement = document.getElementById('weeks-until-test');
+    // weeksElement.innerHTML += 'Weeks:' + weeksUntilTest
 
 </script>
 
