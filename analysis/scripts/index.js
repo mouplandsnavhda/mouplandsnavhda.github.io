@@ -67,8 +67,14 @@ async function begin(breedPrefix) {
         // populateHistogram(gdata, 'gs_2010', 'Utility scores from 2010 - 2015', [2010,2011,2012,2013,2014,2015])
         // populateHistogram(gdata, 'gs_2015', 'Utility scores from 2016 - (spring)2021', [2016,2017,2018,2019,2020,2021])
         
-        populateHistogram(gdata, 'gs_all_hist', 'Utility scores from 2010 - (spring)2021', [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021])
+        var foo = gdata.filter(x =>  x[legend.sire].includes("SUNDANCE REVELATION")
+        || x[legend.sire].includes("FRIEDELSHEIM'S EXCELSIOR")
+        || x[legend.sire].includes("FRIEDELSHEIM'S HIGH OCTANE")
+        || x[legend.sire].includes("COOPER VOM STILLWATER")
+        || x[legend.sire].includes("FRIEDELSHEIM'S FREIGHT TRAIN MASON"));
+        gdata = foo;
 
+        populateHistogram(gdata, 'gs_all_hist', 'Utility scores from 2010 - (spring)2021', [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021])
         populateTestByYear();
         populatePrizesByYear();
         populatePrizesByAge();
@@ -402,7 +408,7 @@ function populateStatsTable(tablePK, chartId) {
 
         var table = new google.visualization.Table(document.getElementById(chartId));
 
-        table.draw(data, { page: 'enable', showRowNumber: true, width: '100%', height: '100%',alternatingRowStyle: true, cssClassNames: {oddTableRow: "analysis-table"} });
+        table.draw(data, { pageSize: 40, page: 'enable', showRowNumber: true, width: '100%', height: '100%',alternatingRowStyle: true, cssClassNames: {oddTableRow: "analysis-table"} });
     }
 }
 
@@ -444,7 +450,7 @@ function populateVCs() {
 
         var table = new google.visualization.Table(document.getElementById('gs_vc_prize'));
 
-        table.draw(data, { page: 'enable', showRowNumber: true, width: '100%', height: '100%',alternatingRowStyle: true, cssClassNames: {oddTableRow: "analysis-table"} });
+        table.draw(data, { pageSize: 40, page: 'enable', showRowNumber: true, width: '100%', height: '100%',alternatingRowStyle: true, cssClassNames: {oddTableRow: "analysis-table"} });
     }
 }
 
