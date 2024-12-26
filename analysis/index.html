@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165937673-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-165937673-1');
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>MoUplands - NAVHDA Analysis</title>
+    <link rel="icon" href="https://www.navhda.org/wp-content/uploads/2019/09/cropped-logo_sm-192x192.png" sizes="192x192">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="./scripts/index.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="../mouplands_cover_files/grid.css" rel="stylesheet">
+</head>
+
+<body class="py-4">
+    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <!-- <div class="jumbotron wht"> -->
+            <h1 class="display-4">Utility Analysis</h1>
+            <p class="lead">
+                <span style="color:red">Attention.</span> NAVHDA International has discontinued collaborating on this project per legal counsel. Unfortunately, that means data will not be updated. In the coming months this page will be removed from our site.  
+            </p>
+            <p class="lead">Thanks - Brandon Whitfield </p>
+        </div>
+    <!-- </div> Jumbotron container -->
+        <div class="container text-center py-5 border">
+                <h3>Select Breed</h3>
+                <p class="px-5">
+                    Currently I only have GS, GW, VI, & PP data, but I am looking to expand that soon.
+                </p>
+                <div class="form-check col text-left">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" value="gs" id="flexRadioDefault1" checked>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      GS
+                    </label>
+                  </div>
+                  <div class="form-check col text-left">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" value="gw" id="flexRadioDefault2" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      GW
+                    </label>
+                  </div>
+                  <div class="form-check col text-left">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" value="vi" id="flexRadioDefault3" >
+                    <label class="form-check-label" for="flexRadioDefault3">
+                      VI
+                    </label>
+                  </div>
+                  <div class="form-check col text-left">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" value="pp" id="flexRadioDefault4" >
+                    <label class="form-check-label" for="flexRadioDefault4">
+                      PP
+                    </label>
+                  </div>
+    
+            
+        </div>
+        <div class="container text-center py-5 border-bottom">
+                <h3>Test Score Histogram</h3>
+                <p class="px-5">
+                    From my experience with large time series data sets, changing how data is grouped can change the visuals, and sometimes tell a different story...  
+                </p>
+                <!-- <div id="gs_2010"></div>
+                <div id="gs_2015"></div> -->
+
+                <label id="gs_all_hist_label" for="gs_all_hist_input" class="form-label">Grouped by 2 points</label>
+                <input id="gs_all_hist_input" type="range" class="form-range" min="1" max="10" step="1" value="2" style="width:75%">
+                <div id="gs_all_hist"></div>
+        </div>
+
+    <div class="container text-center py-5 border-bottom">
+        <h3>Utility Tests per year</h3>
+        <p> 
+            I'm not exactly sure how we tested that many dogs during COVID, but I'm just the messenger. 
+        </p>
+        <div id="gs_by_year"></div>
+        <div id="gs_prize_percentages_by_year"></div>
+        <div id="gs_prize_percentages_by_age"></div>
+        <div class="row">
+    
+            <div id="ut1_sex" class="col-sm"></div>
+            <div id="ut2_sex" class="col-sm"></div>
+            <div id="ut3_sex" class="col-sm"></div>
+            <div id="ut0_sex" class="col-sm"></div>
+        </div>
+    </div>
+
+    <div class="container text-center py-5 border-bottom">
+        <h3>Progeny UT scores</h3>
+        <p>
+            Here is how to interpret the tables below - Using (breeder)Clyde Vetter as an example. He was listed as the breeder on 88 dogs that have ran utility. 
+            Those 88 dogs had a combined 106 Prize 1 scores, 30 Prize 2 scores, 12 Prize 3 scores, and 12 Prize None scores.
+            106 Prize 1 scores is 66% of all the Prize 1,2,3,and None combined. 
+            Remember, dogs can run the utility test many times. If a given dog runs 3 times, and gets 3 Prize 1's, then the Prize 1 score will be incremented 3 times. 
+            Also, if a given dog attempts to attain a prize 1 by running over and over, it will be reflected in the percentages. 
+            Click on the headers to sort if you're curious</p>
+        <h4 style="text-align:left">Progeny UT scores by Breeder</h4>
+        <div id="gs_prize_breeders"></div>
+        <h4 style="text-align:left">Progeny UT scores by Sire</h4>
+        <div id="gs_prize_sires"></div>
+        <h4 style="text-align:left">Progeny UT scores by Dam</h4>
+        <div id="gs_prize_dams"></div>
+    </div>
+            
+    <div class="container text-center py-5 border-bottom">
+        <h3>UT scores for VC's</h3>
+        <p>For every dog with the VC prefix, here is their Utility run rollups. These are raw scores, so if a single dog attains 4 prize 1's, then the prize 1 record will increase by 4. Click on the headers to sort if you're curious</p>
+        <div id="gs_vc_prize"></div>
+    </div>
+    
+    
+    
+    <div class="container text-center py-5 border-bottom">
+    <h3>Breeder Timeseries</h3>
+    <p>Select a breeder and see the utility scores, coat scores, and test locations for dogs they bred.</p>
+    <div class="row justify-content-md-center">
+        <input id="breeder-selector" list="brow" style="height:30px; overflow-y: auto;">
+        <datalist id="brow" style="height:30px; overflow-y: auto;"></datalist> 
+    </div>
+    <div id="breeder_column"></div>  
+    <div id="gs_prize_percentages_by_age_breeder"></div>  
+    <div id="breeder_test_location"></div>  
+    <div id="breeder_coat"></div> 
+
+    <div id="breeder_influence"></div>  
+    <div id="breeder_influence_scatter" style="height:800px; width:100%"></div>  
+    </div>
+
+    <div class="container" style="margin-top:20px;">
+        <span class="badge badge-primary">v1.19.0</span>
+    </div>
+</body>
+<script>
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.load('current', { 'packages': ['bar'] });
+      google.charts.load('current', { 'packages': ['table'] });
+      begin('gs');
+      wireUpChange();
+</script>
+
+</html>
