@@ -3,106 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bird Order Form</title>
+  <title>Bird Orders</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body { padding: 2rem; }
-    .hidden { display: none; }
-    .message { margin-top: 1rem; font-weight: bold; }
-  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Bird Order Form</h1>
-    <div id="status-message" class="message"></div>
+  <div class="container py-5">
+    <h1 class="mb-4">Submit Your Bird Order</h1>
+    <p class="lead">
+      Please use the form below to submit your order. After submission, you will be redirected to calculate your total and complete payment.
+    </p>
 
-    <form id="order-form" class="hidden">
-      <div class="mb-3">
-        <label class="form-label">Name</label>
-        <input type="text" class="form-control" name="Name" required>
-      </div>
+    <div class="mb-4">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3BSCwSGJXQl152vS81BWxQzAjfArPJQUXgtg-CQEG0sRu_A/viewform" class="btn btn-primary" target="_blank">
+        Open Bird Order Form
+      </a>
+    </div>
 
-      <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input type="email" class="form-control" name="Email" required>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Phone</label>
-        <input type="text" class="form-control" name="Phone">
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Are you a NAVHDA Member?</label>
-        <select class="form-control" name="NAVHDA Member">
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Handler Name(s)</label>
-        <input type="text" class="form-control" name="Handler Name(s)">
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Dog Name(s)</label>
-        <input type="text" class="form-control" name="Dog Name(s)">
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Birds Requested</label>
-        <input type="number" class="form-control" name="Quail" placeholder="Quail ($6.50)">
-        <input type="number" class="form-control" name="Chukar" placeholder="Chukar ($15.00)">
-        <input type="number" class="form-control" name="Duck" placeholder="Duck ($16.00)">
-      </div>
-
-      <input type="hidden" name="Training Fee" value="10">
-
-      <button type="submit" class="btn btn-primary">Submit Order</button>
-    </form>
+    <div>
+      <p class="mb-2">Already submitted your form? Calculate your total and pay:</p>
+      <a href="/pay.html" class="btn btn-success">Pay Now</a>
+    </div>
   </div>
-
-  <script>
-    const form = document.getElementById('order-form');
-    const statusMsg = document.getElementById('status-message');
-
-    const openDate = new Date("2025-06-30T00:00:00");
-    const cutoffDate = new Date("2025-07-07T23:59:59");
-    const now = new Date();
-
-  form.classList.remove('hidden');
-
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-
-      // Calculate total
-      const quail = parseInt(data.Quail || 0);
-      const chukar = parseInt(data.Chukar || 0);
-      const duck = parseInt(data.Duck || 0);
-      const trainingFee = 10;
-      const total = (quail * 6.5 + chukar * 15 + duck * 16 + trainingFee).toFixed(2);
-
-      try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbwbQtsA22SPlEMvPOPw8OUHWwI2oLx1YCYXEN79BryUrXlqdFo-4HfA3zYCQjvJWAq6eg/exec", {
-          method: "POST",
-          body: new URLSearchParams(data),
-        });
-
-        if (response.ok) {
-          // Redirect to PayPal
-          const paypalURL = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@mouplands.org&item_name=Bird%20Order&amount=${total}&currency_code=USD`;
-          window.location.href = paypalURL;
-        } else {
-          throw new Error("Failed to submit order.");
-        }
-      } catch (error) {
-        statusMsg.textContent = "Error submitting order. Please try again later.";
-      }
-    });
-  </script>
 </body>
 </html>
