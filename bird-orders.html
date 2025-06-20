@@ -34,16 +34,29 @@
       text-align: center;
       font-weight: bold;
     }
+    .sandbox-notice {
+      text-align: center;
+      background: #fff3cd;
+      color: #856404;
+      padding: 10px;
+      margin-top: 20px;
+      border: 1px solid #ffeeba;
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
 
   <h1>MO Uplands Bird Order Form</h1>
 
+  <div id="sandboxNotice" class="sandbox-notice" style="display: none;">
+    <strong>Test Mode Active:</strong> This form is using PayPal Sandbox. No real money will be charged.
+  </div>
+
   <form id="orderForm" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" onsubmit="return prepOrder();">
-    <!-- PayPal Setup -->
+    <!-- PayPal Info -->
     <input type="hidden" name="cmd" value="_xclick">
-    <input type="hidden" name="business" value="sb-giw2o587526@personal.example.com">
+    <input type="hidden" name="business" id="paypalBusiness" value="">
     <input type="hidden" name="item_name" id="item_name" value="Bird Order">
     <input type="hidden" name="amount" id="amount" value="0">
     <input type="hidden" name="currency_code" value="USD">
@@ -63,7 +76,7 @@
     <label for="duck">Duck ($16.00):</label>
     <input type="number" id="duck" min="0" value="0">
 
-    <!-- Mandatory Fee -->
+    <!-- Training Fee -->
     <p><strong>Training Fee: $10.00 (automatically added)</strong></p>
 
     <!-- Total -->
@@ -94,7 +107,6 @@
       return total.toFixed(2);
     }
 
-    // Recalculate on any input change
     document.querySelectorAll("input[type='number']").forEach(input => {
       input.addEventListener("input", calculateTotal);
     });
@@ -112,8 +124,24 @@
       document.getElementById("custom").value = summary;
       document.getElementById("amount").value = amount;
 
-      return true; // allow form to submit
+      return true;
     }
+
+    // Test mode setup
+    window.onload = function () {
+      const isTest = window.location.search.includes("test=true");
+      const sandboxEmail = "sb-abc123456@business.example.com"; // Replace with your actual sandbox biz email
+      const liveEmail = "paypal@mouplands.org";
+
+      const paypalEmail = isTest ? sandboxEmail : liveEmail;
+      document.getElementById("paypalBusiness").value = paypalEmail;
+
+      if (isTest) {
+        document.getElementById("sandboxNotice").style.display = "block";
+      }
+
+      calculateTotal();
+    };
   </script>
 </body>
 </html>
