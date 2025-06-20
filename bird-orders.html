@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bird Orders</title>
+  <title>Bird Order Form</title>
   <style>
     body {
       font-family: sans-serif;
@@ -11,15 +11,37 @@
       margin: auto;
       padding: 2rem;
     }
-    input[type="number"] {
-      width: 80px;
+    h1 {
+      text-align: center;
     }
     .form-group {
       margin-bottom: 1rem;
     }
-    button {
-      padding: 0.6rem 1.2rem;
+    input[type="number"],
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 0.5rem;
       font-size: 1rem;
+    }
+    button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #0070ba;
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: block;
+      margin: 1rem auto;
+    }
+    button:hover {
+      background-color: #005c99;
+    }
+    .total {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 1rem;
     }
   </style>
 </head>
@@ -27,32 +49,34 @@
   <h1>Bird Order Form</h1>
   <form id="orderForm">
     <div class="form-group">
-      <label for="name">Name:</label><br />
+      <label for="name">Name:</label>
       <input type="text" id="name" name="name" required />
     </div>
     <div class="form-group">
-      <label for="email">Email:</label><br />
+      <label for="email">Email:</label>
       <input type="email" id="email" name="email" required />
     </div>
     <div class="form-group">
-      <label for="quail">Quail ($6.50):</label><br />
+      <label for="quail">Quail ($6.50):</label>
       <input type="number" id="quail" name="quail" min="0" value="0" />
     </div>
     <div class="form-group">
-      <label for="chukar">Chukar ($15.00):</label><br />
+      <label for="chukar">Chukar ($15.00):</label>
       <input type="number" id="chukar" name="chukar" min="0" value="0" />
     </div>
     <div class="form-group">
-      <label for="duck">Duck ($16.00):</label><br />
+      <label for="duck">Duck ($16.00):</label>
       <input type="number" id="duck" name="duck" min="0" value="0" />
     </div>
-    <p><strong>Training Fee: $10 (required)</strong></p>
-    <p><strong>Total: $<span id="totalDisplay">10.00</span></strong></p>
+
+    <p class="total">Training Fee: $10.00 (required)<br>
+    Total: $<span id="totalDisplay">10.00</span></p>
+
     <button type="submit">Submit & Pay</button>
   </form>
 
   <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwb9SmjviL4gE3aE6-DTVdtaHz5OZ3-w0vNIfebTDEw1AAVluq3ygcuc65VLa2CseNY-w/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwbQtsA22SPlEMvPOPw8OUHWwI2oLx1YCYXEN79BryUrXlqdFo-4HfA3zYCQjvJWAq6eg/exec';
 
     const prices = {
       quail: 6.5,
@@ -97,14 +121,13 @@
         headers: { 'Content-Type': 'application/json' }
       })
       .then(() => {
-        // Redirect to PayPal with amount
+        // Redirect to PayPal
         const paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
         paypalURL.searchParams.set("cmd", "_xclick");
         paypalURL.searchParams.set("business", "paypal@mouplands.org");
         paypalURL.searchParams.set("item_name", "Bird Order + Training Fee");
         paypalURL.searchParams.set("amount", data.total.toFixed(2));
         paypalURL.searchParams.set("currency_code", "USD");
-
         window.location.href = paypalURL.toString();
       })
       .catch(error => {
@@ -112,6 +135,9 @@
         console.error('Submission error:', error);
       });
     });
+
+    // Initial total display
+    calculateTotal();
   </script>
 </body>
 </html>
