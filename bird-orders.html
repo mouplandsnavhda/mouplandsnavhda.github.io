@@ -1,154 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>MO Uplands Bird Order Form</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bird Orders</title>
   <style>
     body {
-      font-family: "Segoe UI", sans-serif;
+      font-family: sans-serif;
       max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #f7f9fb;
-      color: #333;
+      margin: auto;
+      padding: 2rem;
     }
-    h1 {
-      text-align: center;
+    input[type="number"] {
+      width: 80px;
     }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 20px;
+    .form-group {
+      margin-bottom: 1rem;
     }
-    input[type="number"],
-    input[type="text"],
     button {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      box-sizing: border-box;
-    }
-    .total {
-      margin-top: 20px;
-      font-size: 1.2em;
-      text-align: center;
-      font-weight: bold;
-    }
-    .sandbox-notice {
-      text-align: center;
-      background: #fff3cd;
-      color: #856404;
-      padding: 10px;
-      margin-top: 20px;
-      border: 1px solid #ffeeba;
-      border-radius: 4px;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
     }
   </style>
 </head>
 <body>
-
-  <h1>MO Uplands Bird Order Form</h1>
-
-  <div id="sandboxNotice" class="sandbox-notice" style="display: none;">
-    <strong>Test Mode Active:</strong> This form is using PayPal Sandbox. No real money will be charged.
-  </div>
-
-  <form id="orderForm" method="post" target="_blank" onsubmit="return prepOrder();">
-    <!-- PayPal Info -->
-    <input type="hidden" name="cmd" value="_xclick">
-    <input type="hidden" name="business" id="paypalBusiness" value="">
-    <input type="hidden" name="item_name" id="item_name" value="Bird Order">
-    <input type="hidden" name="amount" id="amount" value="0">
-    <input type="hidden" name="currency_code" value="USD">
-    <input type="hidden" name="custom" id="custom" value="">
-
-    <!-- User Info -->
-    <label for="name">Your Name:</label>
-    <input type="text" id="name" required>
-
-    <!-- Bird Selection -->
-    <label for="quail">Quail ($6.50):</label>
-    <input type="number" id="quail" min="0" value="0">
-
-    <label for="chukar">Chukar ($15.00):</label>
-    <input type="number" id="chukar" min="0" value="0">
-
-    <label for="duck">Duck ($16.00):</label>
-    <input type="number" id="duck" min="0" value="0">
-
-    <!-- Training Fee -->
-    <p><strong>Training Fee: $10.00 (automatically added)</strong></p>
-
-    <!-- Total -->
-    <p class="total">Total: $<span id="totalDisplay">10.00</span></p>
-
-    <button type="submit">Submit & Pay with PayPal</button>
+  <h1>Bird Order Form</h1>
+  <form id="orderForm">
+    <div class="form-group">
+      <label for="name">Name:</label><br />
+      <input type="text" id="name" name="name" required />
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" required />
+    </div>
+    <div class="form-group">
+      <label for="quail">Quail ($6.50):</label><br />
+      <input type="number" id="quail" name="quail" min="0" value="0" />
+    </div>
+    <div class="form-group">
+      <label for="chukar">Chukar ($15.00):</label><br />
+      <input type="number" id="chukar" name="chukar" min="0" value="0" />
+    </div>
+    <div class="form-group">
+      <label for="duck">Duck ($16.00):</label><br />
+      <input type="number" id="duck" name="duck" min="0" value="0" />
+    </div>
+    <p><strong>Training Fee: $10 (required)</strong></p>
+    <p><strong>Total: $<span id="totalDisplay">10.00</span></strong></p>
+    <button type="submit">Submit & Pay</button>
   </form>
 
   <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz0bFT0F8bmjSBKA6Y6pFNHcEG6n8rk-gUCh-ECpWho77TZkx9chECt9qxrCtDbOahszg/exec';
+
     const prices = {
-      quail: 6.50,
-      chukar: 15.00,
-      duck: 16.00,
-      training: 10.00
+      quail: 6.5,
+      chukar: 15.0,
+      duck: 16.0,
+      trainingFee: 10.0
     };
+
+    const form = document.getElementById('orderForm');
+    const totalDisplay = document.getElementById('totalDisplay');
 
     function calculateTotal() {
-      const quail = parseInt(document.getElementById("quail").value) || 0;
-      const chukar = parseInt(document.getElementById("chukar").value) || 0;
-      const duck = parseInt(document.getElementById("duck").value) || 0;
-
-      const total = (quail * prices.quail) +
-                    (chukar * prices.chukar) +
-                    (duck * prices.duck) +
-                    prices.training;
-
-      document.getElementById("totalDisplay").textContent = total.toFixed(2);
-      return total.toFixed(2);
+      const quail = parseInt(document.getElementById('quail').value) || 0;
+      const chukar = parseInt(document.getElementById('chukar').value) || 0;
+      const duck = parseInt(document.getElementById('duck').value) || 0;
+      const total = (quail * prices.quail) + (chukar * prices.chukar) + (duck * prices.duck) + prices.trainingFee;
+      totalDisplay.textContent = total.toFixed(2);
+      return total;
     }
 
-    document.querySelectorAll("input[type='number']").forEach(input => {
-      input.addEventListener("input", calculateTotal);
+    document.querySelectorAll('#quail, #chukar, #duck').forEach(input => {
+      input.addEventListener('input', calculateTotal);
     });
 
-    function prepOrder() {
-      const name = document.getElementById("name").value.trim();
-      const quail = document.getElementById("quail").value || "0";
-      const chukar = document.getElementById("chukar").value || "0";
-      const duck = document.getElementById("duck").value || "0";
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-      const summary = `Name: ${name} | Quail: ${quail}, Chukar: ${chukar}, Duck: ${duck}`;
-      const amount = calculateTotal();
+      const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        quail: parseInt(document.getElementById('quail').value) || 0,
+        chukar: parseInt(document.getElementById('chukar').value) || 0,
+        duck: parseInt(document.getElementById('duck').value) || 0,
+        trainingFee: prices.trainingFee,
+        total: calculateTotal()
+      };
 
-      document.getElementById("item_name").value = "Bird Order - " + name;
-      document.getElementById("custom").value = summary;
-      document.getElementById("amount").value = amount;
+      // Send to Google Sheets
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(() => {
+        // Redirect to PayPal with amount
+        const paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
+        paypalURL.searchParams.set("cmd", "_xclick");
+        paypalURL.searchParams.set("business", "paypal@mouplands.org");
+        paypalURL.searchParams.set("item_name", "Bird Order + Training Fee");
+        paypalURL.searchParams.set("amount", data.total.toFixed(2));
+        paypalURL.searchParams.set("currency_code", "USD");
 
-      return true;
-    }
-
-    // Set up test/live behavior
-    window.onload = function () {
-      const isTest = window.location.search.includes("test=true");
-      const sandboxEmail = "sb-6pla43588420@business.example.com";
-      const liveEmail = "paypal@mouplands.org";
-
-      const paypalEmail = isTest ? sandboxEmail : liveEmail;
-      document.getElementById("paypalBusiness").value = paypalEmail;
-
-      // Set form action to correct PayPal endpoint
-      const form = document.getElementById("orderForm");
-      form.action = isTest
-        ? "https://www.sandbox.paypal.com/cgi-bin/webscr"
-        : "https://www.paypal.com/cgi-bin/webscr";
-
-      if (isTest) {
-        document.getElementById("sandboxNotice").style.display = "block";
-      }
-
-      calculateTotal();
-    };
+        window.location.href = paypalURL.toString();
+      })
+      .catch(error => {
+        alert("Error submitting order: " + error.message);
+        console.error('Submission error:', error);
+      });
+    });
   </script>
 </body>
 </html>
-
