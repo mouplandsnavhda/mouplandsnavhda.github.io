@@ -1,69 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- DataTables CSS -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-<!-- jQuery + DataTables JS -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
   <meta charset="UTF-8">
-  <title>Bird Vendor List</title>
-  <script <script>
-  const csvUrl = 'bird_vendors_cleaned.csv';
+  <title>MO Uplands Bird Vendors</title>
 
-  Papa.parse(csvUrl, {
-    download: true,
-    header: true,
-    complete: function(results) {
-      const tbody = document.querySelector("#vendorTable tbody");
-      results.data.forEach(row => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${row["Name"] || ""}</td>
-          <td>${row["Location"] || ""}</td>
-          <td>${row["Contact"] || ""}</td>
-          <td>${row["Phone"] || ""}</td>
-          <td>${row["Email"] || ""}</td>
-          <td>${row["Birds"] || ""}</td>
-          <td>${row["Reliable"] || ""}</td>
-          <td>${row["Notes"] || ""}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      // Initialize DataTable after CSV is loaded
-      $('#vendorTable').DataTable({
-        pageLength: 10,
-        lengthChange: false,
-        responsive: true,
-        autoWidth: false
-      });
-    }
-  });
-</script>
-"></script>
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  
+  <!-- Custom Styles -->
   <style>
-  body {
-    font-family: "Segoe UI", sans-serif;
-    padding: 40px;
-    background-color: #f0f2f5;
-  }
-  h1 {
-    text-align: center;
-    color: #2c3e50;
-  }
-  table.dataTable {
-    width: 100% !important;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-  }
-</style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      padding: 40px;
+      background-color: #f5f8fa;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    #vendorTable {
+      width: 100%;
+      border-collapse: collapse;
+      margin: auto;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      background-color: white;
+    }
+
+    table.dataTable thead {
+      background-color: #e9ecef;
+    }
+
+    table.dataTable th,
+    table.dataTable td {
+      padding: 12px;
+      text-align: left;
+    }
+
+    .dataTables_wrapper {
+      max-width: 1000px;
+      margin: auto;
+    }
+  </style>
+
+  <!-- jQuery and DataTables -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
 </head>
+
 <body>
   <h1>MO Uplands Bird Vendor List</h1>
-  <table id="vendorTable">
+
+  <table id="vendorTable" class="display">
     <thead>
       <tr>
         <th>Name</th>
@@ -80,8 +71,7 @@
   </table>
 
   <script>
-    // Load the CSV file (assumes it's in the same folder)
-    const csvUrl = 'bird_vendors_cleaned.csv';
+    const csvUrl = 'bird_vendors_cleaned.csv'; // CSV file must be in same folder
 
     Papa.parse(csvUrl, {
       download: true,
@@ -89,6 +79,7 @@
       complete: function(results) {
         const tbody = document.querySelector("#vendorTable tbody");
         results.data.forEach(row => {
+          if (!row["Name"]) return; // Skip blank rows
           const tr = document.createElement("tr");
           tr.innerHTML = `
             <td>${row["Name"] || ""}</td>
@@ -101,6 +92,14 @@
             <td>${row["Notes"] || ""}</td>
           `;
           tbody.appendChild(tr);
+        });
+
+        // Initialize DataTables
+        $('#vendorTable').DataTable({
+          pageLength: 10,
+          lengthChange: false,
+          responsive: true,
+          autoWidth: false
         });
       }
     });
