@@ -52,7 +52,7 @@
   </form>
 
   <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbz0bFT0F8bmjSBKA6Y6pFNHcEG6n8rk-gUCh-ECpWho77TZkx9chECt9qxrCtDbOahszg/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwb9SmjviL4gE3aE6-DTVdtaHz5OZ3-w0vNIfebTDEw1AAVluq3ygcuc65VLa2CseNY-w/exec';
 
     const prices = {
       quail: 6.5,
@@ -90,7 +90,7 @@
         total: calculateTotal()
       };
 
-      // Send to Google Sheets
+      // Send to Google Sheet
       fetch(scriptURL, {
         method: 'POST',
         body: JSON.stringify(data),
