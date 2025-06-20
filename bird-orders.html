@@ -71,13 +71,8 @@
     const cutoffDate = new Date("2025-07-07T23:59:59");
     const now = new Date();
 
-    if (now < openDate) {
-      statusMsg.textContent = "Ordering will open on June 30.";
-    } else if (now > cutoffDate) {
-      statusMsg.textContent = "Ordering is now closed for the week.";
-    } else {
-      form.classList.remove('hidden');
-    }
+  form.classList.remove('hidden');
+
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
