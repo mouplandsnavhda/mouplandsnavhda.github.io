@@ -1,3 +1,7 @@
+from pathlib import Path
+
+# HTML content for the updated bird order form
+html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +57,7 @@
     <strong>Test Mode Active:</strong> This form is using PayPal Sandbox. No real money will be charged.
   </div>
 
-  <form id="orderForm" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" onsubmit="return prepOrder();">
+  <form id="orderForm" method="post" target="_blank" onsubmit="return prepOrder();">
     <!-- PayPal Info -->
     <input type="hidden" name="cmd" value="_xclick">
     <input type="hidden" name="business" id="paypalBusiness" value="">
@@ -127,14 +131,20 @@
       return true;
     }
 
-    // Test mode setup
+    // Set up test/live behavior
     window.onload = function () {
       const isTest = window.location.search.includes("test=true");
-      const sandboxEmail = "sb-6pla43588420@business.example.com"; // Replace with your actual sandbox biz email
+      const sandboxEmail = "sb-6pla43588420@business.example.com";
       const liveEmail = "paypal@mouplands.org";
 
       const paypalEmail = isTest ? sandboxEmail : liveEmail;
       document.getElementById("paypalBusiness").value = paypalEmail;
+
+      // Set form action to correct PayPal endpoint
+      const form = document.getElementById("orderForm");
+      form.action = isTest
+        ? "https://www.sandbox.paypal.com/cgi-bin/webscr"
+        : "https://www.paypal.com/cgi-bin/webscr";
 
       if (isTest) {
         document.getElementById("sandboxNotice").style.display = "block";
@@ -145,3 +155,11 @@
   </script>
 </body>
 </html>
+"""
+
+# Save the HTML to a file
+output_path = Path("/mnt/data/bird-orders.html")
+output_path.write_text(html_content)
+
+output_path.name  # return the filename for linking later
+
