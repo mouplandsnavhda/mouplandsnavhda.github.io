@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MO Uplands Bird Order Form</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f7f9fb;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 20px;
+    }
+    input[type="number"],
+    input[type="text"],
+    button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    .total {
+      margin-top: 20px;
+      font-size: 1.2em;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>MO Uplands Bird Order Form</h1>
+
+  <form id="orderForm" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" onsubmit="return prepOrder();">
+    <!-- PayPal Setup -->
+    <input type="hidden" name="cmd" value="_xclick">
+    <input type="hidden" name="business" value="paypal@mouplands.org">
+    <input type="hidden" name="item_name" id="item_name" value="Bird Order">
+    <input type="hidden" name="amount" id="amount" value="0">
+    <input type="hidden" name="currency_code" value="USD">
+    <input type="hidden" name="custom" id="custom" value="">
+
+    <!-- User Info -->
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" required>
+
+    <!-- Bird Selection -->
+    <label for="quail">Quail ($6.50):</label>
+    <input type="number" id="quail" min="0" value="0">
+
+    <label for="chukar">Chukar ($15.00):</label>
+    <input type="number" id="chukar" min="0" value="0">
+
+    <label for="duck">Duck ($16.00):</label>
+    <input type="number" id="duck" min="0" value="0">
+
+    <!-- Mandatory Fee -->
+    <p><strong>Training Fee: $10.00 (automatically added)</strong></p>
+
+    <!-- Total -->
+    <p class="total">Total: $<span id="totalDisplay">10.00</span></p>
+
+    <button type="submit">Submit & Pay with PayPal</button>
+  </form>
+
+  <script>
+    const prices = {
+      quail: 6.50,
+      chukar: 15.00,
+      duck: 16.00,
+      training: 10.00
+    };
+
+    function calculateTotal() {
+      const quail = parseInt(document.getElementById("quail").value) || 0;
+      const chukar = parseInt(document.getElementById("chukar").value) || 0;
+      const duck = parseInt(document.getElementById("duck").value) || 0;
+
+      const total = (quail * prices.quail) +
+                    (chukar * prices.chukar) +
+                    (duck * prices.duck) +
+                    prices.training;
+
+      document.getElementById("totalDisplay").textContent = total.toFixed(2);
+      return total.toFixed(2);
+    }
+
+    // Recalculate on any input change
+    document.querySelectorAll("input[type='number']").forEach(input => {
+      input.addEventListener("input", calculateTotal);
+    });
+
+    function prepOrder() {
+      const name = document.getElementById("name").value.trim();
+      const quail = document.getElementById("quail").value || "0";
+      const chukar = document.getElementById("chukar").value || "0";
+      const duck = document.getElementById("duck").value || "0";
+
+      const summary = `Name: ${name} | Quail: ${quail}, Chukar: ${chukar}, Duck: ${duck}`;
+      const amount = calculateTotal();
+
+      document.getElementById("item_name").value = "Bird Order - " + name;
+      document.getElementById("custom").value = summary;
+      document.getElementById("amount").value = amount;
+
+      return true; // allow form to submit
+    }
+  </script>
+</body>
+</html>
