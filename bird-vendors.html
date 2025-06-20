@@ -6,27 +6,38 @@
 
   <!-- DataTables CSS -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-  
-  <!-- Custom Styles -->
+
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
-      padding: 40px;
       background-color: #f5f8fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
     }
 
     h1 {
       text-align: center;
       color: #2c3e50;
+      font-size: 2rem;
       margin-bottom: 30px;
     }
 
-    #vendorTable {
-      width: 100%;
-      border-collapse: collapse;
-      margin: auto;
-      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-      background-color: white;
+    .table-container {
+      overflow-x: auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    table.dataTable {
+      width: 100% !important;
     }
 
     table.dataTable thead {
@@ -35,43 +46,58 @@
 
     table.dataTable th,
     table.dataTable td {
-      padding: 12px;
+      padding: 10px;
       text-align: left;
+      font-size: 14px;
     }
 
-    .dataTables_wrapper {
-      max-width: 1000px;
-      margin: auto;
+    .dataTables_wrapper .dataTables_filter {
+      float: right;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      table.dataTable th,
+      table.dataTable td {
+        font-size: 12px;
+      }
     }
   </style>
 
-  <!-- jQuery and DataTables -->
+  <!-- jQuery + DataTables -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
 </head>
 
 <body>
-  <h1>MO Uplands Bird Vendor List</h1>
-
-  <table id="vendorTable" class="display">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Location</th>
-        <th>Contact</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Birds</th>
-        <th>Reliable</th>
-        <th>Notes</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <div class="container">
+    <h1>MO Uplands Bird Vendor List</h1>
+    <div class="table-container">
+      <table id="vendorTable" class="display">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Contact</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Birds</th>
+            <th>Reliable</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
 
   <script>
-    const csvUrl = 'bird_vendors_cleaned.csv'; // CSV file must be in same folder
+    const csvUrl = 'bird_vendors_cleaned.csv';
 
     Papa.parse(csvUrl, {
       download: true,
@@ -79,7 +105,7 @@
       complete: function(results) {
         const tbody = document.querySelector("#vendorTable tbody");
         results.data.forEach(row => {
-          if (!row["Name"]) return; // Skip blank rows
+          if (!row["Name"]) return;
           const tr = document.createElement("tr");
           tr.innerHTML = `
             <td>${row["Name"] || ""}</td>
@@ -94,7 +120,6 @@
           tbody.appendChild(tr);
         });
 
-        // Initialize DataTables
         $('#vendorTable').DataTable({
           pageLength: 10,
           lengthChange: false,
