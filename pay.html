@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bird Order Payment</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 500px; margin: 2em auto; padding: 1em; border: 1px solid #ccc; border-radius: 10px; }
+    input[type="number"] { width: 60px; }
+    .total { font-weight: bold; margin-top: 1em; }
+    button { margin-top: 1em; padding: 0.5em 1em; }
+    label { display: block; margin-top: 1em; }
+  </style>
+</head>
+<body>
+  <h2>Bird Order Payment</h2>
+
+  <label>Quail ($6.50 each): <input type="number" id="quail" min="0" value="0"></label>
+  <label>Chukar ($15.00 each): <input type="number" id="chukar" min="0" value="0"></label>
+  <label>Duck ($16.00 each): <input type="number" id="duck" min="0" value="0"></label>
+
+  <label>
+    <input type="checkbox" id="sandbox" checked>
+    Use PayPal Sandbox (for testing)
+  </label>
+
+  <div class="total">Total: $<span id="total">10.00</span></div>
+
+  <button onclick="submitPayment()">Pay with PayPal</button>
+
+  <script>
+    const prices = { quail: 6.5, chukar: 15, duck: 16, training: 10 };
+    const totalEl = document.getElementById("total");
+
+    document.querySelectorAll("input[type='number']").forEach(input => {
+      input.addEventListener("input", updateTotal);
+    });
+
+    function updateTotal() {
+      const q = +document.getElementById("quail").value || 0;
+      const c = +document.getElementById("chukar").value || 0;
+      const d = +document.getElementById("duck").value || 0;
+      const total = (q * prices.quail) + (c * prices.chukar) + (d * prices.duck) + prices.training;
+      totalEl.textContent = total.toFixed(2);
+    }
+
+    function submitPayment() {
+      const q = +document.getElementById("quail").value || 0;
+      const c = +document.getElementById("chukar").value || 0;
+      const d = +document.getElementById("duck").value || 0;
+      const sandbox = document.getElementById("sandbox").checked;
+
+      const total = (q * prices.quail) + (c * prices.chukar) + (d * prices.duck) + prices.training;
+      const amount = total.toFixed(2);
+
+      const base = sandbox
+        ? "https://www.sandbox.paypal.com/cgi-bin/webscr"
+        : "https://www.paypal.com/cgi-bin/webscr";
+
+      const params = new URLSearchParams({
+        cmd: "_xclick",
+        business: "paypal@mouplands.org",
+        item_name: "Bird Order Payment",
+        amount: amount,
+        currency_code: "USD"
+      });
+
+      window.location.href = `${base}?${params.toString()}`;
+    }
+
+    updateTotal();
+  </script>
+</body>
+</html>
