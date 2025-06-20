@@ -43,41 +43,69 @@
       text-align: center;
       margin-top: 1rem;
     }
+    #modeBanner {
+      text-align: center;
+      padding: 0.5rem;
+      font-weight: bold;
+      background-color: #fdd835;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+    }
+    .sandbox {
+      background-color: #ffeb3b;
+    }
+    .live {
+      background-color: #c8e6c9;
+    }
+    .toggle {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .toggle input {
+      margin-left: 0.5rem;
+    }
   </style>
 </head>
 <body>
   <h1>Bird Order Form</h1>
+
+  <div id="modeBanner" class="sandbox">SANDBOX MODE — Test Only</div>
+  <div class="toggle">
+    <label>
+      <input type="checkbox" id="modeToggle" />
+      Use Live PayPal
+    </label>
+  </div>
+
   <form id="orderForm">
     <div class="form-group">
       <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required />
+      <input type="text" id="name" required />
     </div>
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required />
+      <input type="email" id="email" required />
     </div>
     <div class="form-group">
       <label for="quail">Quail ($6.50):</label>
-      <input type="number" id="quail" name="quail" min="0" value="0" />
+      <input type="number" id="quail" min="0" value="0" />
     </div>
     <div class="form-group">
       <label for="chukar">Chukar ($15.00):</label>
-      <input type="number" id="chukar" name="chukar" min="0" value="0" />
+      <input type="number" id="chukar" min="0" value="0" />
     </div>
     <div class="form-group">
       <label for="duck">Duck ($16.00):</label>
-      <input type="number" id="duck" name="duck" min="0" value="0" />
+      <input type="number" id="duck" min="0" value="0" />
     </div>
 
     <p class="total">Training Fee: $10.00 (required)<br>
     Total: $<span id="totalDisplay">10.00</span></p>
 
-    <button type="submit">Submit & Pay</button>
+    <button type="submit">Pay with PayPal</button>
   </form>
 
   <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwbQtsA22SPlEMvPOPw8OUHWwI2oLx1YCYXEN79BryUrXlqdFo-4HfA3zYCQjvJWAq6eg/exec';
-
     const prices = {
       quail: 6.5,
       chukar: 15.0,
@@ -85,8 +113,13 @@
       trainingFee: 10.0
     };
 
+    const sandboxBusiness = "sb-6pla43588420@business.example.com";
+    const liveBusiness = "paypal@mouplands.org";
+
     const form = document.getElementById('orderForm');
     const totalDisplay = document.getElementById('totalDisplay');
+    const modeToggle = document.getElementById('modeToggle');
+    const modeBanner = document.getElementById('modeBanner');
 
     function calculateTotal() {
       const quail = parseInt(document.getElementById('quail').value) || 0;
@@ -103,40 +136,36 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      const total = calculateTotal();
+      const useLive = modeToggle.checked;
 
-      const data = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        quail: parseInt(document.getElementById('quail').value) || 0,
-        chukar: parseInt(document.getElementById('chukar').value) || 0,
-        duck: parseInt(document.getElementById('duck').value) || 0,
-        trainingFee: prices.trainingFee,
-        total: calculateTotal()
-      };
+      const paypalURL = new URL(useLive
+        ? "https://www.paypal.com/cgi-bin/webscr"
+        : "https://www.sandbox.paypal.com/cgi-bin/webscr"
+      );
 
-      // Send to Google Sheet
-      fetch(scriptURL, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then(() => {
-        // Redirect to PayPal
-        const paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
-        paypalURL.searchParams.set("cmd", "_xclick");
-        paypalURL.searchParams.set("business", "paypal@mouplands.org");
-        paypalURL.searchParams.set("item_name", "Bird Order + Training Fee");
-        paypalURL.searchParams.set("amount", data.total.toFixed(2));
-        paypalURL.searchParams.set("currency_code", "USD");
-        window.location.href = paypalURL.toString();
-      })
-      .catch(error => {
-        alert("Error submitting order: " + error.message);
-        console.error('Submission error:', error);
-      });
+      paypalURL.searchParams.set("cmd", "_xclick");
+      paypalURL.searchParams.set("business", useLive ? liveBusiness : sandboxBusiness);
+      paypalURL.searchParams.set("item_name", "Bird Order + Training Fee");
+      paypalURL.searchParams.set("amount", total.toFixed(2));
+      paypalURL.searchParams.set("currency_code", "USD");
+
+      window.location.href = paypalURL.toString();
     });
 
-    // Initial total display
+    modeToggle.addEventListener('change', function () {
+      if (modeToggle.checked) {
+        modeBanner.textContent = "LIVE MODE — Real Payments";
+        modeBanner.classList.remove("sandbox");
+        modeBanner.classList.add("live");
+      } else {
+        modeBanner.textContent = "SANDBOX MODE — Test Only";
+        modeBanner.classList.remove("live");
+        modeBanner.classList.add("sandbox");
+      }
+    });
+
+    // Initialize total
     calculateTotal();
   </script>
 </body>
