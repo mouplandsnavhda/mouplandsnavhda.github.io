@@ -1,7 +1,3 @@
-from pathlib import Path
-
-# HTML content for the updated bird order form
-html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -155,11 +151,4 @@ html_content = """
   </script>
 </body>
 </html>
-"""
-
-# Save the HTML to a file
-output_path = Path("/mnt/data/bird-orders.html")
-output_path.write_text(html_content)
-
-output_path.name  # return the filename for linking later
 
