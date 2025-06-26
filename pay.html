@@ -19,7 +19,7 @@
       font-weight: bold;
       margin-top: 1em;
     }
-    button, form button {
+    button {
       margin-top: 1em;
       padding: 0.5em 1em;
       font-size: 1em;
@@ -32,9 +32,6 @@
     hr {
       margin: 2em 0;
     }
-    h2, h3 {
-      margin-top: 1.5em;
-    }
   </style>
 </head>
 <body>
@@ -44,49 +41,33 @@
   <label>Chukar ($15.00 each): <input type="number" id="chukar" min="0" value="0"></label>
   <label>Duck ($16.00 each): <input type="number" id="duck" min="0" value="0"></label>
 
+  <hr>
+
+  <label><input type="checkbox" id="clinic"> Register for Retriever Clinic ($75)</label>
+  <label><input type="checkbox" id="lunch"> Add Lunch ($10)</label>
+
   <div class="total">Total: $<span id="total">10.00</span></div>
 
   <button onclick="submitPayment()">Pay with PayPal</button>
 
-  <hr>
-
-  <h3>Retriever Clinic Registration</h3>
-  <p>Pay $75 to register for the Retriever Clinic.</p>
-  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-    <input type="hidden" name="cmd" value="_xclick">
-    <input type="hidden" name="business" value="paypal@mouplands.org">
-    <input type="hidden" name="item_name" value="Retriever Clinic Registration">
-    <input type="hidden" name="amount" value="75.00">
-    <input type="hidden" name="currency_code" value="USD">
-    <button type="submit">Pay $75 for Retriever Clinic</button>
-  </form>
-
-  <hr>
-
-  <h3>Optional Lunch</h3>
-  <p>Pay $10 if you would like lunch provided during the event.</p>
-  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-    <input type="hidden" name="cmd" value="_xclick">
-    <input type="hidden" name="business" value="paypal@mouplands.org">
-    <input type="hidden" name="item_name" value="Event Lunch">
-    <input type="hidden" name="amount" value="10.00">
-    <input type="hidden" name="currency_code" value="USD">
-    <button type="submit">Pay $10 for Lunch</button>
-  </form>
-
   <script>
-    const prices = { quail: 6.5, chukar: 15, duck: 16, training: 10 };
+    const prices = { quail: 6.5, chukar: 15, duck: 16, training: 10, clinic: 75, lunch: 10 };
     const totalEl = document.getElementById("total");
 
-    document.querySelectorAll("input[type='number']").forEach(input => {
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach(input => {
       input.addEventListener("input", updateTotal);
+      input.addEventListener("change", updateTotal);
     });
 
     function updateTotal() {
       const q = +document.getElementById("quail").value || 0;
       const c = +document.getElementById("chukar").value || 0;
       const d = +document.getElementById("duck").value || 0;
-      const total = (q * prices.quail) + (c * prices.chukar) + (d * prices.duck) + prices.training;
+      const clinic = document.getElementById("clinic").checked ? prices.clinic : 0;
+      const lunch = document.getElementById("lunch").checked ? prices.lunch : 0;
+
+      const total = (q * prices.quail) + (c * prices.chukar) + (d * prices.duck) + prices.training + clinic + lunch;
       totalEl.textContent = total.toFixed(2);
     }
 
@@ -94,14 +75,27 @@
       const q = +document.getElementById("quail").value || 0;
       const c = +document.getElementById("chukar").value || 0;
       const d = +document.getElementById("duck").value || 0;
+      const clinicChecked = document.getElementById("clinic").checked;
+      const lunchChecked = document.getElementById("lunch").checked;
 
-      const total = (q * prices.quail) + (c * prices.chukar) + (d * prices.duck) + prices.training;
+      const clinic = clinicChecked ? prices.clinic : 0;
+      const lunch = lunchChecked ? prices.lunch : 0;
+      const total = (q * prices.quail) + (c * prices.chukar) + (d * prices.duck) + prices.training + clinic + lunch;
       const amount = total.toFixed(2);
+
+      let itemName = "Bird Order";
+      if (clinicChecked || lunchChecked) {
+        itemName += " + ";
+        const extras = [];
+        if (clinicChecked) extras.push("Retriever Clinic");
+        if (lunchChecked) extras.push("Lunch");
+        itemName += extras.join(" & ");
+      }
 
       const paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
       paypalURL.searchParams.set("cmd", "_xclick");
       paypalURL.searchParams.set("business", "paypal@mouplands.org");
-      paypalURL.searchParams.set("item_name", "Bird Order Payment");
+      paypalURL.searchParams.set("item_name", itemName);
       paypalURL.searchParams.set("amount", amount);
       paypalURL.searchParams.set("currency_code", "USD");
 
