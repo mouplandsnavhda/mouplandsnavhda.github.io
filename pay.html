@@ -19,6 +19,12 @@
       font-weight: bold;
       margin-top: 1em;
     }
+    .total small {
+      display: block;
+      font-weight: normal;
+      color: #555;
+      margin-top: 0.2em;
+    }
     button {
       margin-top: 1em;
       padding: 0.5em 1em;
@@ -46,7 +52,10 @@
   <label><input type="checkbox" id="clinic"> Register for Retriever Clinic ($75)</label>
   <label><input type="checkbox" id="lunch"> Add Lunch ($10)</label>
 
-  <div class="total">Total: $<span id="total">10.00</span></div>
+  <div class="total">
+    Total: $<span id="total">10.00</span>
+    <small>Includes required $10 training day fee</small>
+  </div>
 
   <button onclick="submitPayment()">Pay with PayPal</button>
 
@@ -84,13 +93,10 @@
       const amount = total.toFixed(2);
 
       let itemName = "Bird Order";
-      if (clinicChecked || lunchChecked) {
-        itemName += " + ";
-        const extras = [];
-        if (clinicChecked) extras.push("Retriever Clinic");
-        if (lunchChecked) extras.push("Lunch");
-        itemName += extras.join(" & ");
-      }
+      const extras = [];
+      if (clinicChecked) extras.push("Retriever Clinic");
+      if (lunchChecked) extras.push("Lunch");
+      if (extras.length) itemName += " + " + extras.join(" & ");
 
       const paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
       paypalURL.searchParams.set("cmd", "_xclick");
