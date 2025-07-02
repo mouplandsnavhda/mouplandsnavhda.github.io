@@ -2,27 +2,167 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bird Orders</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Bird Orders - MoUplands NAVHDA</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="./mouplands_cover_files/bootstrap.min.css" rel="stylesheet">
+  <link href="./mouplands_cover_files/theme.min.css" rel="stylesheet">
+  <link href="./mouplands_cover_files/custom.css" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #f5f5f5;
+      padding-top: 2rem;
+    }
+    
+    .orders-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .card {
+      border: none;
+      border-radius: 0;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      margin-bottom: 2rem;
+    }
+    
+    .card-header {
+      background-color: #1f2749;
+      color: white;
+      border-bottom: none;
+      padding: 1rem 1.25rem;
+    }
+    
+    .btn-primary {
+      background-color: #f12639;
+      border-color: #f12639;
+      border-radius: 0;
+      padding: 0.625rem 1.5rem;
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+    
+    .btn-primary:hover {
+      background-color: #d60e21;
+      border-color: #d60e21;
+    }
+    
+    .btn-success {
+      background-color: #2ecd75;
+      border-color: #2ecd75;
+      border-radius: 0;
+      padding: 0.625rem 1.5rem;
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+    
+    .btn-success:hover {
+      background-color: #25a35d;
+      border-color: #25a35d;
+    }
+    
+    .step-section {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 0;
+    }
+    
+    .step-number {
+      display: inline-block;
+      background-color: #f12639;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container py-5">
-    <h1 class="mb-4">Submit Your Bird Order</h1>
-    <p class="lead">
-      Please use the form below to submit your order. After submission, you will be redirected to calculate your total and complete payment.
-    </p>
+  <div class="container">
+    <div class="orders-container">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="mb-0">Submit Your Bird Order</h1>
+        </div>
+        <div class="card-body">
+          <p class="lead mb-4">
+            Please follow the steps below to submit your bird order. After submission, you will be redirected to calculate your total and complete payment.
+          </p>
 
-    <div class="mb-4">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3BSCwSGJXQl152vS81BWxQzAjfArPJQUXgtg-CQEG0sRu_A/viewform" class="btn btn-primary" target="_blank">
-        Open Bird Order Form
-      </a>
-    </div>
+          <!-- Step 1: Order Form -->
+          <div class="step-section">
+            <h5 class="mb-3">
+              <span class="step-number">1</span>
+              Submit Your Order Form
+            </h5>
+            <p class="mb-3">
+              Use our Google Form to submit your bird order details. This helps us track your order and ensure we have all the necessary information.
+            </p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3BSCwSGJXQl152vS81BWxQzAjfArPJQUXgtg-CQEG0sRu_A/viewform" 
+               class="btn btn-primary" 
+               target="_blank">
+              <i class="fas fa-external-link-alt"></i> Open Bird Order Form
+            </a>
+          </div>
 
-    <div>
-      <p class="mb-2">Already submitted your form? Calculate your total and pay:</p>
-      <a href="/pay.html" class="btn btn-success">Pay Now</a>
+          <!-- Step 2: Payment -->
+          <div class="step-section">
+            <h5 class="mb-3">
+              <span class="step-number">2</span>
+              Calculate Total & Complete Payment
+            </h5>
+            <p class="mb-3">
+              Already submitted your form? Use our payment calculator to determine your total and complete your payment securely through PayPal.
+            </p>
+            <a href="/pay.html" class="btn btn-success">
+              <i class="fas fa-calculator"></i> Calculate & Pay Now
+            </a>
+          </div>
+
+          <!-- Additional Information -->
+          <div class="mt-4">
+            <h5 class="text-secondary mb-3">Order Information</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <h6>Available Birds:</h6>
+                <ul class="list-unstyled">
+                  <li>• Quail - $6.50 each</li>
+                  <li>• Chukar - $15.00 each</li>
+                  <li>• Duck - $16.00 each</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h6>Additional Services:</h6>
+                <ul class="list-unstyled">
+                  <li>• Retriever Clinic - $75</li>
+                  <li>• Lunch - $10</li>
+                  <li>• Training Day Fee - $10 (required)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="mt-4 p-3 bg-light">
+            <h6 class="text-secondary mb-2">Need Help?</h6>
+            <p class="mb-0 small">
+              If you have any questions about your bird order or payment, please contact us through our main website or reach out to our chapter officers.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 </body>
 </html>
