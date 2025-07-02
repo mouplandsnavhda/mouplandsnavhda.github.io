@@ -149,7 +149,6 @@
                   <th>Phone</th>
                   <th>Email</th>
                   <th>Birds Available</th>
-                  <th>Reliability</th>
                   <th>Notes</th>
                 </tr>
               </thead>
@@ -181,17 +180,6 @@
           
           const tr = document.createElement("tr");
           
-          // Determine reliability badge
-          let reliabilityBadge = '';
-          const reliability = (row["Reliable"] || "").toLowerCase();
-          if (reliability.includes('reliable')) {
-            reliabilityBadge = '<span class="badge badge-reliable">Reliable</span>';
-          } else if (reliability.includes('not reliable')) {
-            reliabilityBadge = '<span class="badge badge-not-reliable">Not Reliable</span>';
-          } else {
-            reliabilityBadge = '<span class="badge badge-unknown">Unknown</span>';
-          }
-          
           tr.innerHTML = `
             <td><strong>${row["Name"] || ""}</strong></td>
             <td>${row["Location"] || ""}</td>
@@ -199,7 +187,6 @@
             <td>${row["Phone"] || ""}</td>
             <td>${row["Email"] ? `<a href="mailto:${row["Email"]}">${row["Email"]}</a>` : ""}</td>
             <td>${row["Birds"] || ""}</td>
-            <td>${reliabilityBadge}</td>
             <td>${row["Notes"] || ""}</td>
           `;
           tbody.appendChild(tr);
@@ -227,7 +214,7 @@
       error: function(error) {
         console.error('Error loading CSV:', error);
         document.querySelector("#vendorTable tbody").innerHTML = 
-          '<tr><td colspan="8" class="text-center text-muted">Error loading vendor data. Please refresh the page.</td></tr>';
+          '<tr><td colspan="7" class="text-center text-muted">Error loading vendor data. Please refresh the page.</td></tr>';
       }
     });
   </script>
