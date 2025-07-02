@@ -2,66 +2,203 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bird Order Payment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Bird Order Payment - MoUplands NAVHDA</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="./mouplands_cover_files/bootstrap.min.css" rel="stylesheet">
+  <link href="./mouplands_cover_files/theme.min.css" rel="stylesheet">
+  <link href="./mouplands_cover_files/custom.css" rel="stylesheet">
+  
   <style>
     body {
-      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding-top: 2rem;
+    }
+    
+    .payment-container {
       max-width: 600px;
-      margin: 2em auto;
-      padding: 1em;
-      border: 1px solid #ccc;
-      border-radius: 10px;
+      margin: 0 auto;
     }
-    input[type="number"] {
-      width: 60px;
+    
+    .card {
+      border: none;
+      border-radius: 0;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     }
-    .total {
+    
+    .card-header {
+      background-color: #1f2749;
+      color: white;
+      border-bottom: none;
+      padding: 1rem 1.25rem;
+    }
+    
+    .form-control {
+      border-radius: 0;
+      border: 1px solid #cdced3;
+    }
+    
+    .form-control:focus {
+      border-color: #f99ea6;
+      box-shadow: 0 0 0 0.2rem rgba(241, 38, 57, 0.25);
+    }
+    
+    .btn-primary {
+      background-color: #f12639;
+      border-color: #f12639;
+      border-radius: 0;
+      padding: 0.625rem 1.5rem;
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+    
+    .btn-primary:hover {
+      background-color: #d60e21;
+      border-color: #d60e21;
+    }
+    
+    .total-section {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    
+    .price-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    
+    .price-item:last-child {
+      border-top: 1px solid #dee2e6;
+      padding-top: 0.5rem;
+      margin-top: 0.5rem;
       font-weight: bold;
-      margin-top: 1em;
+      font-size: 1.1rem;
     }
-    .total small {
-      display: block;
-      font-weight: normal;
-      color: #555;
-      margin-top: 0.2em;
+    
+    .form-check-input:checked {
+      background-color: #f12639;
+      border-color: #f12639;
     }
-    button {
-      margin-top: 1em;
-      padding: 0.5em 1em;
-      font-size: 1em;
-      cursor: pointer;
-    }
-    label {
-      display: block;
-      margin-top: 1em;
-    }
-    hr {
-      margin: 2em 0;
+    
+    .form-check-input:focus {
+      box-shadow: 0 0 0 0.2rem rgba(241, 38, 57, 0.25);
     }
   </style>
 </head>
 <body>
-  <h2>Bird Order Payment</h2>
+  <div class="container">
+    <div class="payment-container">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="mb-0">Bird Order Payment</h2>
+        </div>
+        <div class="card-body">
+          <form id="paymentForm">
+            <!-- Bird Quantities -->
+            <div class="mb-4">
+              <h5 class="text-secondary mb-3">Select Bird Quantities</h5>
+              
+              <div class="form-group">
+                <label for="quail" class="form-label">Quail ($6.50 each)</label>
+                <input type="number" class="form-control" id="quail" min="0" value="0">
+              </div>
+              
+              <div class="form-group">
+                <label for="chukar" class="form-label">Chukar ($15.00 each)</label>
+                <input type="number" class="form-control" id="chukar" min="0" value="0">
+              </div>
+              
+              <div class="form-group">
+                <label for="duck" class="form-label">Duck ($16.00 each)</label>
+                <input type="number" class="form-control" id="duck" min="0" value="0">
+              </div>
+            </div>
 
-  <label>Quail ($6.50 each): <input type="number" id="quail" min="0" value="0"></label>
-  <label>Chukar ($15.00 each): <input type="number" id="chukar" min="0" value="0"></label>
-  <label>Duck ($16.00 each): <input type="number" id="duck" min="0" value="0"></label>
+            <hr>
 
-  <hr>
+            <!-- Additional Services -->
+            <div class="mb-4">
+              <h5 class="text-secondary mb-3">Additional Services</h5>
+              
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="clinic">
+                <label class="form-check-label" for="clinic">
+                  Register for Retriever Clinic ($75)
+                </label>
+              </div>
+              
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="lunch">
+                <label class="form-check-label" for="lunch">
+                  Add Lunch ($10)
+                </label>
+              </div>
+            </div>
 
-  <label><input type="checkbox" id="clinic"> Register for Retriever Clinic ($75)</label>
-  <label><input type="checkbox" id="lunch"> Add Lunch ($10)</label>
+            <!-- Total Section -->
+            <div class="total-section">
+              <h5 class="text-secondary mb-3">Order Summary</h5>
+              
+              <div class="price-item">
+                <span>Quail (0 × $6.50):</span>
+                <span id="quailTotal">$0.00</span>
+              </div>
+              
+              <div class="price-item">
+                <span>Chukar (0 × $15.00):</span>
+                <span id="chukarTotal">$0.00</span>
+              </div>
+              
+              <div class="price-item">
+                <span>Duck (0 × $16.00):</span>
+                <span id="duckTotal">$0.00</span>
+              </div>
+              
+              <div class="price-item">
+                <span>Retriever Clinic:</span>
+                <span id="clinicTotal">$0.00</span>
+              </div>
+              
+              <div class="price-item">
+                <span>Lunch:</span>
+                <span id="lunchTotal">$0.00</span>
+              </div>
+              
+              <div class="price-item">
+                <span>Training Day Fee:</span>
+                <span>$10.00</span>
+              </div>
+              
+              <div class="price-item">
+                <span>Total:</span>
+                <span id="total">$10.00</span>
+              </div>
+            </div>
 
-  <div class="total">
-    Total: $<span id="total">10.00</span>
-    <small>Includes required $10 training day fee</small>
+            <div class="text-center">
+              <button type="button" class="btn btn-primary btn-lg" onclick="submitPayment()">
+                Pay with PayPal
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <button onclick="submitPayment()">Pay with PayPal</button>
-
   <script>
-    const prices = { quail: 6.5, chukar: 15, duck: 16, training: 10, clinic: 75, lunch: 10 };
-    const totalEl = document.getElementById("total");
+    const prices = { 
+      quail: 6.5, 
+      chukar: 15, 
+      duck: 16, 
+      training: 10, 
+      clinic: 75, 
+      lunch: 10 
+    };
 
     const inputs = document.querySelectorAll("input");
     inputs.forEach(input => {
@@ -76,8 +213,15 @@
       const clinic = document.getElementById("clinic").checked ? prices.clinic : 0;
       const lunch = document.getElementById("lunch").checked ? prices.lunch : 0;
 
+      // Update individual totals
+      document.getElementById("quailTotal").textContent = `$${(q * prices.quail).toFixed(2)}`;
+      document.getElementById("chukarTotal").textContent = `$${(c * prices.chukar).toFixed(2)}`;
+      document.getElementById("duckTotal").textContent = `$${(d * prices.duck).toFixed(2)}`;
+      document.getElementById("clinicTotal").textContent = clinic ? `$${clinic.toFixed(2)}` : "$0.00";
+      document.getElementById("lunchTotal").textContent = lunch ? `$${lunch.toFixed(2)}` : "$0.00";
+
       const total = (q * prices.quail) + (c * prices.chukar) + (d * prices.duck) + prices.training + clinic + lunch;
-      totalEl.textContent = total.toFixed(2);
+      document.getElementById("total").textContent = `$${total.toFixed(2)}`;
     }
 
     function submitPayment() {
@@ -108,6 +252,7 @@
       window.location.href = paypalURL.toString();
     }
 
+    // Initialize totals
     updateTotal();
   </script>
 </body>
