@@ -164,5 +164,25 @@
 
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" title="Back to Top" style="display:none;position:fixed;bottom:40px;right:40px;z-index:9999;background:#f12639;color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.2);cursor:pointer;transition:opacity 0.3s;">
+    &uarr;
+  </button>
+  <script>
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 200) {
+        backToTopBtn.style.display = 'block';
+        backToTopBtn.style.opacity = 1;
+      } else {
+        backToTopBtn.style.opacity = 0;
+        setTimeout(()=>{backToTopBtn.style.display = 'none';}, 300);
+      }
+    });
+    backToTopBtn.addEventListener('click', function() {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  </script>
 </body>
 </html>

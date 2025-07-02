@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>MoUplands · NAVHDA</title>
 
-  <link rel="icon" href="https://www.navhda.org/wp-content/uploads/2019/09/cropped-logo_sm-192x192.png" sizes="192x192">
+  <link rel="icon" href="./mouplands_cover_files/images/mouplands_logo_white.png" sizes="192x192">
 
   <link href="./mouplands_cover_files/bootstrap.min.css" rel="stylesheet">
   <link href="./mouplands_cover_files/theme.min.css" rel="stylesheet">
@@ -530,5 +530,24 @@
     <span class="badge badge-primary">v1.1.2</span>
   </section>
 
+  <!-- Back to Top Button -->
+  <button id="backToTop" title="Back to Top" style="display:none;position:fixed;bottom:40px;right:40px;z-index:9999;background:#f12639;color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.2);cursor:pointer;transition:opacity 0.3s;">
+    &uarr;
+  </button>
+  <script>
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 200) {
+        backToTopBtn.style.display = 'block';
+        backToTopBtn.style.opacity = 1;
+      } else {
+        backToTopBtn.style.opacity = 0;
+        setTimeout(()=>{backToTopBtn.style.display = 'none';}, 300);
+      }
+    });
+    backToTopBtn.addEventListener('click', function() {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  </script>
 </body>
 </html>
