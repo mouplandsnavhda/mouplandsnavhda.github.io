@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Missouri Uplands NAVHDA - Payment and Registration Form. Pay for membership, camping, training days, and events.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:;">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <title>Payment & Registration - MoUplands NAVHDA</title>
+
+  <link rel="icon" href="./mouplands_cover_files/images/mouplands_logo_white.png" sizes="192x192">
+  <link href="./mouplands_cover_files/bootstrap.min.css" rel="stylesheet">
+  <link href="./mouplands_cover_files/theme.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+  <link href="./mouplands_cover_files/custom.css" rel="stylesheet">
+
+  <style>
+    .payment-form {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 30px;
+      margin: 20px 0;
+    }
+    .service-item {
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px 0;
+      background: white;
+    }
+    .quantity-input {
+      width: 80px;
+      text-align: center;
+    }
+    .total-section {
+      background: #007bff;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .contact-section {
+      background: #e9ecef;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body class="text-center">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="opacity: .6;">
+    <a class="navbar-brand" href="index.html">MoUplands</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#why">Join</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#training">Training</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#tests">Tests</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#events">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#schedule">Schedule</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#officers">Officers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#sponsors">Sponsors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="bird-vendors.html">Bird Vendors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="bird-orders.html">Bird Orders</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 100px;">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h1 class="mb-4">Payment & Registration</h1>
+        <p class="lead">Select the services you need and provide your contact information below.</p>
+        
+        <div class="payment-form">
+          <form id="paymentForm">
+            <!-- Membership -->
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="membership" value="35">
+                <label class="form-check-label" for="membership">
+                  <strong>Annual Membership</strong> - $35/year
+                </label>
+              </div>
+              <small class="text-muted">For new members only. If you're a new member, please also fill out the <a href="https://forms.gle/3wwYrx6vRMXAkQrVA" target="_blank" rel="noopener noreferrer">New Member Form</a>.</small>
+            </div>
+
+            <!-- Training Day Fee -->
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="trainingDay" value="10">
+                <label class="form-check-label" for="trainingDay">
+                  <strong>Training Day Fee</strong> - $10/day
+                </label>
+              </div>
+              <div class="ml-4 mt-2 hidden" id="trainingDayDetails">
+                <label for="trainingDays">Number of training days:</label>
+                <input type="number" class="form-control quantity-input d-inline-block ml-2" id="trainingDays" min="1" max="10" value="1">
+              </div>
+            </div>
+
+            <!-- RV Camping -->
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="rvCamping" value="25">
+                <label class="form-check-label" for="rvCamping">
+                  <strong>RV Camping</strong> - $25/night
+                </label>
+              </div>
+              <div class="ml-4 mt-2 hidden" id="rvCampingDetails">
+                <label for="rvNights">Number of nights:</label>
+                <input type="number" class="form-control quantity-input d-inline-block ml-2" id="rvNights" min="1" max="14" value="1">
+              </div>
+            </div>
+
+            <!-- Tent Camping -->
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="tentCamping" value="10">
+                <label class="form-check-label" for="tentCamping">
+                  <strong>Tent Camping</strong> - $10/night
+                </label>
+              </div>
+              <div class="ml-4 mt-2 hidden" id="tentCampingDetails">
+                <label for="tentNights">Number of nights:</label>
+                <input type="number" class="form-control quantity-input d-inline-block ml-2" id="tentNights" min="1" max="14" value="1">
+              </div>
+            </div>
+
+            <!-- Lodge (Coming Soon) -->
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="lodge" value="0" disabled>
+                <label class="form-check-label" for="lodge">
+                  <strong>Lodge Accommodations</strong> - <em>Fees TBD</em>
+                </label>
+              </div>
+              <small class="text-muted">Lodge fees are being finalized. Please check back soon or contact us for current rates.</small>
+            </div>
+
+            <!-- Retriever Clinic -->
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="retrieverClinic" value="75">
+                <label class="form-check-label" for="retrieverClinic">
+                  <strong>Retriever Clinic</strong> - $75
+                </label>
+              </div>
+              <small class="text-muted">Specialized training clinic for retriever work.</small>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="contact-section">
+              <h4>Contact Information</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input type="text" class="form-control" id="firstName" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="lastName">Last Name *</label>
+                    <input type="text" class="form-control" id="lastName" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" class="form-control" id="email" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" class="form-control" id="phone">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="notes">Additional Notes</label>
+                <textarea class="form-control" id="notes" rows="3" placeholder="Any special requests or additional information..."></textarea>
+              </div>
+            </div>
+
+            <!-- Total Section -->
+            <div class="total-section">
+              <h3>Total Amount: $<span id="totalAmount">0</span></h3>
+              <p class="mb-0">Select your payment method below</p>
+            </div>
+
+            <!-- Payment Buttons -->
+            <div class="row justify-content-center">
+              <div class="col-md-6">
+                <button type="button" class="btn btn-success btn-lg btn-block mb-3" id="paypalBtn" disabled>
+                  <i class="fab fa-paypal"></i> Pay with PayPal
+                </button>
+              </div>
+              <div class="col-md-6">
+                <button type="button" class="btn btn-outline-primary btn-lg btn-block mb-3" id="checkBtn">
+                  <i class="fas fa-money-check-alt"></i> Pay by Check
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Check Payment Instructions -->
+        <div class="card mt-4" id="checkInstructions" style="display: none;">
+          <div class="card-header">
+            <h4>Check Payment Instructions</h4>
+          </div>
+          <div class="card-body">
+            <p><strong>Payable To:</strong> MO UPLANDS NAVHDA</p>
+            <p><strong>Send To:</strong></p>
+            <p>Jodee Mathis<br>
+            23407 N. Hyatt Cemetery Road<br>
+            Cuba, IL 61427</p>
+            <p><strong>Amount:</strong> $<span id="checkAmount">0</span></p>
+            <p><strong>Please include:</strong> Your name and what you're paying for in the memo line.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>Missouri Uplands NAVHDA</h5>
+          <p>A passionate group of versatile dog enthusiasts with decades of experience.</p>
+          <p><small>Last updated: January 2025</small></p>
+        </div>
+        <div class="col-md-6">
+          <h5>Quick Links</h5>
+          <div class="row">
+            <div class="col-4">
+              <a href="bird-vendors.html" class="text-light mr-3">Bird Vendors</a>
+            </div>
+            <div class="col-4">
+              <a href="bird-orders.html" class="text-light mr-3">Bird Orders</a>
+            </div>
+            <div class="col-4">
+              <a href="payment.html" class="text-light">Payment</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12">
+          <a href="#" class="text-white" id="backToTop">
+            <i class="fas fa-arrow-up"></i> Back to Top
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+  <script>
+    // Service prices
+    const prices = {
+      membership: 35,
+      trainingDay: 10,
+      rvCamping: 25,
+      tentCamping: 10,
+      lodge: 0, // TBD
+      retrieverClinic: 75
+    };
+
+    // Calculate total
+    function calculateTotal() {
+      let total = 0;
+      
+      if (document.getElementById('membership').checked) {
+        total += prices.membership;
+      }
+      
+      if (document.getElementById('trainingDay').checked) {
+        const days = parseInt(document.getElementById('trainingDays').value) || 1;
+        total += prices.trainingDay * days;
+      }
+      
+      if (document.getElementById('rvCamping').checked) {
+        const nights = parseInt(document.getElementById('rvNights').value) || 1;
+        total += prices.rvCamping * nights;
+      }
+      
+      if (document.getElementById('tentCamping').checked) {
+        const nights = parseInt(document.getElementById('tentNights').value) || 1;
+        total += prices.tentCamping * nights;
+      }
+      
+      if (document.getElementById('retrieverClinic').checked) {
+        total += prices.retrieverClinic;
+      }
+      
+      document.getElementById('totalAmount').textContent = total;
+      document.getElementById('checkAmount').textContent = total;
+      
+      // Enable PayPal button if total > 0
+      document.getElementById('paypalBtn').disabled = total <= 0;
+    }
+
+    // Show/hide details based on checkbox
+    function toggleDetails(checkboxId, detailsId) {
+      const checkbox = document.getElementById(checkboxId);
+      const details = document.getElementById(detailsId);
+      
+      if (checkbox.checked) {
+        details.classList.remove('hidden');
+      } else {
+        details.classList.add('hidden');
+      }
+      calculateTotal();
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      // Checkbox change events
+      document.getElementById('trainingDay').addEventListener('change', function() {
+        toggleDetails('trainingDay', 'trainingDayDetails');
+      });
+      
+      document.getElementById('rvCamping').addEventListener('change', function() {
+        toggleDetails('rvCamping', 'rvCampingDetails');
+      });
+      
+      document.getElementById('tentCamping').addEventListener('change', function() {
+        toggleDetails('tentCamping', 'tentCampingDetails');
+      });
+
+      // Quantity change events
+      document.getElementById('trainingDays').addEventListener('change', calculateTotal);
+      document.getElementById('trainingDays').addEventListener('input', calculateTotal);
+      document.getElementById('rvNights').addEventListener('change', calculateTotal);
+      document.getElementById('rvNights').addEventListener('input', calculateTotal);
+      document.getElementById('tentNights').addEventListener('change', calculateTotal);
+      document.getElementById('tentNights').addEventListener('input', calculateTotal);
+
+      // General checkbox events
+      document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', calculateTotal);
+      });
+
+      // Payment button events
+      document.getElementById('paypalBtn').addEventListener('click', function() {
+        // Validate form
+        if (!document.getElementById('firstName').value || !document.getElementById('lastName').value || !document.getElementById('email').value) {
+          alert('Please fill in all required contact information.');
+          return;
+        }
+        
+        // For now, redirect to PayPal with basic membership
+        // In a full implementation, you'd send the calculated amount
+        window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=D3T6HTZTHCB6Q', '_blank');
+      });
+
+      document.getElementById('checkBtn').addEventListener('click', function() {
+        document.getElementById('checkInstructions').style.display = 'block';
+        document.getElementById('checkInstructions').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      // Back to top
+      document.getElementById('backToTop').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Initial calculation
+      calculateTotal();
+    });
+  </script>
+</body>
+
+</html> 

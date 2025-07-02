@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Submit your bird order for Missouri Uplands NAVHDA training events. Order quail, chukar, and duck for your versatile dog training needs.">
-  <title>Bird Orders - MoUplands NAVHDA</title>
+  <meta name="description" content="Calculate and pay for your bird order with Missouri Uplands NAVHDA. Secure PayPal payment for quail, chukar, duck, and training services.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:;">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <title>Bird Order Payment - MoUplands NAVHDA</title>
   
   <link rel="icon" href="./mouplands_cover_files/images/mouplands_logo_white.png" sizes="192x192">
   
@@ -19,8 +23,8 @@
       padding-top: 2rem;
     }
     
-    .orders-container {
-      max-width: 800px;
+    .payment-container {
+      max-width: 600px;
       margin: 0 auto;
     }
     
@@ -28,7 +32,6 @@
       border: none;
       border-radius: 0;
       box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-      margin-bottom: 2rem;
     }
     
     .card-header {
@@ -36,6 +39,16 @@
       color: white;
       border-bottom: none;
       padding: 1rem 1.25rem;
+    }
+    
+    .form-control {
+      border-radius: 0;
+      border: 1px solid #cdced3;
+    }
+    
+    .form-control:focus {
+      border-color: #f99ea6;
+      box-shadow: 0 0 0 0.2rem rgba(241, 38, 57, 0.25);
     }
     
     .btn-primary {
@@ -52,114 +65,172 @@
       border-color: #d60e21;
     }
     
-    .btn-success {
-      background-color: #2ecd75;
-      border-color: #2ecd75;
-      border-radius: 0;
-      padding: 0.625rem 1.5rem;
-      font-size: 1.125rem;
-      font-weight: 500;
-    }
-    
-    .btn-success:hover {
-      background-color: #25a35d;
-      border-color: #25a35d;
-    }
-    
-    .step-section {
+    .total-section {
       background-color: #f8f9fa;
       border: 1px solid #dee2e6;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-      border-radius: 0;
+      padding: 1rem;
+      margin: 1rem 0;
     }
     
-    .step-number {
-      display: inline-block;
-      background-color: #f12639;
-      color: white;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 30px;
+    .price-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    
+    .price-item:last-child {
+      border-top: 1px solid #dee2e6;
+      padding-top: 0.5rem;
+      margin-top: 0.5rem;
       font-weight: bold;
-      margin-right: 10px;
+      font-size: 1.1rem;
+    }
+    
+    .form-check-input:checked {
+      background-color: #f12639;
+      border-color: #f12639;
+    }
+    
+    .form-check-input:focus {
+      box-shadow: 0 0 0 0.2rem rgba(241, 38, 57, 0.25);
     }
   </style>
 </head>
 <body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="opacity: .6;">
+    <a class="navbar-brand" href="index.html">MoUplands</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#why">Join</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#training">Training</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#tests">Tests</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#events">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#schedule">Schedule</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#officers">Officers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#sponsors">Sponsors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="bird-vendors.html">Bird Vendors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="bird-orders.html">Bird Orders</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="container">
-    <div class="orders-container">
+    <div class="payment-container">
       <div class="card">
         <div class="card-header">
-          <h1 class="mb-0">Submit Your Bird Order</h1>
+          <h2 class="mb-0">Bird Order Payment</h2>
         </div>
         <div class="card-body">
-          <p class="lead mb-4">
-            Please follow the steps below to submit your bird order. After submission, you will be redirected to calculate your total and complete payment.
-          </p>
-
-          <!-- Step 1: Order Form -->
-          <div class="step-section">
-            <h5 class="mb-3">
-              <span class="step-number">1</span>
-              Submit Your Order Form
-            </h5>
-            <p class="mb-3">
-              Use our Google Form to submit your bird order details. This helps us track your order and ensure we have all the necessary information.
-            </p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3BSCwSGJXQl152vS81BWxQzAjfArPJQUXgtg-CQEG0sRu_A/viewform" 
-               class="btn btn-primary" 
-               target="_blank">
-              <i class="fas fa-external-link-alt"></i> Open Bird Order Form
-            </a>
-          </div>
-
-          <!-- Step 2: Payment -->
-          <div class="step-section">
-            <h5 class="mb-3">
-              <span class="step-number">2</span>
-              Calculate Total & Complete Payment
-            </h5>
-            <p class="mb-3">
-              Already submitted your form? Use our payment calculator to determine your total and complete your payment securely through PayPal.
-            </p>
-            <a href="/pay.html" class="btn btn-success">
-              <i class="fas fa-calculator"></i> Calculate & Pay Now
-            </a>
-          </div>
-
-          <!-- Additional Information -->
-          <div class="mt-4">
-            <h5 class="text-secondary mb-3">Order Information</h5>
-            <div class="row">
-              <div class="col-md-6">
-                <h6>Available Birds:</h6>
-                <ul class="list-unstyled">
-                  <li>• Quail - $6.50 each</li>
-                  <li>• Chukar - $15.00 each</li>
-                  <li>• Duck - $16.00 each</li>
-                </ul>
+          <form id="paymentForm">
+            <!-- Bird Quantities -->
+            <div class="mb-4">
+              <h5 class="text-secondary mb-3">Select Bird Quantities</h5>
+              
+              <div class="form-group">
+                <label for="quail" class="form-label">Quail ($6.50 each)</label>
+                <input type="number" class="form-control" id="quail" min="0" value="0">
               </div>
-              <div class="col-md-6">
-                <h6>Additional Services:</h6>
-                <ul class="list-unstyled">
-                  <li>• Retriever Clinic - $75</li>
-                  <li>• Lunch - $10</li>
-                  <li>• Training Day Fee - $10 (required)</li>
-                </ul>
+
+              <div class="form-group">
+                <label for="chukar" class="form-label">Chukar ($15.00 each)</label>
+                <input type="number" class="form-control" id="chukar" min="0" value="0">
+              </div>
+              
+              <div class="form-group">
+                <label for="duck" class="form-label">Duck ($16.00 each)</label>
+                <input type="number" class="form-control" id="duck" min="0" value="0">
               </div>
             </div>
-          </div>
 
-          <!-- Contact Information -->
-          <div class="mt-4 p-3 bg-light">
-            <h6 class="text-secondary mb-2">Need Help?</h6>
-            <p class="mb-0 small">
-              If you have any questions about your bird order or payment, please contact us through our main website or reach out to our chapter officers.
-            </p>
-          </div>
+            <hr>
+
+            <!-- Additional Services -->
+            <div class="mb-4">
+              <h5 class="text-secondary mb-3">Additional Services</h5>
+              
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="clinic">
+                <label class="form-check-label" for="clinic">
+                  Register for Retriever Clinic ($75)
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="lunch">
+                <label class="form-check-label" for="lunch">
+                  Add Lunch ($10)
+                </label>
+              </div>
+            </div>
+
+            <!-- Total Section -->
+            <div class="total-section">
+              <h5 class="text-secondary mb-3">Order Summary</h5>
+              
+              <div class="price-item">
+                <span>Quail (0 × $6.50):</span>
+                <span id="quailTotal">$0.00</span>
+              </div>
+              
+              <div class="price-item">
+                <span>Chukar (0 × $15.00):</span>
+                <span id="chukarTotal">$0.00</span>
+              </div>
+              
+              <div class="price-item">
+                <span>Duck (0 × $16.00):</span>
+                <span id="duckTotal">$0.00</span>
+              </div>
+              
+              <div class="price-item">
+                <span>Retriever Clinic:</span>
+                <span id="clinicTotal">$0.00</span>
+              </div>
+              
+              <div class="price-item">
+                <span>Lunch:</span>
+                <span id="lunchTotal">$0.00</span>
+              </div>
+              
+              <div class="price-item">
+                <span>Training Day Fee:</span>
+                <span>$10.00</span>
+              </div>
+              
+              <div class="price-item">
+                <span>Total:</span>
+                <span id="total">$10.00</span>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button type="button" class="btn btn-primary btn-lg" onclick="submitPayment()">
+                Pay with PayPal
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -180,41 +251,97 @@
         <div class="col-md-6 text-md-right">
           <h6>Connect With Us</h6>
           <div class="social-links">
-            <a href="https://www.facebook.com/pg/NavhdaMoUplands/events/" target="_blank" class="text-light mr-3" title="Facebook Events">
+            <a href="https://www.facebook.com/pg/NavhdaMoUplands/events/" target="_blank" class="text-light mr-3" rel="noopener noreferrer" title="Facebook Events">
               <i class="fab fa-facebook-f fa-lg"></i>
             </a>
-            <a href="https://www.navhda.org/" target="_blank" class="text-light mr-3" title="NAVHDA National">
+            <a href="https://www.navhda.org/" target="_blank" class="text-light mr-3" rel="noopener noreferrer" title="NAVHDA National">
               <i class="fas fa-globe fa-lg"></i>
             </a>
           </div>
           <div class="mt-2">
             <a href="index.html" class="text-light mr-3">Home</a>
             <a href="bird-vendors.html" class="text-light mr-3">Bird Vendors</a>
-            <a href="pay.html" class="text-light">Payment</a>
+            <a href="bird-orders.html" class="text-light">Bird Orders</a>
           </div>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Back to Top Button -->
-  <button id="backToTop" title="Back to Top" style="display:none;position:fixed;bottom:40px;right:40px;z-index:9999;background:#f12639;color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.2);cursor:pointer;transition:opacity 0.3s;">
-    &uarr;
-  </button>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
   <script>
-    const backToTopBtn = document.getElementById('backToTop');
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 200) {
-        backToTopBtn.style.display = 'block';
-        backToTopBtn.style.opacity = 1;
-      } else {
-        backToTopBtn.style.opacity = 0;
-        setTimeout(()=>{backToTopBtn.style.display = 'none';}, 300);
-      }
+    const prices = { 
+      quail: 6.5, 
+      chukar: 15, 
+      duck: 16, 
+      training: 10, 
+      clinic: 75, 
+      lunch: 10 
+    };
+
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach(input => {
+      input.addEventListener("input", updateTotal);
+      input.addEventListener("change", updateTotal);
     });
-    backToTopBtn.addEventListener('click', function() {
-      window.scrollTo({top: 0, behavior: 'smooth'});
-    });
+
+    function updateTotal() {
+      const q = +document.getElementById("quail").value || 0;
+      const c = +document.getElementById("chukar").value || 0;
+      const d = +document.getElementById("duck").value || 0;
+      const clinic = document.getElementById("clinic").checked ? prices.clinic : 0;
+      const lunch = document.getElementById("lunch").checked ? prices.lunch : 0;
+
+      // Update individual totals
+      document.getElementById("quailTotal").textContent = `$${(q * prices.quail).toFixed(2)}`;
+      document.getElementById("chukarTotal").textContent = `$${(c * prices.chukar).toFixed(2)}`;
+      document.getElementById("duckTotal").textContent = `$${(d * prices.duck).toFixed(2)}`;
+      document.getElementById("clinicTotal").textContent = clinic ? `$${clinic.toFixed(2)}` : "$0.00";
+      document.getElementById("lunchTotal").textContent = lunch ? `$${lunch.toFixed(2)}` : "$0.00";
+
+      const total = (q * prices.quail) + (c * prices.chukar) + (d * prices.duck) + prices.training + clinic + lunch;
+      document.getElementById("total").textContent = `$${total.toFixed(2)}`;
+    }
+
+    function submitPayment() {
+      const q = +document.getElementById("quail").value || 0;
+      const c = +document.getElementById("chukar").value || 0;
+      const d = +document.getElementById("duck").value || 0;
+      const clinicChecked = document.getElementById("clinic").checked;
+      const lunchChecked = document.getElementById("lunch").checked;
+
+      const clinic = clinicChecked ? prices.clinic : 0;
+      const lunch = lunchChecked ? prices.lunch : 0;
+      const total = (q * prices.quail) + (c * prices.chukar) + (d * prices.duck) + prices.training + clinic + lunch;
+      const amount = total.toFixed(2);
+
+      let itemName = "Bird Order";
+      const extras = [];
+      if (clinicChecked) extras.push("Retriever Clinic");
+      if (lunchChecked) extras.push("Lunch");
+      if (extras.length) itemName += " + " + extras.join(" & ");
+
+      const paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
+      paypalURL.searchParams.set("cmd", "_xclick");
+      paypalURL.searchParams.set("business", "paypal@mouplands.org");
+      paypalURL.searchParams.set("item_name", itemName);
+      paypalURL.searchParams.set("amount", amount);
+      paypalURL.searchParams.set("currency_code", "USD");
+
+      window.location.href = paypalURL.toString();
+    }
+
+    // Initialize totals
+    updateTotal();
   </script>
 </body>
 </html>
