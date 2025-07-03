@@ -26,13 +26,13 @@ if "%1"=="commit" (
 )
 
 if "%1"=="push" (
-    %GIT_PATH% push origin main
+    %GIT_PATH% push origin master
     echo Pushed changes to GitHub
     goto :eof
 )
 
 if "%1"=="pull" (
-    %GIT_PATH% pull origin main
+    %GIT_PATH% pull origin master
     echo Pulled latest changes from GitHub
     goto :eof
 )
@@ -50,7 +50,7 @@ if "%1"=="diff" (
 if "%1"=="quick" (
     %GIT_PATH% add .
     %GIT_PATH% commit -m "Quick update - %date% %time%"
-    %GIT_PATH% push origin main
+    %GIT_PATH% push origin master
     echo Quick commit and push completed!
     goto :eof
 )
