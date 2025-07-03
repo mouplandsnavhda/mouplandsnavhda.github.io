@@ -99,8 +99,8 @@
       <div class="col-lg-8">
         <h1 class="mb-4">Payment & Registration</h1>
         <div id="testModeIndicator" class="alert alert-warning" style="display: none;">
-          <strong>TEST MODE ACTIVE</strong> - Redirecting to PayPal Sandbox for testing. 
-          <small>Add ?test=true to the URL to enable test mode. Uses PayPal Sandbox environment.</small>
+          <strong>TEST MODE ACTIVE</strong> - PayPal URL will be shown for manual testing. 
+          <small>Add ?test=true to the URL to enable test mode. Copy the URL to test in a new tab.</small>
         </div>
         <p class="lead">Select the services you need and provide your contact information below.</p>
         
@@ -466,7 +466,7 @@
         if (isTestMode) {
           // Use PayPal sandbox for testing
           paypalURL = new URL("https://www.sandbox.paypal.com/cgi-bin/webscr");
-          paypalURL.searchParams.set("business", "sb-test@mouplands.org"); // Sandbox test email
+          paypalURL.searchParams.set("business", "paypal@mouplands.org"); // Use same email for testing
         } else {
           // Use live PayPal for production
           paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
@@ -498,9 +498,10 @@
         }
         
         if (isTestMode) {
-          // In test mode, redirect to PayPal Sandbox
-          console.log('Test Mode - Redirecting to PayPal Sandbox:', paypalURL.toString());
-          window.open(paypalURL.toString(), '_blank');
+          // In test mode, show the PayPal URL for manual testing
+          const testMessage = 'TEST MODE: PayPal URL\n\n' + paypalURL.toString() + '\n\nCopy this URL and paste it in a new browser tab to test the payment flow.';
+          alert(testMessage);
+          console.log('Test Mode - PayPal URL:', paypalURL.toString());
           return;
         }
         
