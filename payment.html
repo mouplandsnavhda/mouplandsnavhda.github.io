@@ -154,6 +154,67 @@
               <small class="text-muted">Lodge fees are being finalized. Please check back soon or contact us for current rates.</small>
             </div>
 
+            <!-- NAVHDA Tests -->
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="naTest" value="155">
+                <label class="form-check-label" for="naTest">
+                  <strong>NA Test (Natural Ability) - Member</strong> - $155
+                </label>
+              </div>
+              <small class="text-muted">For dogs 16 months and younger. Tests natural hunting ability, pointing, and water work.</small>
+            </div>
+
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="naTestNonMember" value="180">
+                <label class="form-check-label" for="naTestNonMember">
+                  <strong>NA Test (Natural Ability) - Non-Member</strong> - $180
+                </label>
+              </div>
+              <small class="text-muted">For dogs 16 months and younger. Non-member pricing.</small>
+            </div>
+
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="utTest" value="190">
+                <label class="form-check-label" for="utTest">
+                  <strong>UT Test (Utility) - Member</strong> - $190
+                </label>
+              </div>
+              <small class="text-muted">For dogs 16 months and older. Comprehensive test of hunting, pointing, retrieving, and water work.</small>
+            </div>
+
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="utTestNonMember" value="215">
+                <label class="form-check-label" for="utTestNonMember">
+                  <strong>UT Test (Utility) - Non-Member</strong> - $215
+                </label>
+              </div>
+              <small class="text-muted">For dogs 16 months and older. Non-member pricing.</small>
+            </div>
+
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gdTest" value="190">
+                <label class="form-check-label" for="gdTest">
+                  <strong>GD Test (Gun Dog) - Member</strong> - $190
+                </label>
+              </div>
+              <small class="text-muted">For dogs 16 months and older. Tests hunting, pointing, and retrieving abilities.</small>
+            </div>
+
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gdTestNonMember" value="215">
+                <label class="form-check-label" for="gdTestNonMember">
+                  <strong>GD Test (Gun Dog) - Non-Member</strong> - $215
+                </label>
+              </div>
+              <small class="text-muted">For dogs 16 months and older. Non-member pricing.</small>
+            </div>
+
 
 
             <!-- Contact Information -->
@@ -284,7 +345,13 @@
       membership: 35,
       rvCamping: 25,
       tentCamping: 10,
-      lodge: 0 // TBD
+      lodge: 0, // TBD
+      naTest: 155,
+      naTestNonMember: 180,
+      utTest: 190,
+      utTestNonMember: 215,
+      gdTest: 190,
+      gdTestNonMember: 215
     };
 
     // Calculate total
@@ -303,6 +370,30 @@
       if (document.getElementById('tentCamping').checked) {
         const nights = parseInt(document.getElementById('tentNights').value) || 1;
         total += prices.tentCamping * nights;
+      }
+      
+      if (document.getElementById('naTest').checked) {
+        total += prices.naTest;
+      }
+      
+      if (document.getElementById('naTestNonMember').checked) {
+        total += prices.naTestNonMember;
+      }
+      
+      if (document.getElementById('utTest').checked) {
+        total += prices.utTest;
+      }
+      
+      if (document.getElementById('utTestNonMember').checked) {
+        total += prices.utTestNonMember;
+      }
+      
+      if (document.getElementById('gdTest').checked) {
+        total += prices.gdTest;
+      }
+      
+      if (document.getElementById('gdTestNonMember').checked) {
+        total += prices.gdTestNonMember;
       }
       
       document.getElementById('totalAmount').textContent = total;
