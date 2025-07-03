@@ -1,3 +1,8 @@
+/* Prevent fixed-top navbar from overlapping content */
+body {
+  padding-top: 70px !important;
+}
+
 .pad-it {
     padding: 10px 15px;
 }
