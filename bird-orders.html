@@ -100,6 +100,13 @@
         margin-right: 24px;
       }
     }
+    
+    @media (max-width: 767.98px) {
+      .row.justify-content-center.mb-4 > .col-md-5 {
+        justify-content: center !important;
+        margin-bottom: 12px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -156,32 +163,16 @@
             <h5 class="text-secondary mb-3">Order Options</h5>
             <p class="mb-3">Submit your order using the Google Form below. After submitting the form, you can pay with PayPal or by check using the payment option.</p>
             
-            <div class="row justify-content-center">
-              <div class="col-md-6 mb-3 d-flex">
-                <div class="card flex-fill h-100">
-                  <div class="card-body text-center d-flex flex-column justify-content-between align-items-center">
-                    <div class="w-100">
-                      <h5 class="card-title">Step 1: Order Form</h5>
-                      <p class="card-text">Start here if you haven't submitted your order yet. Use our Google Form to submit your order details.</p>
-                    </div>
-                    <a href="https://forms.gle/3wwYrx6vRMXAkQrVA" target="_blank" class="btn btn-danger btn-block w-100 py-3 mt-3 font-weight-bold" style="font-size: 1.25rem; letter-spacing: 1px;">
-                      <i class="fab fa-google mr-2"></i>ORDER FORM
-                    </a>
-                  </div>
-                </div>
+            <div class="row justify-content-center mb-4">
+              <div class="col-md-5 d-flex justify-content-end mb-2 mb-md-0">
+                <a href="https://forms.gle/3wwYrx6vRMXAkQrVA" target="_blank" class="btn btn-danger btn-lg w-100 font-weight-bold" style="font-size: 1.25rem; letter-spacing: 1px; max-width: 260px;">
+                  <i class="fab fa-google mr-2"></i>ORDER FORM
+                </a>
               </div>
-              <div class="col-md-6 mb-3 d-flex">
-                <div class="card flex-fill h-100">
-                  <div class="card-body text-center d-flex flex-column justify-content-between align-items-center">
-                    <div class="w-100">
-                      <h5 class="card-title">Step 2: Make Payment</h5>
-                      <p class="card-text">After submitting your order form, use this to pay with PayPal or by check to complete your order.</p>
-                    </div>
-                    <button type="button" class="btn btn-success btn-block w-100 py-3 mt-3 font-weight-bold" style="font-size: 1.25rem; letter-spacing: 1px;" onclick="showPaymentForm()">
-                      <i class="fas fa-credit-card mr-2"></i>COMPLETE PAYMENT
-                    </button>
-                  </div>
-                </div>
+              <div class="col-md-5 d-flex justify-content-start">
+                <button type="button" class="btn btn-success btn-lg w-100 font-weight-bold" style="font-size: 1.25rem; letter-spacing: 1px; max-width: 260px;" onclick="showPaymentForm()">
+                  <i class="fas fa-credit-card mr-2"></i>COMPLETE PAYMENT
+                </button>
               </div>
             </div>
           </div>
