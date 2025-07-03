@@ -55,6 +55,9 @@
                             <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
                         </div>
                         <h1 class="card-title text-success mb-4">Payment Successful!</h1>
+                        <div id="testModeIndicator" class="alert alert-info" style="display: none;">
+                          <strong>TEST MODE</strong> - This was a test transaction using PayPal Sandbox.
+                        </div>
                         <p class="card-text lead mb-4">
                             Thank you for your payment to Missouri Uplands NAVHDA. Your transaction has been completed successfully.
                         </p>
@@ -98,5 +101,16 @@
     
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <script>
+        // Check for test mode
+        const urlParams = new URLSearchParams(window.location.search);
+        const isTestMode = urlParams.get('test') === 'true';
+        
+        // Show test mode indicator if in test mode
+        if (isTestMode) {
+            document.getElementById('testModeIndicator').style.display = 'block';
+        }
+    </script>
 </body>
 </html> 

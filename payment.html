@@ -99,8 +99,8 @@
       <div class="col-lg-8">
         <h1 class="mb-4">Payment & Registration</h1>
         <div id="testModeIndicator" class="alert alert-warning" style="display: none;">
-          <strong>TEST MODE ACTIVE</strong> - PayPal URL will be shown instead of redirecting. 
-          <small>Add ?test=true to the URL to enable test mode.</small>
+          <strong>TEST MODE ACTIVE</strong> - PayPal Sandbox URL will be shown instead of redirecting. 
+          <small>Add ?test=true to the URL to enable test mode. Uses PayPal Sandbox environment.</small>
         </div>
         <p class="lead">Select the services you need and provide your contact information below.</p>
         
@@ -461,9 +461,19 @@
         const total = document.getElementById('totalAmount').textContent;
         
         // Create PayPal URL with custom fields
-        const paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
+        let paypalURL;
+        
+        if (isTestMode) {
+          // Use PayPal sandbox for testing
+          paypalURL = new URL("https://www.sandbox.paypal.com/cgi-bin/webscr");
+          paypalURL.searchParams.set("business", "sb-test@mouplands.org"); // Sandbox test email
+        } else {
+          // Use live PayPal for production
+          paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
+          paypalURL.searchParams.set("business", "paypal@mouplands.org");
+        }
+        
         paypalURL.searchParams.set("cmd", "_xclick");
-        paypalURL.searchParams.set("business", "paypal@mouplands.org");
         paypalURL.searchParams.set("item_name", itemName);
         paypalURL.searchParams.set("amount", total);
         paypalURL.searchParams.set("currency_code", "USD");
@@ -479,13 +489,18 @@
         }
         
         // Add return URL for confirmation
-        paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html");
-        paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html");
+        if (isTestMode) {
+          paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html?test=true");
+          paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html?test=true");
+        } else {
+          paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html");
+          paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html");
+        }
         
         if (isTestMode) {
           // In test mode, show the PayPal URL instead of redirecting
-          alert('TEST MODE: PayPal URL\n\n' + paypalURL.toString() + '\n\nThis would normally redirect to PayPal.');
-          console.log('Test Mode - PayPal URL:', paypalURL.toString());
+          alert('TEST MODE: PayPal Sandbox URL\n\n' + paypalURL.toString() + '\n\nThis would normally redirect to PayPal Sandbox.');
+          console.log('Test Mode - PayPal Sandbox URL:', paypalURL.toString());
           return;
         }
         
