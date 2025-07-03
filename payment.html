@@ -99,7 +99,7 @@
       <div class="col-lg-8">
         <h1 class="mb-4">Payment & Registration</h1>
         <div id="testModeIndicator" class="alert alert-warning" style="display: none;">
-          <strong>TEST MODE ACTIVE</strong> - PayPal Sandbox URL will be shown instead of redirecting. 
+          <strong>TEST MODE ACTIVE</strong> - Redirecting to PayPal Sandbox for testing. 
           <small>Add ?test=true to the URL to enable test mode. Uses PayPal Sandbox environment.</small>
         </div>
         <p class="lead">Select the services you need and provide your contact information below.</p>
@@ -498,9 +498,9 @@
         }
         
         if (isTestMode) {
-          // In test mode, show the PayPal URL instead of redirecting
-          alert('TEST MODE: PayPal Sandbox URL\n\n' + paypalURL.toString() + '\n\nThis would normally redirect to PayPal Sandbox.');
-          console.log('Test Mode - PayPal Sandbox URL:', paypalURL.toString());
+          // In test mode, redirect to PayPal Sandbox
+          console.log('Test Mode - Redirecting to PayPal Sandbox:', paypalURL.toString());
+          window.open(paypalURL.toString(), '_blank');
           return;
         }
         
