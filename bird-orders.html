@@ -183,8 +183,12 @@
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="lunch">
                 <label class="form-check-label" for="lunch">
-                  Add Lunch ($10)
+                  Add Lunch ($10/day)
                 </label>
+              </div>
+              <div class="ml-4 mt-2 hidden" id="lunchDetails">
+                <label for="lunchDays">Number of days:</label>
+                <input type="number" class="form-control quantity-input d-inline-block ml-2" id="lunchDays" min="1" max="10" value="1">
               </div>
             </div>
 
@@ -297,12 +301,24 @@
       input.addEventListener("change", updateTotal);
     });
 
+    // Add lunch checkbox event listener
+    document.getElementById("lunch").addEventListener("change", function() {
+      const lunchDetails = document.getElementById("lunchDetails");
+      if (this.checked) {
+        lunchDetails.classList.remove("hidden");
+      } else {
+        lunchDetails.classList.add("hidden");
+      }
+      updateTotal();
+    });
+
     function updateTotal() {
       const q = +document.getElementById("quail").value || 0;
       const c = +document.getElementById("chukar").value || 0;
       const d = +document.getElementById("duck").value || 0;
       const clinic = document.getElementById("clinic").checked ? prices.clinic : 0;
-      const lunch = document.getElementById("lunch").checked ? prices.lunch : 0;
+      const lunchDays = document.getElementById("lunch").checked ? (+document.getElementById("lunchDays").value || 1) : 0;
+      const lunch = lunchDays * prices.lunch;
 
       // Update individual totals
       document.getElementById("quailTotal").textContent = `$${(q * prices.quail).toFixed(2)}`;
@@ -321,16 +337,17 @@
       const d = +document.getElementById("duck").value || 0;
       const clinicChecked = document.getElementById("clinic").checked;
       const lunchChecked = document.getElementById("lunch").checked;
+      const lunchDays = lunchChecked ? (+document.getElementById("lunchDays").value || 1) : 0;
 
       const clinic = clinicChecked ? prices.clinic : 0;
-      const lunch = lunchChecked ? prices.lunch : 0;
+      const lunch = lunchDays * prices.lunch;
       const total = (q * prices.quail) + (c * prices.chukar) + (d * prices.duck) + prices.training + clinic + lunch;
       const amount = total.toFixed(2);
 
       let itemName = "Bird Order";
       const extras = [];
       if (clinicChecked) extras.push("Retriever Clinic");
-      if (lunchChecked) extras.push("Lunch");
+      if (lunchChecked) extras.push(`Lunch (${lunchDays} day${lunchDays > 1 ? 's' : ''})`);
       if (extras.length) itemName += " + " + extras.join(" & ");
 
       const paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
