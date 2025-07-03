@@ -177,39 +177,19 @@
 
             <div class="service-item">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="utTest" value="190">
-                <label class="form-check-label" for="utTest">
-                  <strong>UT Test (Utility) - Member</strong> - $190
+                <input class="form-check-input" type="checkbox" id="utGdtTest" value="190">
+                <label class="form-check-label" for="utGdtTest">
+                  <strong>UT/GDT Test (Utility/Gun Dog) - Member</strong> - $190
                 </label>
               </div>
-              <small class="text-muted">For dogs 16 months and older. Comprehensive test of hunting, pointing, retrieving, and water work.</small>
+              <small class="text-muted">For dogs 16 months and older. UT tests comprehensive hunting, pointing, retrieving, and water work. GDT tests hunting, pointing, and retrieving abilities.</small>
             </div>
 
             <div class="service-item">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="utTestNonMember" value="215">
-                <label class="form-check-label" for="utTestNonMember">
-                  <strong>UT Test (Utility) - Non-Member</strong> - $215
-                </label>
-              </div>
-              <small class="text-muted">For dogs 16 months and older. Non-member pricing.</small>
-            </div>
-
-            <div class="service-item">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gdTest" value="190">
-                <label class="form-check-label" for="gdTest">
-                  <strong>GD Test (Gun Dog) - Member</strong> - $190
-                </label>
-              </div>
-              <small class="text-muted">For dogs 16 months and older. Tests hunting, pointing, and retrieving abilities.</small>
-            </div>
-
-            <div class="service-item">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gdTestNonMember" value="215">
-                <label class="form-check-label" for="gdTestNonMember">
-                  <strong>GD Test (Gun Dog) - Non-Member</strong> - $215
+                <input class="form-check-input" type="checkbox" id="utGdtTestNonMember" value="215">
+                <label class="form-check-label" for="utGdtTestNonMember">
+                  <strong>UT/GDT Test (Utility/Gun Dog) - Non-Member</strong> - $215
                 </label>
               </div>
               <small class="text-muted">For dogs 16 months and older. Non-member pricing.</small>
@@ -348,10 +328,8 @@
       lodge: 0, // TBD
       naTest: 155,
       naTestNonMember: 180,
-      utTest: 190,
-      utTestNonMember: 215,
-      gdTest: 190,
-      gdTestNonMember: 215
+      utGdtTest: 190,
+      utGdtTestNonMember: 215
     };
 
     // Calculate total
@@ -380,20 +358,12 @@
         total += prices.naTestNonMember;
       }
       
-      if (document.getElementById('utTest').checked) {
-        total += prices.utTest;
+      if (document.getElementById('utGdtTest').checked) {
+        total += prices.utGdtTest;
       }
       
-      if (document.getElementById('utTestNonMember').checked) {
-        total += prices.utTestNonMember;
-      }
-      
-      if (document.getElementById('gdTest').checked) {
-        total += prices.gdTest;
-      }
-      
-      if (document.getElementById('gdTestNonMember').checked) {
-        total += prices.gdTestNonMember;
+      if (document.getElementById('utGdtTestNonMember').checked) {
+        total += prices.utGdtTestNonMember;
       }
       
       document.getElementById('totalAmount').textContent = total;
