@@ -143,10 +143,44 @@
     <div class="payment-container">
       <div class="card">
         <div class="card-header">
-          <h2 class="mb-0">Bird Order Payment</h2>
+          <h2 class="mb-0">Bird Orders</h2>
         </div>
         <div class="card-body">
-          <form id="paymentForm">
+          <div class="mb-4">
+            <h5 class="text-secondary mb-3">Order Options</h5>
+            <p class="mb-3">Choose how you'd like to place your bird order:</p>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Google Form Order</h5>
+                    <p class="card-text">Use our Google Form to submit your order details. You'll be redirected to payment after submission.</p>
+                    <a href="https://forms.gle/3wwYrx6vRMXAkQrVA" target="_blank" class="btn btn-primary">
+                      <i class="fab fa-google"></i> Submit Order Form
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Direct Payment</h5>
+                    <p class="card-text">Calculate and pay for your order directly on this page.</p>
+                    <button type="button" class="btn btn-success" onclick="showPaymentForm()">
+                      <i class="fas fa-calculator"></i> Calculate & Pay
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div id="paymentFormSection" style="display: none;">
+            <hr>
+            <h5 class="text-secondary mb-3">Payment Calculator</h5>
+            <form id="paymentForm">
             <!-- Bird Quantities -->
             <div class="mb-4">
               <h5 class="text-secondary mb-3">Select Bird Quantities</h5>
@@ -236,8 +270,12 @@
               <button type="button" class="btn btn-primary btn-lg" onclick="submitPayment()">
                 Pay with PayPal
               </button>
+              <button type="button" class="btn btn-secondary btn-lg ml-2" onclick="hidePaymentForm()">
+                Back to Options
+              </button>
             </div>
           </form>
+        </div>
         </div>
       </div>
     </div>
@@ -362,6 +400,17 @@
 
     // Initialize totals
     updateTotal();
+    
+    // Show/hide payment form
+    function showPaymentForm() {
+      document.getElementById('paymentFormSection').style.display = 'block';
+      document.querySelector('.mb-4').style.display = 'none';
+    }
+    
+    function hidePaymentForm() {
+      document.getElementById('paymentFormSection').style.display = 'none';
+      document.querySelector('.mb-4').style.display = 'block';
+    }
   </script>
 </body>
 </html>
