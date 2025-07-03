@@ -12,6 +12,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove unused image files
 - Additional content improvements
 
+## [1.5.0] - 2025-01-07
+
+### Added
+- PayPal integration with custom fields for contact information
+- Payment success page (payment-success.html) for user confirmation
+- Automatic contact info and payment details sent to PayPal
+- Return and cancel URLs for better user experience
+- Detailed item descriptions in PayPal transactions
+
+### Changed
+- Updated payment form to use PayPal's custom field parameters
+- Enhanced payment button to collect and send all form data to PayPal
+- Improved user flow with proper success/error handling
+
+### Files Added
+- `payment-success.html` - Payment confirmation page
+
+### Files Modified
+- `payment.html` - PayPal integration with custom fields
+
 ## [1.4.0] - 2025-01-07
 
 ### Added

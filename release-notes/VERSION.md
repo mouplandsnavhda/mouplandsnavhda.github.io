@@ -1,16 +1,17 @@
 # Version Information
 
-## Current Version: 1.4.0
+## Current Version: 1.5.0
 
 ### Version Components
 - **Major**: 1 (Foundation version)
-- **Minor**: 2 (Feature releases)
+- **Minor**: 5 (Feature releases)
 - **Patch**: 0 (Bug fixes)
 
 ## Version History
 
 | Version | Date | Description |
 |---------|------|-------------|
+| 1.5.0 | 2025-01-07 | PayPal integration with custom fields |
 | 1.4.0 | 2025-01-07 | Git command line helper and workflow |
 | 1.3.0 | 2025-01-07 | Security improvements and audit |
 | 1.2.0 | 2025-01-07 | 404 page redesign, project tracking |

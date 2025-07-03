@@ -416,9 +416,60 @@
           return;
         }
         
-        // For now, redirect to PayPal with basic membership
-        // In a full implementation, you'd send the calculated amount
-        window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=D3T6HTZTHCB6Q', '_blank');
+        // Build PayPal URL with custom fields
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const notes = document.getElementById('notes').value;
+        
+        // Build item description
+        let itemName = "MO Uplands Payment";
+        const services = [];
+        
+        if (document.getElementById('membership').checked) services.push("Membership");
+        if (document.getElementById('rvCamping').checked) {
+          const nights = document.getElementById('rvNights').value || 1;
+          services.push(`RV Camping (${nights} night${nights > 1 ? 's' : ''})`);
+        }
+        if (document.getElementById('tentCamping').checked) {
+          const nights = document.getElementById('tentNights').value || 1;
+          services.push(`Tent Camping (${nights} night${nights > 1 ? 's' : ''})`);
+        }
+        if (document.getElementById('naTest').checked) services.push("NA Test (Member)");
+        if (document.getElementById('naTestNonMember').checked) services.push("NA Test (Non-Member)");
+        if (document.getElementById('utGdtTest').checked) services.push("UT/GDT Test (Member)");
+        if (document.getElementById('utGdtTestNonMember').checked) services.push("UT/GDT Test (Non-Member)");
+        
+        if (services.length > 0) {
+          itemName += " - " + services.join(", ");
+        }
+        
+        const total = document.getElementById('totalAmount').textContent;
+        
+        // Create PayPal URL with custom fields
+        const paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
+        paypalURL.searchParams.set("cmd", "_xclick");
+        paypalURL.searchParams.set("business", "paypal@mouplands.org");
+        paypalURL.searchParams.set("item_name", itemName);
+        paypalURL.searchParams.set("amount", total);
+        paypalURL.searchParams.set("currency_code", "USD");
+        
+        // Add custom fields for contact information
+        paypalURL.searchParams.set("custom", `Name: ${firstName} ${lastName}, Email: ${email}, Phone: ${phone || 'Not provided'}`);
+        paypalURL.searchParams.set("on0", "Contact Info");
+        paypalURL.searchParams.set("os0", `${firstName} ${lastName} - ${email} - ${phone || 'No phone'}`);
+        
+        if (notes) {
+          paypalURL.searchParams.set("on1", "Additional Notes");
+          paypalURL.searchParams.set("os1", notes);
+        }
+        
+        // Add return URL for confirmation
+        paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html");
+        paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html");
+        
+        window.open(paypalURL.toString(), '_blank');
       });
 
       document.getElementById('checkBtn').addEventListener('click', function() {
