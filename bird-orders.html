@@ -366,6 +366,8 @@
       paypalURL.searchParams.set("item_name", itemName);
       paypalURL.searchParams.set("amount", amount);
       paypalURL.searchParams.set("currency_code", "USD");
+      paypalURL.searchParams.set("no_shipping", "1");
+      paypalURL.searchParams.set("rm", "2");
 
       window.location.href = paypalURL.toString();
     }
@@ -382,6 +384,11 @@
     function hidePaymentForm() {
       document.getElementById('paymentFormSection').style.display = 'none';
       document.querySelector('.mb-4').style.display = 'block';
+    }
+    
+    // Check for URL parameter to auto-show payment form
+    if (window.location.search.includes('payment=true')) {
+      showPaymentForm();
     }
   </script>
 </body>
