@@ -2,6 +2,11 @@
 <html lang="en">
 
 <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:;">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165937673-1"></script>
     <script>
@@ -272,10 +277,10 @@
                 <div class="col-md-6 text-md-right">
                     <h6>Connect With Us</h6>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/pg/NavhdaMoUplands/events/" target="_blank" class="text-light mr-3" title="Facebook Events">
+                        <a href="https://www.facebook.com/pg/NavhdaMoUplands/events/" target="_blank" class="text-light mr-3" rel="noopener noreferrer" title="Facebook Events">
                             <i class="fab fa-facebook-f fa-lg"></i>
                         </a>
-                        <a href="https://www.navhda.org/" target="_blank" class="text-light mr-3" title="NAVHDA National">
+                        <a href="https://www.navhda.org/" target="_blank" class="text-light mr-3" rel="noopener noreferrer" title="NAVHDA National">
                             <i class="fas fa-globe fa-lg"></i>
                         </a>
                     </div>

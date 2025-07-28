@@ -78,3 +78,20 @@ python -m SimpleHTTPServer 8088
 ```
 python3 -m http.server 8088
 ```
+
+## 🚦 Safe Development & Preview Workflow
+
+1. **Create and use a test branch for all changes:**
+   - `git checkout -b test`
+2. **Make your changes and preview locally:**
+   - Use `start-server.ps1` or `start-server.bat` to run a local server.
+   - Open `http://localhost:8088/` in your browser to preview.
+3. **Commit and push your changes to the test branch:**
+   - Use `git-commit-push.bat` to stage, commit, and push.
+4. **When satisfied, merge to production:**
+   - `git checkout master`
+   - `git merge test`
+   - `git push`
+5. **Never push directly to master without previewing.**
+
+This ensures all changes are reviewed and tested before going live.
