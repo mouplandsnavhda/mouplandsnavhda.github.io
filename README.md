@@ -63,6 +63,23 @@ This project uses a structured workflow to ensure quality, documentation, and sm
 - `notes/session-notes-YYYY-MM-DD.md` — Daily session logs
 - `TODO.md`, `BUGS.md`, `KB.md` — Task, bug, and knowledge base files (if present)
 
+## 🔍 **Current Environment Check**
+
+**Always check which branch you're on before making changes:**
+
+```bash
+git status
+```
+
+- If you see `On branch test` → You're in development mode (safe to make changes)
+- If you see `On branch master` → You're in production mode (be careful!)
+
+**Quick branch switching:**
+```bash
+git checkout test    # Switch to development
+git checkout master  # Switch to production
+```
+
 ---
 
 Happy collaborating!
@@ -81,17 +98,76 @@ python3 -m http.server 8088
 
 ## 🚦 Safe Development & Preview Workflow
 
-1. **Create and use a test branch for all changes:**
-   - `git checkout -b test`
+### **Test vs Production Environments**
+
+- **`test` branch**: Development/testing environment
+  - Make all changes here first
+  - Preview changes locally before deploying
+  - Safe to experiment and iterate
+
+- **`master` branch**: Production environment  
+  - Live website at https://www.mouplands.org
+  - Only merge tested changes from `test` branch
+  - Never make direct changes to master
+
+### **Development Workflow**
+
+1. **Start on test branch:**
+   ```bash
+   git checkout test
+   ```
+
 2. **Make your changes and preview locally:**
-   - Use `start-server.ps1` or `start-server.bat` to run a local server.
-   - Open `http://localhost:8088/` in your browser to preview.
-3. **Commit and push your changes to the test branch:**
-   - Use `git-commit-push.bat` to stage, commit, and push.
-4. **When satisfied, merge to production:**
-   - `git checkout master`
-   - `git merge test`
-   - `git push`
-5. **Never push directly to master without previewing.**
+   - Use `start-server.ps1` or `start-server.bat` to run a local server
+   - Open `http://localhost:8088/` in your browser to preview
+   - Test all functionality before proceeding
+
+3. **Commit and push your changes to test branch:**
+   - Use `git-commit-push.bat` to stage, commit, and push
+   - Or use `git-commands.bat quick` for automatic commit
+
+4. **When satisfied, deploy to production:**
+   ```bash
+   git checkout master
+   git merge test
+   git push origin master
+   ```
+
+5. **⚠️ Never push directly to master without testing on test branch first**
+
+### **Available Git Commands**
+
+#### **Quick Commands:**
+- `git-commit-push.bat` - Prompts for commit message, then add/commit/push
+- `git-commands.bat quick` - Automatic add/commit/push with timestamp
+
+#### **Individual Commands:**
+- `git-commands.bat status` - Show current git status
+- `git-commands.bat add` - Add all changes to staging
+- `git-commands.bat commit "message"` - Commit with custom message
+- `git-commands.bat push` - Push to remote repository
+- `git-commands.bat pull` - Pull latest changes
+- `git-commands.bat log` - Show recent commits
+- `git-commands.bat diff` - Show current changes
+
+### **Example Workflow:**
+```bash
+# 1. Make changes on test branch
+git checkout test
+# ... edit files ...
+
+# 2. Preview locally
+start-server.bat
+# ... test in browser ...
+
+# 3. Commit changes
+git-commit-push.bat
+# Enter commit message when prompted
+
+# 4. Deploy to production
+git checkout master
+git merge test
+git push origin master
+```
 
 This ensures all changes are reviewed and tested before going live.
