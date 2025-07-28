@@ -80,6 +80,34 @@ git checkout test    # Switch to development
 git checkout master  # Switch to production
 ```
 
+## 🤖 **AI Assistant Reminders**
+
+**⚠️ IMPORTANT: Before making any changes, always check current branch and use proper workflow**
+
+### **Quick Reference for AI:**
+1. **Check current branch:** `git status`
+2. **Switch to test branch:** `git checkout test`
+3. **Make changes and test locally**
+4. **Commit changes:** `git-commit-push.bat` (prompts for message)
+5. **Deploy to production:** 
+   ```bash
+   git checkout master
+   git merge test
+   git push origin master
+   ```
+
+### **Available Git Scripts:**
+- `git-commit-push.bat` - Interactive commit with message prompt
+- `git-commands.bat quick` - Automatic commit with timestamp
+- `git-commands.bat status` - Check current branch/status
+- `git-commands.bat commit "message"` - Commit with custom message
+
+### **Remember:**
+- ✅ Always work on `test` branch first
+- ✅ Never make direct changes to `master`
+- ✅ Use the provided git scripts for consistency
+- ✅ Check branch status before starting work
+
 ---
 
 Happy collaborating!
