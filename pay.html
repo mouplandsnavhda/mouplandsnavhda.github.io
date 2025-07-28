@@ -103,6 +103,13 @@
     .form-check-input:focus {
       box-shadow: 0 0 0 0.2rem rgba(241, 38, 57, 0.25);
     }
+    <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-53FZKBWVS3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-53FZKBWVS3');
   </style>
 </head>
 
@@ -162,69 +169,52 @@
               <h5 class="text-secondary mb-3">Select Bird Quantities</h5>
               
               <div class="form-group">
-                <label for="quail" class="form-label">Quail ($6.50 each)</label>
+                <label for="quail" class="form-label">Quail ($7.50 each)</label>
                 <input type="number" class="form-control" id="quail" min="0" value="0">
               </div>
 
               <div class="form-group">
-                <label for="chukar" class="form-label">Chukar ($15.00 each)</label>
+                <label for="chukar" class="form-label">Chukar ($10.00 each)</label>
                 <input type="number" class="form-control" id="chukar" min="0" value="0">
               </div>
               
               <div class="form-group">
-                <label for="duck" class="form-label">Duck ($16.00 each)</label>
+                <label for="pheasant" class="form-label">Pheasant ($14.00 each)</label>
+                <input type="number" class="form-control" id="pheasant" min="0" value="0">
+              </div>
+              
+              <div class="form-group">
+                <label for="duck" class="form-label">Duck ($16.50 each)</label>
                 <input type="number" class="form-control" id="duck" min="0" value="0">
               </div>
             </div>
 
             <hr>
 
-            <!-- Additional Services -->
-            <div class="mb-4">
-              <h5 class="text-secondary mb-3">Additional Services</h5>
-              
-              <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" id="clinic">
-                <label class="form-check-label" for="clinic">
-                  Register for Retriever Clinic ($75)
-                </label>
-              </div>
 
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="lunch">
-                <label class="form-check-label" for="lunch">
-                  Add Lunch ($10)
-                </label>
-              </div>
-            </div>
 
             <!-- Total Section -->
             <div class="total-section">
               <h5 class="text-secondary mb-3">Order Summary</h5>
               
               <div class="price-item">
-                <span>Quail (0 × $6.50):</span>
+                <span>Quail (0 × $7.50):</span>
                 <span id="quailTotal">$0.00</span>
               </div>
               
               <div class="price-item">
-                <span>Chukar (0 × $15.00):</span>
+                <span>Chukar (0 × $10.00):</span>
                 <span id="chukarTotal">$0.00</span>
               </div>
               
               <div class="price-item">
-                <span>Duck (0 × $16.00):</span>
+                <span>Pheasant (0 × $14.00):</span>
+                <span id="pheasantTotal">$0.00</span>
+              </div>
+              
+              <div class="price-item">
+                <span>Duck (0 × $16.50):</span>
                 <span id="duckTotal">$0.00</span>
-              </div>
-              
-              <div class="price-item">
-                <span>Retriever Clinic:</span>
-                <span id="clinicTotal">$0.00</span>
-              </div>
-              
-              <div class="price-item">
-                <span>Lunch:</span>
-                <span id="lunchTotal">$0.00</span>
               </div>
               
               <div class="price-item">
@@ -290,12 +280,11 @@
 
   <script>
     const prices = { 
-      quail: 6.5, 
-      chukar: 15, 
-      duck: 16, 
-      training: 10, 
-      clinic: 75, 
-      lunch: 10 
+      quail: 7.5, 
+      chukar: 10, 
+      pheasant: 14, 
+      duck: 16.5, 
+      training: 10
     };
 
     const inputs = document.querySelectorAll("input");
@@ -307,38 +296,35 @@
     function updateTotal() {
       const q = +document.getElementById("quail").value || 0;
       const c = +document.getElementById("chukar").value || 0;
+      const p = +document.getElementById("pheasant").value || 0;
       const d = +document.getElementById("duck").value || 0;
-      const clinic = document.getElementById("clinic").checked ? prices.clinic : 0;
-      const lunch = document.getElementById("lunch").checked ? prices.lunch : 0;
 
       // Update individual totals
       document.getElementById("quailTotal").textContent = `$${(q * prices.quail).toFixed(2)}`;
       document.getElementById("chukarTotal").textContent = `$${(c * prices.chukar).toFixed(2)}`;
+      document.getElementById("pheasantTotal").textContent = `$${(p * prices.pheasant).toFixed(2)}`;
       document.getElementById("duckTotal").textContent = `$${(d * prices.duck).toFixed(2)}`;
-      document.getElementById("clinicTotal").textContent = clinic ? `$${clinic.toFixed(2)}` : "$0.00";
-      document.getElementById("lunchTotal").textContent = lunch ? `$${lunch.toFixed(2)}` : "$0.00";
 
-      const total = (q * prices.quail) + (c * prices.chukar) + (d * prices.duck) + prices.training + clinic + lunch;
+      const total = (q * prices.quail) + (c * prices.chukar) + (p * prices.pheasant) + (d * prices.duck) + prices.training;
       document.getElementById("total").textContent = `$${total.toFixed(2)}`;
     }
 
     function submitPayment() {
       const q = +document.getElementById("quail").value || 0;
       const c = +document.getElementById("chukar").value || 0;
+      const p = +document.getElementById("pheasant").value || 0;
       const d = +document.getElementById("duck").value || 0;
-      const clinicChecked = document.getElementById("clinic").checked;
-      const lunchChecked = document.getElementById("lunch").checked;
 
-      const clinic = clinicChecked ? prices.clinic : 0;
-      const lunch = lunchChecked ? prices.lunch : 0;
-      const total = (q * prices.quail) + (c * prices.chukar) + (d * prices.duck) + prices.training + clinic + lunch;
+      const total = (q * prices.quail) + (c * prices.chukar) + (p * prices.pheasant) + (d * prices.duck) + prices.training;
       const amount = total.toFixed(2);
 
       let itemName = "Bird Order";
-      const extras = [];
-      if (clinicChecked) extras.push("Retriever Clinic");
-      if (lunchChecked) extras.push("Lunch");
-      if (extras.length) itemName += " + " + extras.join(" & ");
+      const items = [];
+      if (q > 0) items.push(`${q} Quail`);
+      if (c > 0) items.push(`${c} Chukar`);
+      if (p > 0) items.push(`${p} Pheasant`);
+      if (d > 0) items.push(`${d} Duck`);
+      if (items.length) itemName += " - " + items.join(", ");
 
       const paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
       paypalURL.searchParams.set("cmd", "_xclick");
@@ -346,6 +332,8 @@
       paypalURL.searchParams.set("item_name", itemName);
       paypalURL.searchParams.set("amount", amount);
       paypalURL.searchParams.set("currency_code", "USD");
+      paypalURL.searchParams.set("no_shipping", "1");
+      paypalURL.searchParams.set("rm", "2");
 
       window.location.href = paypalURL.toString();
     }
