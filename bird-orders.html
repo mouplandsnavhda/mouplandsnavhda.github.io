@@ -386,10 +386,12 @@
       document.querySelector('.mb-4').style.display = 'block';
     }
     
-    // Check for URL parameter to auto-show payment form
-    if (window.location.search.includes('payment=true')) {
-      showPaymentForm();
-    }
+    // Check for URL parameter to auto-show payment form after DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.location.search.includes('payment=true')) {
+        showPaymentForm();
+      }
+    });
   </script>
 </body>
 </html>
