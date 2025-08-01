@@ -28,38 +28,33 @@
     -ms-user-select: none;
     user-select: none;
   }
-
   @media (min-width: 768px) {
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
     }
   }
-
   html, body {
     margin: 0 !important;
     padding: 0 !important;
   }
-
   header, .cover-image, .hero, .jumbotron {
     margin-top: 0 !important;
-    padding-top: 0 !important;
+    /* REMOVE THIS LINE: padding-top: 0 !important; */
   }
-
   .navbar {
     margin-bottom: 0 !important;
     border-bottom: none !important;
   }
-
   nav {
     background-color: #1f2749;
   }
-
   nav > a {
     color: white;
   }
-   section.py-0.overflow-hidden.text-center:first-of-type {
-    padding-top: 60px !important;
-}
+  
+  body > section:first-child {
+    padding-top: 70px !important;
+  }
 </style>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
