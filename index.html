@@ -166,39 +166,68 @@
                 </li>
               </ul>
 
-              <div class="row justify-content-center">
-            <div class="col-auto">
-              <a href="https://forms.gle/3wwYrx6vRMXAkQrVA" class="btn btn-lg btn-block btn-outline-primary" data-aos="fade-down"
-                data-aos-delay="100" data-aos-duration="1000" data-smooth-scroll="" data-smooth-scroll-hash="false">New Member Form</a>
-            </div>
-                
-              <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                <input type="hidden" name="cmd" value="_s-xclick">
-                <input type="hidden" name="hosted_button_id" value="D3T6HTZTHCB6Q">
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0"
-                  name="submit" alt="PayPal - The safer, easier way to pay online!">
-                <img alt="PayPal tracking pixel" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-              </form>
+            <!-- New Member Form Button (centered above payment cards) -->
+<div class="text-center mb-4">
+  <a href="https://forms.gle/3wwYrx6vRMXAkQrVA" 
+     class="btn btn-lg btn-outline-primary" 
+     data-aos="fade-down"
+     data-aos-delay="100" 
+     data-aos-duration="1000" 
+     data-smooth-scroll="" 
+     data-smooth-scroll-hash="false">
+     New Member Form
+  </a>
+</div>
 
-            </div>
+<!-- Payment Options -->
+<!-- <h2 class="mb-5 fw-medium text-secondary text-uppercase">Payment Options</h2> -->
+<div class="card-deck mb-3 text-center">
+  <!-- PayPal Option -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header">
+      <h4 class="my-0 font-weight-normal">PayPal</h4>
+    </div>
+    <div class="card-body">
+      <h1 class="card-title pricing-card-title">$35 <small class="text-muted">/ yr</small></h1>
+      <ul class="list-unstyled mt-3 mb-4">
+        <li>If you're a new member, you are welcome to pay using PayPal, but please fill out the form below!!</li>
+      </ul>
 
-          </div>
-          <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Check</h4>
-            </div>
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">$35 <small class="text-muted">/ yr</small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>Payable To: MO UPLANDS NAVHDA </li>
-                <br />
-                <li>Jodee Mathis</li>
-                <li>23407 N. Hyatt Cemetery Road</li>
-                <li>Cuba, IL 61427</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="D3T6HTZTHCB6Q">
+        <input type="image" 
+               src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" 
+               border="0"
+               name="submit" 
+               alt="PayPal - The safer, easier way to pay online!">
+        <img alt="PayPal tracking pixel" 
+             border="0" 
+             src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" 
+             width="1" 
+             height="1">
+      </form>
+    </div>
+  </div>
+
+  <!-- Check Option -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header">
+      <h4 class="my-0 font-weight-normal">Check</h4>
+    </div>
+    <div class="card-body">
+      <h1 class="card-title pricing-card-title">$35 <small class="text-muted">/ yr</small></h1>
+      <ul class="list-unstyled mt-3 mb-4">
+        <li>Payable To: MO UPLANDS NAVHDA</li>
+        <br />
+        <li>Jodee Mathis</li>
+        <li>23407 N. Hyatt Cemetery Road</li>
+        <li>Cuba, IL 61427</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
             
           </div>
 
