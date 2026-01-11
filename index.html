@@ -182,12 +182,18 @@
         <li>If you're a new member, you are welcome to pay using PayPal, you will be redirected at the end to fill out the new membership form!!</li>
       </ul>
 
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-  <input type="hidden" name="cmd" value="_s-xclick" />
-  <input type="hidden" name="hosted_button_id" value="D3T6HTZTHCB6Q" />
-  <input type="hidden" name="currency_code" value="USD" />
-  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Buy Now" />
-</form>
+<script 
+  src="https://www.paypal.com/sdk/js?client-id=BAA4nV4C0uVtHI5yUcgxrwjAJ8XpxxVbS2CD5DUQ8jT9bvQppOtrrtVvlYu6g7OWrkyMNMm4wpi9tPztBQ&components=hosted-buttons&enable-funding=venmo&currency=USD">
+</script>
+
+<div id="paypal-container-6X3XDLPY4235E"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "6X3XDLPY4235E",
+  }).render("#paypal-container-6X3XDLPY4235E")
+</script>
+
+
 
     </div>
   </div>
