@@ -194,22 +194,22 @@
   src="https://www.paypal.com/sdk/js?client-id=BAA4nV4C0uVtHI5yUcgxrwjAJ8XpxxVbS2CD5DUQ8jT9bvQppOtrrtVvlYu6g7OWrkyMNMm4wpi9tPztBQ&components=hosted-buttons&enable-funding=venmo&currency=USD">
 </script>
 
-<div id="paypal-container-6X3XDLPY4235E"></div>
-<script>
-  paypal.HostedButtons({
-    hostedButtonId: "6X3XDLPY4235E",
-  }).render("#paypal-container-6X3XDLPY4235E")
-</script>
-    </div>
-  </div>
+<div style="max-width:360px; margin:0 auto; text-align:center;">
+  <div id="paypal-container-6X3XDLPY4235E"></div>
 
-  <p style="margin-top:12px; font-size:14px;">
-  Having trouble on mobile?
-  <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6X3XDLPY4235E"
-     target="_blank" rel="noopener">
-     Tap here to pay with PayPal
-  </a>.
-</p>
+  <p style="margin-top:12px; font-size:14px; line-height:1.3;">
+    Having trouble on mobile?
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6X3XDLPY4235E"
+       target="_blank" rel="noopener">
+      Tap here to pay with PayPal
+    </a>.
+  </p>
+</div>
+
+<script>
+  paypal.HostedButtons({ hostedButtonId: "6X3XDLPY4235E" })
+    .render("#paypal-container-6X3XDLPY4235E");
+</script>
 
 
   <!-- Check Option -->
