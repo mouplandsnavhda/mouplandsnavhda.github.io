@@ -187,25 +187,33 @@
     $35.00 USD
   </div>
 
-  <div style="max-width:360px; margin:0 auto;">
-    <div id="paypal-container-6X3XDLPY4235E"></div>
+ <!-- PayPal SDK (must be BEFORE the render call) -->
+<script
+  src="https://www.paypal.com/sdk/js?client-id=BAA4nV4C0uVtHI5yUcgxrwjAJ8XpxxVbS2CD5DUQ8jT9bvQppOtrrtVvlYu6g7OWrkyMNMm4wpi9tPztBQ&components=hosted-buttons&enable-funding=venmo&currency=USD">
+</script>
 
-    <p style="margin-top:6px; font-size:13px; line-height:1.2; color:#666;">
-      Having trouble on mobile?
-      <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6X3XDLPY4235E"
-         target="_blank" rel="noopener"
-         style="color:#d0021b; text-decoration:none;">
-        Tap here to pay with PayPal
-      </a>.
-    </p>
-  </div>
+<div style="max-width:360px; margin:0 auto; text-align:center;">
+  <div id="paypal-container-6X3XDLPY4235E"></div>
+
+  <p style="margin-top:6px; font-size:13px; line-height:1.2; color:#666;">
+    Having trouble on mobile?
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6X3XDLPY4235E"
+       target="_blank" rel="noopener"
+       style="color:#d0021b; text-decoration:none;">
+      Tap here to pay with PayPal
+    </a>.
+  </p>
 </div>
 
 <script>
-  paypal.HostedButtons({ hostedButtonId: "6X3XDLPY4235E" })
-    .render("#paypal-container-6X3XDLPY4235E");
+  // Render hosted buttons
+  if (window.paypal && paypal.HostedButtons) {
+    paypal.HostedButtons({ hostedButtonId: "6X3XDLPY4235E" })
+      .render("#paypal-container-6X3XDLPY4235E");
+  } else {
+    console.log("PayPal SDK did not load");
+  }
 </script>
-
 
 
   <!-- Check Option -->
