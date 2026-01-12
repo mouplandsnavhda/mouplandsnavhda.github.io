@@ -178,56 +178,53 @@
       <h4 class="my-0 font-weight-normal">PayPal</h4>
     </div>
 
-    <div class="card-body text-center d-flex flex-column justify-content-between">
+    <div class="card-body text-center d-flex flex-column justify-content-start">
 
       <!-- Price -->
-      <h1 class="card-title pricing-card-title">
+      <h1 class="card-title pricing-card-title mb-3">
         $35 <small class="text-muted">/ yr</small>
       </h1>
 
-      <!-- Centered PayPal content -->
-      <div>
+      <style>
+        .pp-6X3XDLPY4235E{
+          text-align:center;
+          border:none;
+          border-radius:1.5rem;
+          min-width:11.625rem;
+          padding:0 2rem;
+          height:2.625rem;
+          font-weight:bold;
+          background-color:#FFD140;
+          color:#000000;
+          font-family:"Helvetica Neue",Arial,sans-serif;
+          font-size:1rem;
+          line-height:1.25rem;
+          cursor:pointer;
+        }
+      </style>
 
-        <style>
-          .pp-6X3XDLPY4235E{
-            text-align:center;
-            border:none;
-            border-radius:1.5rem;
-            min-width:11.625rem;
-            padding:0 2rem;
-            height:2.625rem;
-            font-weight:bold;
-            background-color:#FFD140;
-            color:#000000;
-            font-family:"Helvetica Neue",Arial,sans-serif;
-            font-size:1rem;
-            line-height:1.25rem;
-            cursor:pointer;
-          }
-        </style>
+      <!-- PayPal Button -->
+      <form action="https://www.paypal.com/ncp/payment/6X3XDLPY4235E"
+            method="post"
+            target="_blank"
+            style="display:inline-grid; justify-items:center; gap:0.35rem; margin-top:6px;">
 
-        <form action="https://www.paypal.com/ncp/payment/6X3XDLPY4235E"
-              method="post"
-              target="_blank"
-              style="display:inline-grid; justify-items:center; gap:0.4rem; margin-top:10px;">
-          <input class="pp-6X3XDLPY4235E" type="submit" value="Buy Now" />
+        <input class="pp-6X3XDLPY4235E" type="submit" value="Buy Now" />
 
-          <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg"
-               alt="cards"
-               style="margin-top:4px;" />
+        <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg"
+             alt="cards"
+             style="margin-top:2px;" />
 
-          <section style="font-size:0.75rem; margin-top:2px;">
-            Powered by
-            <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg"
-                 alt="paypal"
-                 style="height:0.875rem; vertical-align:middle;" />
-          </section>
-        </form>
+        <section style="font-size:0.75rem; margin-top:0;">
+          Powered by
+          <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg"
+               alt="paypal"
+               style="height:0.875rem; vertical-align:middle;" />
+        </section>
+      </form>
 
-      </div>
-
-      <!-- Bottom helper -->
-      <p style="margin-top:10px; font-size:13px; line-height:1.2; color:#666;">
+      <!-- Backup link -->
+      <p style="margin-top:4px; font-size:13px; line-height:1.2; color:#666;">
         Having trouble on mobile?
         <a href="https://www.paypal.com/ncp/payment/6X3XDLPY4235E"
            target="_blank"
@@ -239,6 +236,8 @@
 
     </div>
   </div>
+
+</div>
 
   <!-- Check Option -->
   <div class="card mb-4 shadow-sm">
