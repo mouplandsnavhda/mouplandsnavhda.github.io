@@ -177,35 +177,58 @@
       <h4 class="my-0 font-weight-normal">PayPal</h4>
     </div>
     
-<!-- Paypal Button -->
-<div>
-  <style>.pp-6X3XDLPY4235E{text-align:center;border:none;border-radius:1.5rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
-  <form action="https://www.paypal.com/ncp/payment/6X3XDLPY4235E" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
-    <input class="pp-6X3XDLPY4235E" type="submit" value="Buy Now" />
-    <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" />
-    <section style="font-size: 0.75rem;"> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
-  </form>
-</div>
+<!-- PayPal Button -->
+<div style="max-width:360px; margin:0 auto; text-align:center;">
+  <style>
+    .pp-6X3XDLPY4235E{
+      text-align:center;
+      border:none;
+      border-radius:1.5rem;
+      min-width:11.625rem;
+      padding:0 2rem;
+      height:2.625rem;
+      font-weight:bold;
+      background-color:#FFD140;
+      color:#000000;
+      font-family:"Helvetica Neue",Arial,sans-serif;
+      font-size:1rem;
+      line-height:1.25rem;
+      cursor:pointer;
+    }
+  </style>
 
-  <p style="margin-top:6px; font-size:13px; line-height:1.2; color:#666;">
+  <form action="https://www.paypal.com/ncp/payment/6X3XDLPY4235E"
+        method="post"
+        target="_blank"
+        style="
+          display:inline-grid;
+          justify-items:center;
+          align-content:start;
+          gap:0.4rem;
+          margin-bottom:6px;
+        ">
+    <input class="pp-6X3XDLPY4235E" type="submit" value="Buy Now" />
+    <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg"
+         alt="cards"
+         style="margin-top:2px;" />
+    <section style="font-size:0.75rem; margin-top:2px;">
+      Powered by
+      <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg"
+           alt="paypal"
+           style="height:0.875rem; vertical-align:middle;" />
+    </section>
+  </form>
+
+  <p style="margin-top:4px; font-size:13px; line-height:1.2; color:#666;">
     Having trouble on mobile?
     <a href="https://www.paypal.com/ncp/payment/6X3XDLPY4235E"
-       target="_blank" rel="noopener"
+       target="_blank"
+       rel="noopener"
        style="color:#d0021b; text-decoration:none;">
       Tap here to pay with PayPal
     </a>.
   </p>
 </div>
-
-<script>
-  // Render hosted buttons
-  if (window.paypal && paypal.HostedButtons) {
-    paypal.HostedButtons({ hostedButtonId: "6X3XDLPY4235E" })
-      .render("#paypal-container-6X3XDLPY4235E");
-  } else {
-    console.log("PayPal SDK did not load");
-  }
-</script>
 
 
   <!-- Check Option -->
