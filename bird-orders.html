@@ -118,47 +118,16 @@
   </script>
 </head>
 <body>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="opacity: .6;">
-    <a class="navbar-brand" href="index.html">MoUplands</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#why">Join</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#training">Training</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#tests">Tests</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#events">Events</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#schedule">Schedule</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#officers">Officers</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#sponsors">Sponsors</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="bird-vendors.html">Bird Vendors</a>
-        </li>
-                <li class="nav-item">
-          <a class="nav-link" href="bird-orders.html">Bird Orders</a>
-</li>
-        <li class="nav-item">
-          <a class="nav-link" href="payment.html">Payment</a>
-</li>
-      </ul>
-    </div>
-  </nav>
+ <div id="navbar-placeholder"></div>
+
+<script>
+  fetch('navbar.html')
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById('navbar-placeholder').innerHTML = html;
+    })
+    .catch(err => console.error('Navbar failed to load:', err));
+</script>
 
   <div class="container">
     <div class="payment-container">
