@@ -62,6 +62,10 @@
     .hidden {
       display: none;
     }
+    #orderSummary {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 
@@ -144,6 +148,8 @@
             </div>
 
             <!-- NAVHDA Tests -->
+
+            <!-- NA Member -->
             <div class="service-item">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="naTest" value="155">
@@ -154,11 +160,18 @@
               <small class="text-muted">For dogs 16 months and younger. Tests natural hunting ability, pointing, and water work.</small>
 
               <div class="ml-4 mt-2 hidden" id="naTestDetails">
-                <label for="naTestQty">Number of dogs:</label>
-                <input type="number" class="form-control quantity-input d-inline-block ml-2" id="naTestQty" min="1" max="10" value="1">
+                <div class="d-flex align-items-center flex-wrap">
+                  <label for="naTestQty" class="mb-0">Number of dogs:</label>
+                  <input type="number" class="form-control quantity-input d-inline-block ml-2" id="naTestQty" min="1" max="10" value="1">
+                </div>
+                <div class="mt-2">
+                  <label for="naTestDogs" class="mb-0">Dog name(s) (comma-separated):</label>
+                  <input type="text" class="form-control" id="naTestDogs" placeholder="e.g., Bella, Ranger, Scout">
+                </div>
               </div>
             </div>
 
+            <!-- NA Non-Member -->
             <div class="service-item">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="naTestNonMember" value="180">
@@ -169,11 +182,18 @@
               <small class="text-muted">For dogs 16 months and younger. Non-member pricing.</small>
 
               <div class="ml-4 mt-2 hidden" id="naTestNonMemberDetails">
-                <label for="naTestNonMemberQty">Number of dogs:</label>
-                <input type="number" class="form-control quantity-input d-inline-block ml-2" id="naTestNonMemberQty" min="1" max="10" value="1">
+                <div class="d-flex align-items-center flex-wrap">
+                  <label for="naTestNonMemberQty" class="mb-0">Number of dogs:</label>
+                  <input type="number" class="form-control quantity-input d-inline-block ml-2" id="naTestNonMemberQty" min="1" max="10" value="1">
+                </div>
+                <div class="mt-2">
+                  <label for="naTestNonMemberDogs" class="mb-0">Dog name(s) (comma-separated):</label>
+                  <input type="text" class="form-control" id="naTestNonMemberDogs" placeholder="e.g., Bella, Ranger, Scout">
+                </div>
               </div>
             </div>
 
+            <!-- UT/GDT Member -->
             <div class="service-item">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="utGdtTest" value="190">
@@ -184,11 +204,18 @@
               <small class="text-muted">For dogs 16 months and older. UT tests comprehensive hunting, pointing, retrieving, and water work. GDT tests hunting, pointing, and retrieving abilities.</small>
 
               <div class="ml-4 mt-2 hidden" id="utGdtTestDetails">
-                <label for="utGdtTestQty">Number of dogs:</label>
-                <input type="number" class="form-control quantity-input d-inline-block ml-2" id="utGdtTestQty" min="1" max="10" value="1">
+                <div class="d-flex align-items-center flex-wrap">
+                  <label for="utGdtTestQty" class="mb-0">Number of dogs:</label>
+                  <input type="number" class="form-control quantity-input d-inline-block ml-2" id="utGdtTestQty" min="1" max="10" value="1">
+                </div>
+                <div class="mt-2">
+                  <label for="utGdtTestDogs" class="mb-0">Dog name(s) (comma-separated):</label>
+                  <input type="text" class="form-control" id="utGdtTestDogs" placeholder="e.g., Bella, Ranger, Scout">
+                </div>
               </div>
             </div>
 
+            <!-- UT/GDT Non-Member -->
             <div class="service-item">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="utGdtTestNonMember" value="215">
@@ -199,9 +226,22 @@
               <small class="text-muted">For dogs 16 months and older. Non-member pricing.</small>
 
               <div class="ml-4 mt-2 hidden" id="utGdtTestNonMemberDetails">
-                <label for="utGdtTestNonMemberQty">Number of dogs:</label>
-                <input type="number" class="form-control quantity-input d-inline-block ml-2" id="utGdtTestNonMemberQty" min="1" max="10" value="1">
+                <div class="d-flex align-items-center flex-wrap">
+                  <label for="utGdtTestNonMemberQty" class="mb-0">Number of dogs:</label>
+                  <input type="number" class="form-control quantity-input d-inline-block ml-2" id="utGdtTestNonMemberQty" min="1" max="10" value="1">
+                </div>
+                <div class="mt-2">
+                  <label for="utGdtTestNonMemberDogs" class="mb-0">Dog name(s) (comma-separated):</label>
+                  <input type="text" class="form-control" id="utGdtTestNonMemberDogs" placeholder="e.g., Bella, Ranger, Scout">
+                </div>
               </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="service-item" id="orderSummaryBox">
+              <h4 class="mb-2">Order Summary</h4>
+              <ul id="orderSummary" class="mb-2"></ul>
+              <div><strong>Total:</strong> $<span id="summaryTotal">0.00</span></div>
             </div>
 
             <!-- Contact Information -->
@@ -294,15 +334,9 @@
         <div class="col-md-6">
           <h5>Quick Links</h5>
           <div class="row">
-            <div class="col-4">
-              <a href="bird-vendors.html" class="text-light mr-3">Bird Vendors</a>
-            </div>
-            <div class="col-4">
-              <a href="bird-orders.html" class="text-light mr-3">Bird Orders</a>
-            </div>
-            <div class="col-4">
-              <a href="payment.html" class="text-light">Payment</a>
-            </div>
+            <div class="col-4"><a href="bird-vendors.html" class="text-light mr-3">Bird Vendors</a></div>
+            <div class="col-4"><a href="bird-orders.html" class="text-light mr-3">Bird Orders</a></div>
+            <div class="col-4"><a href="payment.html" class="text-light">Payment</a></div>
           </div>
         </div>
       </div>
@@ -326,326 +360,291 @@
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
 
- <script>
-  // Prices (membership removed)
-  const prices = {
-    rvCamping: 25,
-    tentCamping: 10,
-    lodge: 0, // TBD
-    naTest: 155,
-    naTestNonMember: 180,
-    utGdtTest: 190,
-    utGdtTestNonMember: 215
-  };
-
-  function safeInt(value, fallback = 1) {
-    const n = parseInt(value, 10);
-    return Number.isFinite(n) && n > 0 ? n : fallback;
-  }
-
-  function getQty(inputId) {
-    const el = document.getElementById(inputId);
-    return safeInt(el ? el.value : "1", 1);
-  }
-
-  function cleanDogs(text) {
-    return (text || "")
-      .split(",")
-      .map(s => s.trim())
-      .filter(Boolean);
-  }
-
-  function setText(id, value) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = value;
-  }
-
-  function toggleDetails(checkboxId, detailsId) {
-    const checkbox = document.getElementById(checkboxId);
-    const details = document.getElementById(detailsId);
-    if (!checkbox || !details) return;
-
-    if (checkbox.checked) details.classList.remove('hidden');
-    else details.classList.add('hidden');
-
-    calculateTotal();
-  }
-
-  // Makes two checkboxes mutually exclusive (like radios) AND keeps details tidy
-  function enforceExclusivePair(aId, aDetailsId, bId, bDetailsId) {
-    const a = document.getElementById(aId);
-    const b = document.getElementById(bId);
-    const aDetails = document.getElementById(aDetailsId);
-    const bDetails = document.getElementById(bDetailsId);
-
-    if (!a || !b || !aDetails || !bDetails) return;
-
-    a.addEventListener('change', () => {
-      if (a.checked) {
-        b.checked = false;
-        bDetails.classList.add('hidden');
-      }
-      toggleDetails(aId, aDetailsId);
-    });
-
-    b.addEventListener('change', () => {
-      if (b.checked) {
-        a.checked = false;
-        aDetails.classList.add('hidden');
-      }
-      toggleDetails(bId, bDetailsId);
-    });
-  }
-
-  function buildOrderData() {
-    let total = 0;
-    const lines = [];
-    const services = [];
-    const dogLines = [];
-
-    // Camping
-    if (document.getElementById('rvCamping').checked) {
-      const nights = getQty('rvNights');
-      const amount = prices.rvCamping * nights;
-      total += amount;
-      lines.push(`RV Camping: ${nights} night${nights > 1 ? 's' : ''} = $${amount.toFixed(2)}`);
-      services.push(`RV Camping (${nights} night${nights > 1 ? 's' : ''})`);
-    }
-
-    if (document.getElementById('tentCamping').checked) {
-      const nights = getQty('tentNights');
-      const amount = prices.tentCamping * nights;
-      total += amount;
-      lines.push(`Tent Camping: ${nights} night${nights > 1 ? 's' : ''} = $${amount.toFixed(2)}`);
-      services.push(`Tent Camping (${nights} night${nights > 1 ? 's' : ''})`);
-    }
-
-    // Tests + dog names
-    const tests = [
-      {
-        id: 'naTest',
-        label: 'NA Test (Member)',
-        price: prices.naTest,
-        qtyId: 'naTestQty',
-        dogsId: 'naTestDogs'
-      },
-      {
-        id: 'naTestNonMember',
-        label: 'NA Test (Non-Member)',
-        price: prices.naTestNonMember,
-        qtyId: 'naTestNonMemberQty',
-        dogsId: 'naTestNonMemberDogs'
-      },
-      {
-        id: 'utGdtTest',
-        label: 'UT/GDT Test (Member)',
-        price: prices.utGdtTest,
-        qtyId: 'utGdtTestQty',
-        dogsId: 'utGdtTestDogs'
-      },
-      {
-        id: 'utGdtTestNonMember',
-        label: 'UT/GDT Test (Non-Member)',
-        price: prices.utGdtTestNonMember,
-        qtyId: 'utGdtTestNonMemberQty',
-        dogsId: 'utGdtTestNonMemberDogs'
-      }
-    ];
-
-    tests.forEach(t => {
-      const cb = document.getElementById(t.id);
-      if (!cb || !cb.checked) return;
-
-      const q = getQty(t.qtyId);
-      const amount = t.price * q;
-      total += amount;
-
-      lines.push(`${t.label}: x${q} = $${amount.toFixed(2)}`);
-      services.push(`${t.label} x${q}`);
-
-      const dogText = document.getElementById(t.dogsId)?.value || "";
-      const dogs = cleanDogs(dogText);
-      if (dogs.length) {
-        dogLines.push(`${t.label}: ${dogs.join(", ")}`);
-      }
-    });
-
-    return {
-      total,
-      lines,
-      services,
-      dogLines
+  <script>
+    const prices = {
+      rvCamping: 25,
+      tentCamping: 10,
+      naTest: 155,
+      naTestNonMember: 180,
+      utGdtTest: 190,
+      utGdtTestNonMember: 215
     };
-  }
 
-  function renderSummary(order) {
-    const ul = document.getElementById('orderSummary');
-    if (ul) {
-      ul.innerHTML = order.lines.length
-        ? order.lines.map(l => `<li>${l}</li>`).join('')
-        : `<li>No items selected yet.</li>`;
-    }
-    setText('summaryTotal', order.total.toFixed(2));
-  }
-
-  function calculateTotal() {
-    const order = buildOrderData();
-
-    setText('totalAmount', order.total.toFixed(2));
-    setText('checkAmount', order.total.toFixed(2));
-
-    const paypalBtn = document.getElementById('paypalBtn');
-    if (paypalBtn) paypalBtn.disabled = order.total <= 0;
-
-    renderSummary(order);
-  }
-
-  function validateDogNamesRequired() {
-    // Require dog names for any selected test.
-    // Strong validation: number of names must match quantity.
-    const checks = [
-      { cb: 'naTest', qty: 'naTestQty', dogs: 'naTestDogs', label: 'NA Test (Member)' },
-      { cb: 'naTestNonMember', qty: 'naTestNonMemberQty', dogs: 'naTestNonMemberDogs', label: 'NA Test (Non-Member)' },
-      { cb: 'utGdtTest', qty: 'utGdtTestQty', dogs: 'utGdtTestDogs', label: 'UT/GDT Test (Member)' },
-      { cb: 'utGdtTestNonMember', qty: 'utGdtTestNonMemberQty', dogs: 'utGdtTestNonMemberDogs', label: 'UT/GDT Test (Non-Member)' }
+    const TESTS = [
+      { cb:'naTest', label:'NA Test (Member)', price: prices.naTest, details:'naTestDetails', qty:'naTestQty', dogs:'naTestDogs' },
+      { cb:'naTestNonMember', label:'NA Test (Non-Member)', price: prices.naTestNonMember, details:'naTestNonMemberDetails', qty:'naTestNonMemberQty', dogs:'naTestNonMemberDogs' },
+      { cb:'utGdtTest', label:'UT/GDT Test (Member)', price: prices.utGdtTest, details:'utGdtTestDetails', qty:'utGdtTestQty', dogs:'utGdtTestDogs' },
+      { cb:'utGdtTestNonMember', label:'UT/GDT Test (Non-Member)', price: prices.utGdtTestNonMember, details:'utGdtTestNonMemberDetails', qty:'utGdtTestNonMemberQty', dogs:'utGdtTestNonMemberDogs' }
     ];
 
-    for (const t of checks) {
-      const cbEl = document.getElementById(t.cb);
-      if (!cbEl || !cbEl.checked) continue;
+    function byId(id) { return document.getElementById(id); }
 
-      const q = getQty(t.qty);
-      const names = cleanDogs(document.getElementById(t.dogs)?.value || "");
-
-      if (names.length === 0) {
-        alert(`Please enter dog name(s) for: ${t.label}`);
-        document.getElementById(t.dogs)?.focus();
-        return false;
-      }
-
-      // Require names count == quantity (best for reporting)
-      if (names.length !== q) {
-        alert(`For "${t.label}", you selected ${q} dog(s) but entered ${names.length} name(s).\nPlease enter exactly ${q} name(s), separated by commas.`);
-        document.getElementById(t.dogs)?.focus();
-        return false;
-      }
+    function safeInt(v, fallback = 1) {
+      const n = parseInt(v, 10);
+      return Number.isFinite(n) && n > 0 ? n : fallback;
     }
 
-    return true;
-  }
+    function getQty(id) {
+      const el = byId(id);
+      return safeInt(el ? el.value : "1", 1);
+    }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    // Camping show/hide + total
-    document.getElementById('rvCamping').addEventListener('change', () => toggleDetails('rvCamping', 'rvCampingDetails'));
-    document.getElementById('tentCamping').addEventListener('change', () => toggleDetails('tentCamping', 'tentCampingDetails'));
+    function cleanDogs(text) {
+      return (text || "")
+        .split(",")
+        .map(s => s.trim())
+        .filter(Boolean);
+    }
 
-    // Tests: member vs non-member mutually exclusive
-    enforceExclusivePair('naTest', 'naTestDetails', 'naTestNonMember', 'naTestNonMemberDetails');
-    enforceExclusivePair('utGdtTest', 'utGdtTestDetails', 'utGdtTestNonMember', 'utGdtTestNonMemberDetails');
+    function setText(id, value) {
+      const el = byId(id);
+      if (el) el.textContent = value;
+    }
 
-    // Quantity + dog name inputs recalc
-    [
-      'rvNights','tentNights',
-      'naTestQty','naTestNonMemberQty','utGdtTestQty','utGdtTestNonMemberQty',
-      'naTestDogs','naTestNonMemberDogs','utGdtTestDogs','utGdtTestNonMemberDogs'
-    ].forEach(id => {
-      const el = document.getElementById(id);
+    function clearTestFields(test) {
+      const qtyEl = byId(test.qty);
+      if (qtyEl) qtyEl.value = 1;
+      const dogsEl = byId(test.dogs);
+      if (dogsEl) dogsEl.value = "";
+    }
+
+    function showHide(id, show) {
+      const el = byId(id);
       if (!el) return;
-      el.addEventListener('input', calculateTotal);
-      el.addEventListener('change', calculateTotal);
-    });
+      if (show) el.classList.remove("hidden");
+      else el.classList.add("hidden");
+    }
 
-    // Also recalc if any checkbox changes
-    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      cb.addEventListener('change', calculateTotal);
-    });
+    function calculateAndRender() {
+      let total = 0;
+      const lines = [];
+      const services = [];
+      const dogLines = [];
 
-    // Test mode indicator
-    const urlParams = new URLSearchParams(window.location.search);
-    const isTestMode = urlParams.get('test') === 'true';
-    if (isTestMode) document.getElementById('testModeIndicator').style.display = 'block';
-
-    // PayPal click
-    document.getElementById('paypalBtn').addEventListener('click', function() {
-      // Validate contact fields
-      if (!document.getElementById('firstName').value || !document.getElementById('lastName').value || !document.getElementById('email').value) {
-        alert('Please fill in all required contact information.');
-        return;
+      // Camping
+      if (byId('rvCamping')?.checked) {
+        const n = getQty('rvNights');
+        const amt = prices.rvCamping * n;
+        total += amt;
+        lines.push(`RV Camping: ${n} night${n > 1 ? 's' : ''} = $${amt.toFixed(2)}`);
+        services.push(`RV Camping (${n} night${n > 1 ? 's' : ''})`);
       }
 
-      // Validate dog names required when tests selected
-      if (!validateDogNamesRequired()) return;
-
-      const firstName = document.getElementById('firstName').value;
-      const lastName = document.getElementById('lastName').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const notes = document.getElementById('notes').value;
-
-      const order = buildOrderData();
-
-      let itemName = "MO Uplands Payment";
-      if (order.services.length > 0) itemName += " - " + order.services.join(", ");
-
-      const dogNamesSummary = order.dogLines.join(" | ");
-      const servicesSummary = order.services.join(", ");
-
-      let paypalURL;
-      if (isTestMode) {
-        paypalURL = new URL("https://www.sandbox.paypal.com/cgi-bin/webscr");
-        paypalURL.searchParams.set("business", "sb-6pla43588420@business.example.com");
-      } else {
-        paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
-        paypalURL.searchParams.set("business", "paypal@mouplands.org");
+      if (byId('tentCamping')?.checked) {
+        const n = getQty('tentNights');
+        const amt = prices.tentCamping * n;
+        total += amt;
+        lines.push(`Tent Camping: ${n} night${n > 1 ? 's' : ''} = $${amt.toFixed(2)}`);
+        services.push(`Tent Camping (${n} night${n > 1 ? 's' : ''})`);
       }
 
-      paypalURL.searchParams.set("cmd", "_xclick");
-      paypalURL.searchParams.set("item_name", itemName);
-      paypalURL.searchParams.set("amount", order.total.toFixed(2));
-      paypalURL.searchParams.set("currency_code", "USD");
+      // Tests
+      TESTS.forEach(t => {
+        const cb = byId(t.cb);
+        if (!cb || !cb.checked) return;
 
-      // Contact info (shows in transaction details)
-      paypalURL.searchParams.set("on0", "Contact Info");
-      paypalURL.searchParams.set("os0", `${firstName} ${lastName} - ${email} - ${phone || 'No phone'}`);
+        const q = getQty(t.qty);
+        const amt = t.price * q;
+        total += amt;
 
-      // Order summary
-      paypalURL.searchParams.set("on1", "Order Summary");
-      paypalURL.searchParams.set("os1", servicesSummary || "N/A");
+        lines.push(`${t.label}: x${q} = $${amt.toFixed(2)}`);
+        services.push(`${t.label} x${q}`);
 
-      // Dog names (your key reporting field)
-      paypalURL.searchParams.set("on2", "Dog Names");
-      paypalURL.searchParams.set("os2", dogNamesSummary || "N/A");
+        const dogs = cleanDogs(byId(t.dogs)?.value || "");
+        if (dogs.length) dogLines.push(`${t.label}: ${dogs.join(", ")}`);
+      });
 
-      // Notes
-      if (notes) {
-        paypalURL.searchParams.set("on3", "Additional Notes");
-        paypalURL.searchParams.set("os3", notes);
+      // Totals
+      setText('totalAmount', total.toFixed(2));
+      setText('checkAmount', total.toFixed(2));
+      setText('summaryTotal', total.toFixed(2));
+      const paypalBtn = byId('paypalBtn');
+      if (paypalBtn) paypalBtn.disabled = total <= 0;
+
+      // Summary list
+      const ul = byId('orderSummary');
+      if (ul) {
+        ul.innerHTML = lines.length ? lines.map(l => `<li>${l}</li>`).join('') : `<li>No items selected yet.</li>`;
       }
 
-      // Return / cancel
-      if (isTestMode) {
-        paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html?test=true");
-        paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html?test=true");
-      } else {
-        paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html");
-        paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html");
+      return { total, services, dogLines };
+    }
+
+    function validateDogNamesRequired() {
+      for (const t of TESTS) {
+        const cb = byId(t.cb);
+        if (!cb || !cb.checked) continue;
+
+        const qty = getQty(t.qty);
+        const dogsEl = byId(t.dogs);
+        if (!dogsEl) {
+          alert(`Missing dog-name field for: ${t.label} (expected id="${t.dogs}")`);
+          return false;
+        }
+
+        const names = cleanDogs(dogsEl.value);
+
+        if (names.length === 0) {
+          alert(`Please enter dog name(s) for: ${t.label}`);
+          dogsEl.focus();
+          return false;
+        }
+
+        if (names.length !== qty) {
+          alert(`For "${t.label}", you selected ${qty} dog(s) but entered ${names.length} name(s).\nEnter exactly ${qty} name(s), separated by commas.`);
+          dogsEl.focus();
+          return false;
+        }
       }
+      return true;
+    }
 
-      window.open(paypalURL.toString(), '_blank');
+    function enforceExclusivePair(aId, bId) {
+      const a = byId(aId);
+      const b = byId(bId);
+      if (!a || !b) return;
+
+      const aTest = TESTS.find(t => t.cb === aId);
+      const bTest = TESTS.find(t => t.cb === bId);
+
+      a.addEventListener('change', () => {
+        if (a.checked) {
+          b.checked = false;
+          showHide(bTest.details, false);
+          clearTestFields(bTest);
+        }
+        showHide(aTest.details, a.checked);
+        if (!a.checked) clearTestFields(aTest);
+        calculateAndRender();
+      });
+
+      b.addEventListener('change', () => {
+        if (b.checked) {
+          a.checked = false;
+          showHide(aTest.details, false);
+          clearTestFields(aTest);
+        }
+        showHide(bTest.details, b.checked);
+        if (!b.checked) clearTestFields(bTest);
+        calculateAndRender();
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Camping toggles
+      byId('rvCamping')?.addEventListener('change', () => {
+        showHide('rvCampingDetails', byId('rvCamping').checked);
+        calculateAndRender();
+      });
+      byId('tentCamping')?.addEventListener('change', () => {
+        showHide('tentCampingDetails', byId('tentCamping').checked);
+        calculateAndRender();
+      });
+
+      // Exclusive tests
+      enforceExclusivePair('naTest', 'naTestNonMember');
+      enforceExclusivePair('utGdtTest', 'utGdtTestNonMember');
+
+      // Inputs that change totals/summary
+      [
+        'rvNights','tentNights',
+        'naTestQty','naTestNonMemberQty','utGdtTestQty','utGdtTestNonMemberQty',
+        'naTestDogs','naTestNonMemberDogs','utGdtTestDogs','utGdtTestNonMemberDogs'
+      ].forEach(id => {
+        const el = byId(id);
+        if (!el) return;
+        el.addEventListener('input', calculateAndRender);
+        el.addEventListener('change', calculateAndRender);
+      });
+
+      // Test mode
+      const urlParams = new URLSearchParams(window.location.search);
+      const isTestMode = urlParams.get('test') === 'true';
+      if (isTestMode) byId('testModeIndicator').style.display = 'block';
+
+      // PayPal click
+      byId('paypalBtn')?.addEventListener('click', () => {
+        if (!byId('firstName').value || !byId('lastName').value || !byId('email').value) {
+          alert('Please fill in all required contact information.');
+          return;
+        }
+
+        if (!validateDogNamesRequired()) return;
+
+        const firstName = byId('firstName').value;
+        const lastName = byId('lastName').value;
+        const email = byId('email').value;
+        const phone = byId('phone').value;
+        const notes = byId('notes').value;
+
+        const order = calculateAndRender();
+
+        let itemName = "MO Uplands Payment";
+        if (order.services.length) itemName += " - " + order.services.join(", ");
+
+        const total = order.total.toFixed(2);
+        const dogNamesSummary = order.dogLines.join(" | ");
+        const servicesSummary = order.services.join(", ");
+
+        let paypalURL;
+        if (isTestMode) {
+          paypalURL = new URL("https://www.sandbox.paypal.com/cgi-bin/webscr");
+          paypalURL.searchParams.set("business", "sb-6pla43588420@business.example.com");
+        } else {
+          paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
+          paypalURL.searchParams.set("business", "paypal@mouplands.org");
+        }
+
+        paypalURL.searchParams.set("cmd", "_xclick");
+        paypalURL.searchParams.set("item_name", itemName);
+        paypalURL.searchParams.set("amount", total);
+        paypalURL.searchParams.set("currency_code", "USD");
+
+        // PayPal _xclick: reliably keep option 0 and option 1
+        paypalURL.searchParams.set("on0", "Contact Info");
+        paypalURL.searchParams.set("os0", `${firstName} ${lastName} - ${email} - ${phone || 'No phone'}`);
+
+        paypalURL.searchParams.set("on1", "Dog Names");
+        paypalURL.searchParams.set("os1", dogNamesSummary || "N/A");
+
+        // Extra packed into custom for reporting (may truncate if very long)
+        const customParts = [
+          `Order: ${servicesSummary || 'N/A'}`,
+          `Dogs: ${dogNamesSummary || 'N/A'}`
+        ];
+        if (notes) customParts.push(`Notes: ${notes.substring(0, 180)}`);
+        paypalURL.searchParams.set("custom", customParts.join(" | "));
+
+        if (isTestMode) {
+          paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html?test=true");
+          paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html?test=true");
+        } else {
+          paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html");
+          paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html");
+        }
+
+        window.open(paypalURL.toString(), "_blank");
+      });
+
+      // Check instructions
+      byId('checkBtn')?.addEventListener('click', () => {
+        byId('checkInstructions').style.display = 'block';
+        byId('checkInstructions').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      // Back to top
+      byId('backToTop')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Initial state
+      showHide('rvCampingDetails', false);
+      showHide('tentCampingDetails', false);
+      TESTS.forEach(t => showHide(t.details, false));
+      calculateAndRender();
     });
+  </script>
+</body>
 
-    // Check button
-    document.getElementById('checkBtn').addEventListener('click', function() {
-      document.getElementById('checkInstructions').style.display = 'block';
-      document.getElementById('checkInstructions').scrollIntoView({ behavior: 'smooth' });
-    });
-
-    // Back to top
-    document.getElementById('backToTop').addEventListener('click', function(e) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    calculateTotal();
-  });
-</script>
+</html>
