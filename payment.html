@@ -450,9 +450,12 @@
         lines.push(`${t.label}: x${q} = $${amt.toFixed(2)}`);
         services.push(`${t.label} x${q}`);
 
-        const dogs = cleanDogs(byId(t.dogs)?.value || "");
-        if (dogs.length) dogLines.push(`${t.label}: ${dogs.join(", ")}`);
-      });
+       const dogs = cleanDogs(byId(t.dogs)?.value || "");
+       if (dogs.length) {
+         const q = getQty(t.qty);
+         dogLines.push(`${t.label} (${q}): ${dogs.join(", ")}`);
+}
+
 
       // Totals
       setText('totalAmount', total.toFixed(2));
