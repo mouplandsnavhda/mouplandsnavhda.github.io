@@ -324,206 +324,205 @@
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
 
-  <script>
-    // Service prices
-    const prices = {
-      membership: 35,
-      rvCamping: 25,
-      tentCamping: 10,
-      lodge: 0, // TBD
-      naTest: 155,
-      naTestNonMember: 180,
-      utGdtTest: 190,
-      utGdtTestNonMember: 215
-    };
+<script>
+  // Prices (membership removed)
+  const prices = {
+    rvCamping: 25,
+    tentCamping: 10,
+    lodge: 0, // TBD
+    naTest: 155,
+    naTestNonMember: 180,
+    utGdtTest: 190,
+    utGdtTestNonMember: 215
+  };
 
-    // Calculate total
-    function calculateTotal() {
-      let total = 0;
-      
-      if (document.getElementById('membership').checked) {
-        total += prices.membership;
-      }
-      
-      if (document.getElementById('rvCamping').checked) {
-        const nights = parseInt(document.getElementById('rvNights').value) || 1;
-        total += prices.rvCamping * nights;
-      }
-      
-      if (document.getElementById('tentCamping').checked) {
-        const nights = parseInt(document.getElementById('tentNights').value) || 1;
-        total += prices.tentCamping * nights;
-      }
-      
-      if (document.getElementById('naTest').checked) {
-        total += prices.naTest;
-      }
-      
-      if (document.getElementById('naTestNonMember').checked) {
-        total += prices.naTestNonMember;
-      }
-      
-      if (document.getElementById('utGdtTest').checked) {
-        total += prices.utGdtTest;
-      }
-      
-      if (document.getElementById('utGdtTestNonMember').checked) {
-        total += prices.utGdtTestNonMember;
-      }
-      
-      document.getElementById('totalAmount').textContent = total;
-      document.getElementById('checkAmount').textContent = total;
-      
-      // Enable PayPal button if total > 0
-      document.getElementById('paypalBtn').disabled = total <= 0;
+  function safeInt(value, fallback = 1) {
+    const n = parseInt(value, 10);
+    return Number.isFinite(n) && n > 0 ? n : fallback;
+  }
+
+  function getQty(inputId) {
+    const el = document.getElementById(inputId);
+    return safeInt(el ? el.value : "1", 1);
+  }
+
+  function calculateTotal() {
+    let total = 0;
+
+    // Camping
+    if (document.getElementById('rvCamping').checked) {
+      total += prices.rvCamping * getQty('rvNights');
     }
 
-    // Show/hide details based on checkbox
-    function toggleDetails(checkboxId, detailsId) {
-      const checkbox = document.getElementById(checkboxId);
-      const details = document.getElementById(detailsId);
-      
-      if (checkbox.checked) {
-        details.classList.remove('hidden');
-      } else {
-        details.classList.add('hidden');
-      }
-      calculateTotal();
+    if (document.getElementById('tentCamping').checked) {
+      total += prices.tentCamping * getQty('tentNights');
     }
 
-    // Event listeners
-    document.addEventListener('DOMContentLoaded', function() {
-      // Checkbox change events
-      document.getElementById('rvCamping').addEventListener('change', function() {
-        toggleDetails('rvCamping', 'rvCampingDetails');
-      });
-      
-      document.getElementById('tentCamping').addEventListener('change', function() {
-        toggleDetails('tentCamping', 'tentCampingDetails');
-      });
+    // Tests (qty = dogs)
+    if (document.getElementById('naTest').checked) {
+      total += prices.naTest * getQty('naTestQty');
+    }
 
-      // Quantity change events
-      document.getElementById('rvNights').addEventListener('change', calculateTotal);
-      document.getElementById('rvNights').addEventListener('input', calculateTotal);
-      document.getElementById('tentNights').addEventListener('change', calculateTotal);
-      document.getElementById('tentNights').addEventListener('input', calculateTotal);
+    if (document.getElementById('naTestNonMember').checked) {
+      total += prices.naTestNonMember * getQty('naTestNonMemberQty');
+    }
 
-      // General checkbox events
-      document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', calculateTotal);
-      });
+    if (document.getElementById('utGdtTest').checked) {
+      total += prices.utGdtTest * getQty('utGdtTestQty');
+    }
 
-      // Check for test mode
-      const urlParams = new URLSearchParams(window.location.search);
-      const isTestMode = urlParams.get('test') === 'true';
-      
-      // Show test mode indicator if in test mode
-      if (isTestMode) {
-        document.getElementById('testModeIndicator').style.display = 'block';
+    if (document.getElementById('utGdtTestNonMember').checked) {
+      total += prices.utGdtTestNonMember * getQty('utGdtTestNonMemberQty');
+    }
+
+    document.getElementById('totalAmount').textContent = total.toFixed(2);
+    document.getElementById('checkAmount').textContent = total.toFixed(2);
+    document.getElementById('paypalBtn').disabled = total <= 0;
+  }
+
+  function toggleDetails(checkboxId, detailsId) {
+    const checkbox = document.getElementById(checkboxId);
+    const details = document.getElementById(detailsId);
+    if (!checkbox || !details) return;
+
+    if (checkbox.checked) details.classList.remove('hidden');
+    else details.classList.add('hidden');
+
+    calculateTotal();
+  }
+
+  // Makes two checkboxes mutually exclusive (like radios)
+  function enforceExclusivePair(aId, aDetailsId, bId, bDetailsId) {
+    const a = document.getElementById(aId);
+    const b = document.getElementById(bId);
+    const aDetails = document.getElementById(aDetailsId);
+    const bDetails = document.getElementById(bDetailsId);
+
+    if (!a || !b || !aDetails || !bDetails) return;
+
+    a.addEventListener('change', () => {
+      if (a.checked) {
+        b.checked = false;
+        bDetails.classList.add('hidden');
       }
-      
-      // Payment button events
-      document.getElementById('paypalBtn').addEventListener('click', function() {
-        // Validate form
-        if (!document.getElementById('firstName').value || !document.getElementById('lastName').value || !document.getElementById('email').value) {
-          alert('Please fill in all required contact information.');
-          return;
-        }
-        
-        // Build PayPal URL with custom fields
-        const firstName = document.getElementById('firstName').value;
-        const lastName = document.getElementById('lastName').value;
-        const email = document.getElementById('email').value;
-        const phone = document.getElementById('phone').value;
-        const notes = document.getElementById('notes').value;
-        
-        // Build item description
-        let itemName = "MO Uplands Payment";
-        const services = [];
-        
-        if (document.getElementById('membership').checked) services.push("Membership");
-        if (document.getElementById('rvCamping').checked) {
-          const nights = document.getElementById('rvNights').value || 1;
-          services.push(`RV Camping (${nights} night${nights > 1 ? 's' : ''})`);
-        }
-        if (document.getElementById('tentCamping').checked) {
-          const nights = document.getElementById('tentNights').value || 1;
-          services.push(`Tent Camping (${nights} night${nights > 1 ? 's' : ''})`);
-        }
-        if (document.getElementById('naTest').checked) services.push("NA Test (Member)");
-        if (document.getElementById('naTestNonMember').checked) services.push("NA Test (Non-Member)");
-        if (document.getElementById('utGdtTest').checked) services.push("UT/GDT Test (Member)");
-        if (document.getElementById('utGdtTestNonMember').checked) services.push("UT/GDT Test (Non-Member)");
-        
-        if (services.length > 0) {
-          itemName += " - " + services.join(", ");
-        }
-        
-        const total = document.getElementById('totalAmount').textContent;
-        
-        // Create PayPal URL with custom fields
-        let paypalURL;
-        
-        if (isTestMode) {
-          // Use PayPal sandbox for testing
-          paypalURL = new URL("https://www.sandbox.paypal.com/cgi-bin/webscr");
-          paypalURL.searchParams.set("business", "sb-6pla43588420@business.example.com");
-        } else {
-          // Use live PayPal for production
-          paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
-          paypalURL.searchParams.set("business", "paypal@mouplands.org");
-        }
-        
-        paypalURL.searchParams.set("cmd", "_xclick");
-        paypalURL.searchParams.set("item_name", itemName);
-        paypalURL.searchParams.set("amount", total);
-        paypalURL.searchParams.set("currency_code", "USD");
-        
-        // Add custom fields for contact information
-        paypalURL.searchParams.set("custom", `Name: ${firstName} ${lastName}, Email: ${email}, Phone: ${phone || 'Not provided'}`);
-        paypalURL.searchParams.set("on0", "Contact Info");
-        paypalURL.searchParams.set("os0", `${firstName} ${lastName} - ${email} - ${phone || 'No phone'}`);
-        
-        if (notes) {
-          paypalURL.searchParams.set("on1", "Additional Notes");
-          paypalURL.searchParams.set("os1", notes);
-        }
-        
-        // Add return URL for confirmation
-        if (isTestMode) {
-          paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html?test=true");
-          paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html?test=true");
-        } else {
-          paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html");
-          paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html");
-        }
-        
-        if (isTestMode) {
-          // In test mode, redirect to PayPal Sandbox
-          console.log('Test Mode - Redirecting to PayPal Sandbox:', paypalURL.toString());
-          window.open(paypalURL.toString(), '_blank');
-          return;
-        }
-        
-        window.open(paypalURL.toString(), '_blank');
-      });
-
-      document.getElementById('checkBtn').addEventListener('click', function() {
-        document.getElementById('checkInstructions').style.display = 'block';
-        document.getElementById('checkInstructions').scrollIntoView({ behavior: 'smooth' });
-      });
-
-      // Back to top
-      document.getElementById('backToTop').addEventListener('click', function(e) {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-
-      // Initial calculation
-      calculateTotal();
+      toggleDetails(aId, aDetailsId);
     });
-  </script>
-</body>
 
-</html> 
+    b.addEventListener('change', () => {
+      if (b.checked) {
+        a.checked = false;
+        aDetails.classList.add('hidden');
+      }
+      toggleDetails(bId, bDetailsId);
+    });
+  }
 
+  document.addEventListener('DOMContentLoaded', function() {
+    // Camping show/hide + total
+    document.getElementById('rvCamping').addEventListener('change', () => toggleDetails('rvCamping', 'rvCampingDetails'));
+    document.getElementById('tentCamping').addEventListener('change', () => toggleDetails('tentCamping', 'tentCampingDetails'));
+
+    // Tests: member vs non-member mutually exclusive
+    enforceExclusivePair('naTest', 'naTestDetails', 'naTestNonMember', 'naTestNonMemberDetails');
+    enforceExclusivePair('utGdtTest', 'utGdtTestDetails', 'utGdtTestNonMember', 'utGdtTestNonMemberDetails');
+
+    // Quantity changes recalc
+    ['rvNights','tentNights','naTestQty','naTestNonMemberQty','utGdtTestQty','utGdtTestNonMemberQty'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('input', calculateTotal);
+      el.addEventListener('change', calculateTotal);
+    });
+
+    // Also recalc if anything else changes
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', calculateTotal);
+    });
+
+    // Check for test mode
+    const urlParams = new URLSearchParams(window.location.search);
+    const isTestMode = urlParams.get('test') === 'true';
+    if (isTestMode) document.getElementById('testModeIndicator').style.display = 'block';
+
+    // PayPal button
+    document.getElementById('paypalBtn').addEventListener('click', function() {
+      if (!document.getElementById('firstName').value || !document.getElementById('lastName').value || !document.getElementById('email').value) {
+        alert('Please fill in all required contact information.');
+        return;
+      }
+
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const notes = document.getElementById('notes').value;
+
+      let itemName = "MO Uplands Payment";
+      const services = [];
+
+      if (document.getElementById('rvCamping').checked) {
+        const nights = getQty('rvNights');
+        services.push(`RV Camping (${nights} night${nights > 1 ? 's' : ''})`);
+      }
+      if (document.getElementById('tentCamping').checked) {
+        const nights = getQty('tentNights');
+        services.push(`Tent Camping (${nights} night${nights > 1 ? 's' : ''})`);
+      }
+
+      if (document.getElementById('naTest').checked) services.push(`NA Test (Member) x${getQty('naTestQty')}`);
+      if (document.getElementById('naTestNonMember').checked) services.push(`NA Test (Non-Member) x${getQty('naTestNonMemberQty')}`);
+      if (document.getElementById('utGdtTest').checked) services.push(`UT/GDT Test (Member) x${getQty('utGdtTestQty')}`);
+      if (document.getElementById('utGdtTestNonMember').checked) services.push(`UT/GDT Test (Non-Member) x${getQty('utGdtTestNonMemberQty')}`);
+
+      if (services.length > 0) itemName += " - " + services.join(", ");
+
+      const total = document.getElementById('totalAmount').textContent;
+
+      let paypalURL;
+      if (isTestMode) {
+        paypalURL = new URL("https://www.sandbox.paypal.com/cgi-bin/webscr");
+        paypalURL.searchParams.set("business", "sb-6pla43588420@business.example.com");
+      } else {
+        paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
+        paypalURL.searchParams.set("business", "paypal@mouplands.org");
+      }
+
+      paypalURL.searchParams.set("cmd", "_xclick");
+      paypalURL.searchParams.set("item_name", itemName);
+      paypalURL.searchParams.set("amount", total);
+      paypalURL.searchParams.set("currency_code", "USD");
+
+      paypalURL.searchParams.set("custom", `Name: ${firstName} ${lastName}, Email: ${email}, Phone: ${phone || 'Not provided'}`);
+      paypalURL.searchParams.set("on0", "Contact Info");
+      paypalURL.searchParams.set("os0", `${firstName} ${lastName} - ${email} - ${phone || 'No phone'}`);
+
+      if (notes) {
+        paypalURL.searchParams.set("on1", "Additional Notes");
+        paypalURL.searchParams.set("os1", notes);
+      }
+
+      if (isTestMode) {
+        paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html?test=true");
+        paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html?test=true");
+      } else {
+        paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html");
+        paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html");
+      }
+
+      window.open(paypalURL.toString(), '_blank');
+    });
+
+    document.getElementById('checkBtn').addEventListener('click', function() {
+      document.getElementById('checkInstructions').style.display = 'block';
+      document.getElementById('checkInstructions').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('backToTop').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Initial calc
+    calculateTotal();
+  });
+</script>
