@@ -39,9 +39,10 @@
       padding: 15px;
       margin: 10px 0;
       background: white;
+      text-align: left;
     }
     .quantity-input {
-      width: 80px;
+      width: 90px;
       text-align: center;
     }
     .total-section {
@@ -56,6 +57,7 @@
       padding: 20px;
       border-radius: 8px;
       margin: 20px 0;
+      text-align: left;
     }
     .hidden {
       display: none;
@@ -72,36 +74,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#why">Join</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#training">Training</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#tests">Tests</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#events">Events</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#schedule">Schedule</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#officers">Officers</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.html#sponsors">Sponsors</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="bird-vendors.html">Bird Vendors</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="bird-orders.html">Bird Orders</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="payment.html">Payment</a>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="index.html#why">Join</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#training">Training</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#tests">Tests</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#schedule">Schedule</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#officers">Officers</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#sponsors">Sponsors</a></li>
+        <li class="nav-item"><a class="nav-link" href="bird-vendors.html">Bird Vendors</a></li>
+        <li class="nav-item"><a class="nav-link" href="bird-orders.html">Bird Orders</a></li>
+        <li class="nav-item"><a class="nav-link" href="payment.html">Payment</a></li>
       </ul>
     </div>
   </nav>
@@ -110,17 +92,19 @@
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <h1 class="mb-4">Payment & Registration</h1>
+
         <div id="testModeIndicator" class="alert alert-warning" style="display: none;">
-          <strong>TEST MODE ACTIVE</strong> - Redirecting to PayPal Sandbox for testing. 
+          <strong>TEST MODE ACTIVE</strong> - Redirecting to PayPal Sandbox for testing.
           <small>Add ?test=true to the URL to enable test mode. Uses sandbox seller account.</small>
           <br><small><strong>Login with:</strong> sb-giw2o587526@personal.example.com (use your sandbox buyer password)</small>
         </div>
+
         <p class="lead">Select the services you need and provide your contact information below.</p>
-        
+
         <div class="payment-form">
           <form id="paymentForm">
-         
-               <!-- RV Camping -->
+
+            <!-- RV Camping -->
             <div class="service-item">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="rvCamping" value="25">
@@ -168,6 +152,11 @@
                 </label>
               </div>
               <small class="text-muted">For dogs 16 months and younger. Tests natural hunting ability, pointing, and water work.</small>
+
+              <div class="ml-4 mt-2 hidden" id="naTestDetails">
+                <label for="naTestQty">Number of dogs:</label>
+                <input type="number" class="form-control quantity-input d-inline-block ml-2" id="naTestQty" min="1" max="10" value="1">
+              </div>
             </div>
 
             <div class="service-item">
@@ -178,6 +167,11 @@
                 </label>
               </div>
               <small class="text-muted">For dogs 16 months and younger. Non-member pricing.</small>
+
+              <div class="ml-4 mt-2 hidden" id="naTestNonMemberDetails">
+                <label for="naTestNonMemberQty">Number of dogs:</label>
+                <input type="number" class="form-control quantity-input d-inline-block ml-2" id="naTestNonMemberQty" min="1" max="10" value="1">
+              </div>
             </div>
 
             <div class="service-item">
@@ -188,6 +182,11 @@
                 </label>
               </div>
               <small class="text-muted">For dogs 16 months and older. UT tests comprehensive hunting, pointing, retrieving, and water work. GDT tests hunting, pointing, and retrieving abilities.</small>
+
+              <div class="ml-4 mt-2 hidden" id="utGdtTestDetails">
+                <label for="utGdtTestQty">Number of dogs:</label>
+                <input type="number" class="form-control quantity-input d-inline-block ml-2" id="utGdtTestQty" min="1" max="10" value="1">
+              </div>
             </div>
 
             <div class="service-item">
@@ -198,9 +197,12 @@
                 </label>
               </div>
               <small class="text-muted">For dogs 16 months and older. Non-member pricing.</small>
+
+              <div class="ml-4 mt-2 hidden" id="utGdtTestNonMemberDetails">
+                <label for="utGdtTestNonMemberQty">Number of dogs:</label>
+                <input type="number" class="form-control quantity-input d-inline-block ml-2" id="utGdtTestNonMemberQty" min="1" max="10" value="1">
+              </div>
             </div>
-
-
 
             <!-- Contact Information -->
             <div class="contact-section">
@@ -241,7 +243,7 @@
 
             <!-- Total Section -->
             <div class="total-section">
-              <h3>Total Amount: $<span id="totalAmount">0</span></h3>
+              <h3>Total Amount: $<span id="totalAmount">0.00</span></h3>
               <p class="mb-0">Select your payment method below</p>
             </div>
 
@@ -266,13 +268,13 @@
           <div class="card-header">
             <h4>Check Payment Instructions</h4>
           </div>
-          <div class="card-body">
+          <div class="card-body text-left">
             <p><strong>Payable To:</strong> MO UPLANDS NAVHDA</p>
             <p><strong>Send To:</strong></p>
             <p>Jodee Mathis<br>
-            23407 N. Hyatt Cemetery Road<br>
-            Cuba, IL 61427</p>
-            <p><strong>Amount:</strong> $<span id="checkAmount">0</span></p>
+              23407 N. Hyatt Cemetery Road<br>
+              Cuba, IL 61427</p>
+            <p><strong>Amount:</strong> $<span id="checkAmount">0.00</span></p>
             <p><strong>Please include:</strong> Your name and what you're paying for in the memo line.</p>
           </div>
         </div>
@@ -324,205 +326,208 @@
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
 
-<script>
-  // Prices (membership removed)
-  const prices = {
-    rvCamping: 25,
-    tentCamping: 10,
-    lodge: 0, // TBD
-    naTest: 155,
-    naTestNonMember: 180,
-    utGdtTest: 190,
-    utGdtTestNonMember: 215
-  };
+  <script>
+    // Prices (membership removed)
+    const prices = {
+      rvCamping: 25,
+      tentCamping: 10,
+      lodge: 0, // TBD
+      naTest: 155,
+      naTestNonMember: 180,
+      utGdtTest: 190,
+      utGdtTestNonMember: 215
+    };
 
-  function safeInt(value, fallback = 1) {
-    const n = parseInt(value, 10);
-    return Number.isFinite(n) && n > 0 ? n : fallback;
-  }
-
-  function getQty(inputId) {
-    const el = document.getElementById(inputId);
-    return safeInt(el ? el.value : "1", 1);
-  }
-
-  function calculateTotal() {
-    let total = 0;
-
-    // Camping
-    if (document.getElementById('rvCamping').checked) {
-      total += prices.rvCamping * getQty('rvNights');
+    function safeInt(value, fallback = 1) {
+      const n = parseInt(value, 10);
+      return Number.isFinite(n) && n > 0 ? n : fallback;
     }
 
-    if (document.getElementById('tentCamping').checked) {
-      total += prices.tentCamping * getQty('tentNights');
+    function getQty(inputId) {
+      const el = document.getElementById(inputId);
+      return safeInt(el ? el.value : "1", 1);
     }
 
-    // Tests (qty = dogs)
-    if (document.getElementById('naTest').checked) {
-      total += prices.naTest * getQty('naTestQty');
-    }
+    function calculateTotal() {
+      let total = 0;
 
-    if (document.getElementById('naTestNonMember').checked) {
-      total += prices.naTestNonMember * getQty('naTestNonMemberQty');
-    }
-
-    if (document.getElementById('utGdtTest').checked) {
-      total += prices.utGdtTest * getQty('utGdtTestQty');
-    }
-
-    if (document.getElementById('utGdtTestNonMember').checked) {
-      total += prices.utGdtTestNonMember * getQty('utGdtTestNonMemberQty');
-    }
-
-    document.getElementById('totalAmount').textContent = total.toFixed(2);
-    document.getElementById('checkAmount').textContent = total.toFixed(2);
-    document.getElementById('paypalBtn').disabled = total <= 0;
-  }
-
-  function toggleDetails(checkboxId, detailsId) {
-    const checkbox = document.getElementById(checkboxId);
-    const details = document.getElementById(detailsId);
-    if (!checkbox || !details) return;
-
-    if (checkbox.checked) details.classList.remove('hidden');
-    else details.classList.add('hidden');
-
-    calculateTotal();
-  }
-
-  // Makes two checkboxes mutually exclusive (like radios)
-  function enforceExclusivePair(aId, aDetailsId, bId, bDetailsId) {
-    const a = document.getElementById(aId);
-    const b = document.getElementById(bId);
-    const aDetails = document.getElementById(aDetailsId);
-    const bDetails = document.getElementById(bDetailsId);
-
-    if (!a || !b || !aDetails || !bDetails) return;
-
-    a.addEventListener('change', () => {
-      if (a.checked) {
-        b.checked = false;
-        bDetails.classList.add('hidden');
-      }
-      toggleDetails(aId, aDetailsId);
-    });
-
-    b.addEventListener('change', () => {
-      if (b.checked) {
-        a.checked = false;
-        aDetails.classList.add('hidden');
-      }
-      toggleDetails(bId, bDetailsId);
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    // Camping show/hide + total
-    document.getElementById('rvCamping').addEventListener('change', () => toggleDetails('rvCamping', 'rvCampingDetails'));
-    document.getElementById('tentCamping').addEventListener('change', () => toggleDetails('tentCamping', 'tentCampingDetails'));
-
-    // Tests: member vs non-member mutually exclusive
-    enforceExclusivePair('naTest', 'naTestDetails', 'naTestNonMember', 'naTestNonMemberDetails');
-    enforceExclusivePair('utGdtTest', 'utGdtTestDetails', 'utGdtTestNonMember', 'utGdtTestNonMemberDetails');
-
-    // Quantity changes recalc
-    ['rvNights','tentNights','naTestQty','naTestNonMemberQty','utGdtTestQty','utGdtTestNonMemberQty'].forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.addEventListener('input', calculateTotal);
-      el.addEventListener('change', calculateTotal);
-    });
-
-    // Also recalc if anything else changes
-    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      cb.addEventListener('change', calculateTotal);
-    });
-
-    // Check for test mode
-    const urlParams = new URLSearchParams(window.location.search);
-    const isTestMode = urlParams.get('test') === 'true';
-    if (isTestMode) document.getElementById('testModeIndicator').style.display = 'block';
-
-    // PayPal button
-    document.getElementById('paypalBtn').addEventListener('click', function() {
-      if (!document.getElementById('firstName').value || !document.getElementById('lastName').value || !document.getElementById('email').value) {
-        alert('Please fill in all required contact information.');
-        return;
-      }
-
-      const firstName = document.getElementById('firstName').value;
-      const lastName = document.getElementById('lastName').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const notes = document.getElementById('notes').value;
-
-      let itemName = "MO Uplands Payment";
-      const services = [];
-
+      // Camping
       if (document.getElementById('rvCamping').checked) {
-        const nights = getQty('rvNights');
-        services.push(`RV Camping (${nights} night${nights > 1 ? 's' : ''})`);
+        total += prices.rvCamping * getQty('rvNights');
       }
+
       if (document.getElementById('tentCamping').checked) {
-        const nights = getQty('tentNights');
-        services.push(`Tent Camping (${nights} night${nights > 1 ? 's' : ''})`);
+        total += prices.tentCamping * getQty('tentNights');
       }
 
-      if (document.getElementById('naTest').checked) services.push(`NA Test (Member) x${getQty('naTestQty')}`);
-      if (document.getElementById('naTestNonMember').checked) services.push(`NA Test (Non-Member) x${getQty('naTestNonMemberQty')}`);
-      if (document.getElementById('utGdtTest').checked) services.push(`UT/GDT Test (Member) x${getQty('utGdtTestQty')}`);
-      if (document.getElementById('utGdtTestNonMember').checked) services.push(`UT/GDT Test (Non-Member) x${getQty('utGdtTestNonMemberQty')}`);
-
-      if (services.length > 0) itemName += " - " + services.join(", ");
-
-      const total = document.getElementById('totalAmount').textContent;
-
-      let paypalURL;
-      if (isTestMode) {
-        paypalURL = new URL("https://www.sandbox.paypal.com/cgi-bin/webscr");
-        paypalURL.searchParams.set("business", "sb-6pla43588420@business.example.com");
-      } else {
-        paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
-        paypalURL.searchParams.set("business", "paypal@mouplands.org");
+      // Tests (qty = dogs)
+      if (document.getElementById('naTest').checked) {
+        total += prices.naTest * getQty('naTestQty');
       }
 
-      paypalURL.searchParams.set("cmd", "_xclick");
-      paypalURL.searchParams.set("item_name", itemName);
-      paypalURL.searchParams.set("amount", total);
-      paypalURL.searchParams.set("currency_code", "USD");
-
-      paypalURL.searchParams.set("custom", `Name: ${firstName} ${lastName}, Email: ${email}, Phone: ${phone || 'Not provided'}`);
-      paypalURL.searchParams.set("on0", "Contact Info");
-      paypalURL.searchParams.set("os0", `${firstName} ${lastName} - ${email} - ${phone || 'No phone'}`);
-
-      if (notes) {
-        paypalURL.searchParams.set("on1", "Additional Notes");
-        paypalURL.searchParams.set("os1", notes);
+      if (document.getElementById('naTestNonMember').checked) {
+        total += prices.naTestNonMember * getQty('naTestNonMemberQty');
       }
 
-      if (isTestMode) {
-        paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html?test=true");
-        paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html?test=true");
-      } else {
-        paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html");
-        paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html");
+      if (document.getElementById('utGdtTest').checked) {
+        total += prices.utGdtTest * getQty('utGdtTestQty');
       }
 
-      window.open(paypalURL.toString(), '_blank');
+      if (document.getElementById('utGdtTestNonMember').checked) {
+        total += prices.utGdtTestNonMember * getQty('utGdtTestNonMemberQty');
+      }
+
+      document.getElementById('totalAmount').textContent = total.toFixed(2);
+      document.getElementById('checkAmount').textContent = total.toFixed(2);
+      document.getElementById('paypalBtn').disabled = total <= 0;
+    }
+
+    function toggleDetails(checkboxId, detailsId) {
+      const checkbox = document.getElementById(checkboxId);
+      const details = document.getElementById(detailsId);
+      if (!checkbox || !details) return;
+
+      if (checkbox.checked) details.classList.remove('hidden');
+      else details.classList.add('hidden');
+
+      calculateTotal();
+    }
+
+    // Makes two checkboxes mutually exclusive (like radios)
+    function enforceExclusivePair(aId, aDetailsId, bId, bDetailsId) {
+      const a = document.getElementById(aId);
+      const b = document.getElementById(bId);
+      const aDetails = document.getElementById(aDetailsId);
+      const bDetails = document.getElementById(bDetailsId);
+
+      if (!a || !b || !aDetails || !bDetails) return;
+
+      a.addEventListener('change', () => {
+        if (a.checked) {
+          b.checked = false;
+          bDetails.classList.add('hidden');
+        }
+        toggleDetails(aId, aDetailsId);
+      });
+
+      b.addEventListener('change', () => {
+        if (b.checked) {
+          a.checked = false;
+          aDetails.classList.add('hidden');
+        }
+        toggleDetails(bId, bDetailsId);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Camping show/hide + total
+      document.getElementById('rvCamping').addEventListener('change', () => toggleDetails('rvCamping', 'rvCampingDetails'));
+      document.getElementById('tentCamping').addEventListener('change', () => toggleDetails('tentCamping', 'tentCampingDetails'));
+
+      // Tests: member vs non-member mutually exclusive
+      enforceExclusivePair('naTest', 'naTestDetails', 'naTestNonMember', 'naTestNonMemberDetails');
+      enforceExclusivePair('utGdtTest', 'utGdtTestDetails', 'utGdtTestNonMember', 'utGdtTestNonMemberDetails');
+
+      // Quantity changes recalc
+      ['rvNights','tentNights','naTestQty','naTestNonMemberQty','utGdtTestQty','utGdtTestNonMemberQty'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('input', calculateTotal);
+        el.addEventListener('change', calculateTotal);
+      });
+
+      // Also recalc if anything else changes
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', calculateTotal);
+      });
+
+      // Check for test mode
+      const urlParams = new URLSearchParams(window.location.search);
+      const isTestMode = urlParams.get('test') === 'true';
+      if (isTestMode) document.getElementById('testModeIndicator').style.display = 'block';
+
+      // PayPal button
+      document.getElementById('paypalBtn').addEventListener('click', function() {
+        if (!document.getElementById('firstName').value || !document.getElementById('lastName').value || !document.getElementById('email').value) {
+          alert('Please fill in all required contact information.');
+          return;
+        }
+
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const notes = document.getElementById('notes').value;
+
+        let itemName = "MO Uplands Payment";
+        const services = [];
+
+        if (document.getElementById('rvCamping').checked) {
+          const nights = getQty('rvNights');
+          services.push(`RV Camping (${nights} night${nights > 1 ? 's' : ''})`);
+        }
+        if (document.getElementById('tentCamping').checked) {
+          const nights = getQty('tentNights');
+          services.push(`Tent Camping (${nights} night${nights > 1 ? 's' : ''})`);
+        }
+
+        if (document.getElementById('naTest').checked) services.push(`NA Test (Member) x${getQty('naTestQty')}`);
+        if (document.getElementById('naTestNonMember').checked) services.push(`NA Test (Non-Member) x${getQty('naTestNonMemberQty')}`);
+        if (document.getElementById('utGdtTest').checked) services.push(`UT/GDT Test (Member) x${getQty('utGdtTestQty')}`);
+        if (document.getElementById('utGdtTestNonMember').checked) services.push(`UT/GDT Test (Non-Member) x${getQty('utGdtTestNonMemberQty')}`);
+
+        if (services.length > 0) itemName += " - " + services.join(", ");
+
+        const total = document.getElementById('totalAmount').textContent;
+
+        let paypalURL;
+        if (isTestMode) {
+          paypalURL = new URL("https://www.sandbox.paypal.com/cgi-bin/webscr");
+          paypalURL.searchParams.set("business", "sb-6pla43588420@business.example.com");
+        } else {
+          paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
+          paypalURL.searchParams.set("business", "paypal@mouplands.org");
+        }
+
+        paypalURL.searchParams.set("cmd", "_xclick");
+        paypalURL.searchParams.set("item_name", itemName);
+        paypalURL.searchParams.set("amount", total);
+        paypalURL.searchParams.set("currency_code", "USD");
+
+        paypalURL.searchParams.set("custom", `Name: ${firstName} ${lastName}, Email: ${email}, Phone: ${phone || 'Not provided'}`);
+        paypalURL.searchParams.set("on0", "Contact Info");
+        paypalURL.searchParams.set("os0", `${firstName} ${lastName} - ${email} - ${phone || 'No phone'}`);
+
+        if (notes) {
+          paypalURL.searchParams.set("on1", "Additional Notes");
+          paypalURL.searchParams.set("os1", notes);
+        }
+
+        if (isTestMode) {
+          paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html?test=true");
+          paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html?test=true");
+        } else {
+          paypalURL.searchParams.set("return", "https://www.mouplands.org/payment-success.html");
+          paypalURL.searchParams.set("cancel_return", "https://www.mouplands.org/payment.html");
+        }
+
+        window.open(paypalURL.toString(), '_blank');
+      });
+
+      document.getElementById('checkBtn').addEventListener('click', function() {
+        document.getElementById('checkInstructions').style.display = 'block';
+        document.getElementById('checkInstructions').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      document.getElementById('backToTop').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Initial calc
+      calculateTotal();
     });
+  </script>
+</body>
 
-    document.getElementById('checkBtn').addEventListener('click', function() {
-      document.getElementById('checkInstructions').style.display = 'block';
-      document.getElementById('checkInstructions').scrollIntoView({ behavior: 'smooth' });
-    });
-
-    document.getElementById('backToTop').addEventListener('click', function(e) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Initial calc
-    calculateTotal();
-  });
-</script>
+</html>
