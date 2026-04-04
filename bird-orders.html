@@ -21,95 +21,18 @@
   <link href="./mouplands_cover_files/custom.css?v=1.1" rel="stylesheet">
   
   <style>
-    body {
-      background-color: #f5f5f5;
-      padding-top: 2rem;
-    }
-    
-    .payment-container {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    
-    .card {
-      border: none;
-      border-radius: 0;
-      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    }
-    
-    .card-header {
-      background-color: #1f2749;
-      color: white;
-      border-bottom: none;
-      padding: 1rem 1.25rem;
-    }
-    
-    .form-control {
-      border-radius: 0;
-      border: 1px solid #cdced3;
-    }
-    
-    .form-control:focus {
-      border-color: #f99ea6;
-      box-shadow: 0 0 0 0.2rem rgba(241, 38, 57, 0.25);
-    }
-    
-    .btn-primary {
-      background-color: #f12639;
-      border-color: #f12639;
-      border-radius: 0;
-      padding: 0.625rem 1.5rem;
-      font-size: 1.125rem;
-      font-weight: 500;
-    }
-    
-    .btn-primary:hover {
-      background-color: #d60e21;
-      border-color: #d60e21;
-    }
-    
-    .total-section {
-      background-color: #f8f9fa;
-      border: 1px solid #dee2e6;
-      padding: 1rem;
-      margin: 1rem 0;
-    }
-    
-    .price-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-    }
-    
-    .price-item:last-child {
-      border-top: 1px solid #dee2e6;
-      padding-top: 0.5rem;
-      margin-top: 0.5rem;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-    
-    .form-check-input:checked {
-      background-color: #f12639;
-      border-color: #f12639;
-    }
-    
-    .form-check-input:focus {
-      box-shadow: 0 0 0 0.2rem rgba(241, 38, 57, 0.25);
-    }
-    
-    @media (min-width: 768px) {
-      .row.justify-content-center > .col-md-6.mb-3:not(:last-child) {
-        margin-right: 24px;
-      }
-    }
-    
-    @media (max-width: 767.98px) {
-      .row.justify-content-center.mb-4 > .col-md-5 {
-        justify-content: center !important;
-        margin-bottom: 12px;
-      }
-    }
+    body { background-color: #f5f5f5; padding-top: 2rem; }
+    .payment-container { max-width: 600px; margin: 0 auto; }
+    .card { border: none; border-radius: 0; box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); }
+    .card-header { background-color: #1f2749; color: white; border-bottom: none; padding: 1rem 1.25rem; }
+    .form-control { border-radius: 0; border: 1px solid #cdced3; }
+    .form-control:focus { border-color: #f99ea6; box-shadow: 0 0 0 0.2rem rgba(241, 38, 57, 0.25); }
+    .btn-primary { background-color: #f12639; border-color: #f12639; border-radius: 0; padding: 0.625rem 1.5rem; font-size: 1.125rem; font-weight: 500; }
+    .btn-primary:hover { background-color: #d60e21; border-color: #d60e21; }
+    .total-section { background-color: #f8f9fa; border: 1px solid #dee2e6; padding: 1rem; margin: 1rem 0; }
+    .price-item { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+    .price-item:last-child { border-top: 1px solid #dee2e6; padding-top: 0.5rem; margin-top: 0.5rem; font-weight: bold; font-size: 1.1rem; }
+    .form-check-input:checked { background-color: #f12639; border-color: #f12639; }
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-53FZKBWVS3"></script>
   <script>
@@ -123,12 +46,9 @@
  <div id="navbar-placeholder"></div>
 
 <script>
-  // Added a timestamp to the fetch URL so the Navbar never caches
   fetch('navbar.html?t=' + new Date().getTime())
     .then(r => r.text())
-    .then(html => {
-      document.getElementById('navbar-placeholder').innerHTML = html;
-    })
+    .then(html => { document.getElementById('navbar-placeholder').innerHTML = html; })
     .catch(err => console.error('Navbar failed to load:', err));
 </script>
 
@@ -139,22 +59,27 @@
           <h2 class="mb-0">Bird Orders</h2>
         </div>
         <div class="card-body">
+          
+          <div id="testModeIndicator" class="alert alert-warning" style="display:none; text-align:left;">
+            <strong>TEST MODE ACTIVE</strong> — Redirecting to PayPal Sandbox for testing.
+            <br />
+            <small>Buyer login: sb-giw2o587526@personal.example.com</small>
+          </div>
+
           <div class="mb-4">
             <h5 class="text-secondary mb-3">Order Options</h5>
             <p class="mb-3">Submit your order using the Google Form below. After submitting the form, you can pay with PayPal or by check using the payment option.</p>
             
             <div class="row justify-content-center mb-4">
               <div class="col-md-5 d-flex flex-column align-items-end mb-2 mb-md-0" style="max-width: 280px;">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3BSCwSGJXQl152vS81BWxQzAjfArPJQUXgtg-CQEG0sRu_A/viewform?usp=header" target="_blank" class="btn btn-danger btn-lg w-100 font-weight-bold" style="font-size: 1.25rem; letter-spacing: 1px; max-width: 260px;">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3BSCwSGJXQl152vS81BWxQzAjfArPJQUXgtg-CQEG0sRu_A/viewform?usp=header" target="_blank" class="btn btn-danger btn-lg w-100 font-weight-bold">
                   <i class="fab fa-google mr-2"></i>ORDER FORM
                 </a>
-                <small class="text-muted mt-2" style="max-width:260px; text-align:center; display:block;">Start here if you haven't submitted your order yet. Use our Google Form to submit your order details.</small>
               </div>
               <div class="col-md-5 d-flex flex-column align-items-start" style="max-width: 280px;">
-                <button type="button" class="btn btn-success btn-lg w-100 font-weight-bold" style="font-size: 1.25rem; letter-spacing: 1px; max-width: 260px;" onclick="showPaymentForm()">
+                <button type="button" class="btn btn-success btn-lg w-100 font-weight-bold" onclick="showPaymentForm()">
                   <i class="fab fa-paypal mr-2"></i>PAYMENT
                 </button>
-                <small class="text-muted mt-2" style="max-width:260px; text-align:center; display:block;">After submitting your order form, use this to pay with PayPal or by check to complete your order.</small>
               </div>
             </div>
           </div>
@@ -164,63 +89,32 @@
             <h5 class="text-secondary mb-3">Payment Calculator</h5>
             <form id="paymentForm">
             <div class="mb-4">
-              <h5 class="text-secondary mb-3">Select Bird Quantities</h5>
-              
               <div class="form-group">
-                <label for="quail" class="form-label">Quail NOT AVAILABLE ($8.00 each)</label>
+                <label for="quail">Quail NOT AVAILABLE ($8.00 each)</label>
                 <input type="number" class="form-control" id="quail" min="0" value="0">
               </div>
-
               <div class="form-group">
-                <label for="chukar" class="form-label">Chukar ($11.00 each)</label>
+                <label for="chukar">Chukar ($11.00 each)</label>
                 <input type="number" class="form-control" id="chukar" min="0" value="0">
               </div>
-              
               <div class="form-group">
-                  <label for="pheasant" class="form-label">Pheasant ($16.00 each)</label>
-                  <input type="number" class="form-control" id="pheasant" min="0" value="0">
-                </div>
-                
-                <div class="form-group">
-                  <label for="duck" class="form-label">Duck ($16.50 each)</label>
-                  <input type="number" class="form-control" id="duck" min="0" value="0">
-                </div>
+                <label for="pheasant">Pheasant ($16.00 each)</label>
+                <input type="number" class="form-control" id="pheasant" min="0" value="0">
+              </div>
+              <div class="form-group">
+                <label for="duck">Duck ($16.50 each)</label>
+                <input type="number" class="form-control" id="duck" min="0" value="0">
+              </div>
             </div>
-
-            <hr>
 
             <div class="total-section">
               <h5 class="text-secondary mb-3">Order Summary</h5>
-              
-              <div class="price-item">
-                <span>Quail NOT AVAILABLE ($8.00):</span>
-                <span id="quailTotal">$0.00</span>
-              </div>
-              
-              <div class="price-item">
-                <span>Chukar ($11.00):</span>
-                <span id="chukarTotal">$0.00</span>
-              </div>
-              
-              <div class="price-item">
-                <span>Pheasant ($16.00):</span>
-                <span id="pheasantTotal">$0.00</span>
-              </div>
-              
-              <div class="price-item">
-                <span>Duck ($16.50):</span>
-                <span id="duckTotal">$0.00</span>
-              </div>
-              
-              <div class="price-item">
-                <span>Training Day Fee:</span>
-                <span>$10.00</span>
-              </div>
-              
-              <div class="price-item">
-                <span>Total:</span>
-                <span id="total">$10.00</span>
-              </div>
+              <div class="price-item"><span>Quail Total:</span> <span id="quailTotal">$0.00</span></div>
+              <div class="price-item"><span>Chukar Total:</span> <span id="chukarTotal">$0.00</span></div>
+              <div class="price-item"><span>Pheasant Total:</span> <span id="pheasantTotal">$0.00</span></div>
+              <div class="price-item"><span>Duck Total:</span> <span id="duckTotal">$0.00</span></div>
+              <div class="price-item"><span>Training Day Fee:</span> <span>$10.00</span></div>
+              <div class="price-item"><span>Total:</span> <span id="total">$10.00</span></div>
             </div>
 
             <div class="text-center">
@@ -228,11 +122,11 @@
                 <i class="fab fa-paypal"></i> Pay with PayPal
               </button>
               <button type="button" class="btn btn-secondary btn-lg ml-2" onclick="hidePaymentForm()">
-                Back to Options
+                Back
               </button>
             </div>
-          </form>
-        </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -241,57 +135,25 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
   <footer class="bg-dark text-light py-4 mt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h5>Missouri Uplands NAVHDA</h5>
-          <p class="mb-2">A passionate group of versatile dog enthusiasts with decades of experience.</p>
-          <p class="small text-muted">Last updated: January 2025</p>
-        </div>
-        <div class="col-md-6 text-md-right">
-          <h6>Connect With Us</h6>
-          <div class="social-links">
-            <a href="https://www.facebook.com/pg/NavhdaMoUplands/events/" target="_blank" class="text-light mr-3" rel="noopener noreferrer" title="Facebook Events">
-              <i class="fab fa-facebook-f fa-lg"></i>
-            </a>
-            <a href="https://www.navhda.org/" target="_blank" class="text-light mr-3" rel="noopener noreferrer" title="NAVHDA National">
-              <i class="fas fa-globe fa-lg"></i>
-            </a>
-          </div>
-          <div class="mt-2">
-            <a href="index.html" class="text-light mr-3">Home</a>
-            <a href="bird-vendors.html" class="text-light mr-3">Bird Vendors</a>
-            <a href="bird-orders.html" class="text-light">Bird Orders</a>
-          </div>
-        </div>
-      </div>
+    <div class="container text-center">
+      <p>Missouri Uplands NAVHDA &copy; 2026</p>
     </div>
   </footer>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
   <script>
-    // UPDATED PRICES to match HTML Labels
-    const prices = { 
-      quail: 8.00, 
-      chukar: 11.00, 
-      pheasant: 16.00, 
-      duck: 16.50, 
-      training: 10.00
-    };
+    const prices = { quail: 8, chukar: 11, pheasant: 16, duck: 16.5, training: 10 };
+
+    // Test Mode logic
+    const urlParams = new URLSearchParams(window.location.search);
+    const isTestMode = urlParams.get('test') === 'true';
+    if (isTestMode) document.getElementById('testModeIndicator').style.display = 'block';
 
     const inputs = document.querySelectorAll("input");
     inputs.forEach(input => {
       input.addEventListener("input", updateTotal);
-      input.addEventListener("change", updateTotal);
     });
 
     function updateTotal() {
@@ -300,7 +162,6 @@
       const p = +document.getElementById("pheasant").value || 0;
       const d = +document.getElementById("duck").value || 0;
 
-      // Update individual totals
       document.getElementById("quailTotal").textContent = `$${(q * prices.quail).toFixed(2)}`;
       document.getElementById("chukarTotal").textContent = `$${(c * prices.chukar).toFixed(2)}`;
       document.getElementById("pheasantTotal").textContent = `$${(p * prices.pheasant).toFixed(2)}`;
@@ -317,8 +178,7 @@
       const d = +document.getElementById("duck").value || 0;
 
       const total = (q * prices.quail) + (c * prices.chukar) + (p * prices.pheasant) + (d * prices.duck) + prices.training;
-      const amount = total.toFixed(2);
-
+      
       let itemName = "Bird Order";
       const items = [];
       if (q > 0) items.push(`${q} Quail`);
@@ -327,27 +187,27 @@
       if (d > 0) items.push(`${d} Duck`);
       if (items.length) itemName += " - " + items.join(", ");
 
-      const paypalURL = new URL("https://www.paypal.com/cgi-bin/webscr");
+      const paypalBase = isTestMode ? "https://www.sandbox.paypal.com/cgi-bin/webscr" : "https://www.paypal.com/cgi-bin/webscr";
+      const businessEmail = isTestMode ? "sb-6pla43588420@business.example.com" : "paypal@mouplands.org";
+
+      const paypalURL = new URL(paypalBase);
       paypalURL.searchParams.set("cmd", "_xclick");
-      paypalURL.searchParams.set("business", "paypal@mouplands.org");
+      paypalURL.searchParams.set("business", businessEmail);
       paypalURL.searchParams.set("item_name", itemName);
-      paypalURL.searchParams.set("amount", amount);
+      paypalURL.searchParams.set("amount", total.toFixed(2));
       paypalURL.searchParams.set("currency_code", "USD");
       paypalURL.searchParams.set("no_shipping", "1");
       
-      // SUCCESS AND CANCEL REDIRECTS
-      // Note: Make sure payment-success.html exists in your GitHub repo!
+      // REDIRECTS
       paypalURL.searchParams.set("return", "https://mouplands.org/payment-success.html");
       paypalURL.searchParams.set("cancel_return", "https://mouplands.org/bird-orders.html");
-      paypalURL.searchParams.set("rm", "1"); // Use '1' for a simple GET redirect back to your site
+      paypalURL.searchParams.set("rm", "1"); 
 
       window.location.href = paypalURL.toString();
     }
 
-    // Initialize totals
     updateTotal();
     
-    // Show/hide payment form
     function showPaymentForm() {
       document.getElementById('paymentFormSection').style.display = 'block';
       document.querySelector('.mb-4').style.display = 'none';
@@ -357,13 +217,8 @@
       document.getElementById('paymentFormSection').style.display = 'none';
       document.querySelector('.mb-4').style.display = 'block';
     }
-    
-    // Check for URL parameter to auto-show payment form after DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      if (window.location.search.includes('payment=true')) {
-        showPaymentForm();
-      }
-    });
+
+    if (window.location.search.includes('payment=true')) showPaymentForm();
   </script>
 </body>
 </html>
