@@ -334,7 +334,12 @@
       paypalURL.searchParams.set("amount", amount);
       paypalURL.searchParams.set("currency_code", "USD");
       paypalURL.searchParams.set("no_shipping", "1");
-      paypalURL.searchParams.set("rm", "2");
+      
+      // SUCCESS AND CANCEL REDIRECTS
+      // Note: Make sure payment-success.html exists in your GitHub repo!
+      paypalURL.searchParams.set("return", "https://mouplands.org/payment-success.html");
+      paypalURL.searchParams.set("cancel_return", "https://mouplands.org/bird-orders.html");
+      paypalURL.searchParams.set("rm", "1"); // Use '1' for a simple GET redirect back to your site
 
       window.location.href = paypalURL.toString();
     }
