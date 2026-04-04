@@ -31,7 +31,6 @@
 
 <div id="navbar-placeholder"></div>
 <script>
-  // Timestamp prevents navbar caching
   fetch('navbar.html?t=' + new Date().getTime())
     .then(r => r.text())
     .then(html => {
@@ -296,20 +295,19 @@
       let total = 0;
       const lines = [];
       const services = [];
-      const dogLines = [];
 
       if (byId('rvCamping')?.checked) {
         const n = getQty('rvNights');
         total += PRICES.rvCamping * n;
-        lines.push(`RV Camping: ${n} night(s) = $${(PRICES.rvCamping * n).toFixed(2)}`);
-        services.push(`RV Camping (${n} nights)`);
+        lines.push(`RV Camping: ${n} nights`);
+        services.push(`RV Camping (${n}n)`);
       }
 
       if (byId('tentCamping')?.checked) {
         const n = getQty('tentNights');
         total += PRICES.tentCamping * n;
-        lines.push(`Tent Camping: ${n} night(s) = $${(PRICES.tentCamping * n).toFixed(2)}`);
-        services.push(`Tent Camping (${n} nights)`);
+        lines.push(`Tent Camping: ${n} nights`);
+        services.push(`Tent (${n}n)`);
       }
 
       for (const t of TESTS) {
@@ -317,10 +315,8 @@
         if (!cb || !cb.checked) continue;
         const q = getQty(t.qty);
         total += t.price * q;
-        lines.push(`${t.label}: x${q} = $${(t.price * q).toFixed(2)}`);
-        services.push(`${t.label} x${q}`);
-        const dogs = cleanDogs(byId(t.dogs)?.value || "");
-        if (dogs.length) dogLines.push(`${t.label} (${q}): ${dogs.join(", ")}`);
+        lines.push(`${t.label}: x${q}`);
+        services.push(`${t.label} (x${q})`);
       }
 
       setText('totalAmount', total.toFixed(2));
@@ -330,7 +326,7 @@
       if (ul) ul.innerHTML = lines.length ? lines.map(l => `<li>${l}</li>`).join('') : `<li>No items selected yet.</li>`;
       if (byId('paypalBtn')) byId('paypalBtn').disabled = total <= 0;
 
-      return { total, services, dogLines };
+      return { total, services };
     }
 
     function validateDogsRequired() {
@@ -349,19 +345,16 @@
     }
 
     function enforceExclusive(aId, bId) {
-      const a = TESTS.find(t => t.id === aId);
-      const b = TESTS.find(t => t.id === bId);
       [aId, bId].forEach(id => {
         byId(id)?.addEventListener('change', () => {
           if (byId(id).checked) {
             const otherId = id === aId ? bId : aId;
-            const other = id === aId ? b : a;
             if (byId(otherId)) byId(otherId).checked = false;
-            show(other.details, false);
-            clearTestFields(other);
+            const other = TESTS.find(t => t.id === otherId);
+            if (other) { show(other.details, false); clearTestFields(other); }
           }
-          show(id === aId ? a.details : b.details, byId(id).checked);
-          if (!byId(id).checked) clearTestFields(id === aId ? a : b);
+          const current = TESTS.find(t => t.id === id);
+          if (current) show(current.details, byId(id).checked);
           renderTotals();
         });
       });
@@ -387,16 +380,26 @@
         if (!validateDogsRequired()) return;
 
         const order = renderTotals();
-        let paypalURL = new URL(isTestMode ? "https://www.sandbox.paypal.com/cgi-bin/webscr" : "https://www.paypal.com/cgi-bin/webscr");
-        paypalURL.searchParams.set("business", isTestMode ? "sb-6pla43588420@business.example.com" : "paypal@mouplands.org");
+        const paypalBase = isTestMode ? "https://www.sandbox.paypal.com/cgi-bin/webscr" : "https://www.paypal.com/cgi-bin/webscr";
+        const businessEmail = isTestMode ? "sb-6pla43588420@business.example.com" : "paypal@mouplands.org";
+
+        let paypalURL = new URL(paypalBase);
         paypalURL.searchParams.set("cmd", "_xclick");
-        paypalURL.searchParams.set("item_name", "Payment - " + order.services.join(", "));
+        paypalURL.searchParams.set("business", businessEmail);
+        paypalURL.searchParams.set("item_name", "Payment: " + order.services.join(", "));
         paypalURL.searchParams.set("amount", order.total.toFixed(2));
         paypalURL.searchParams.set("currency_code", "USD");
+        paypalURL.searchParams.set("no_shipping", "1");
+        
+        // REDIRECT SETTINGS
+        paypalURL.searchParams.set("return", "https://mouplands.org/payment-success.html");
+        paypalURL.searchParams.set("cancel_return", "https://mouplands.org/payment.html");
+        paypalURL.searchParams.set("rm", "1");
+
         paypalURL.searchParams.set("on0", "Contact");
         paypalURL.searchParams.set("os0", `${byId('firstName').value} ${byId('lastName').value} (${byId('email').value})`);
         
-        window.open(paypalURL.toString(), "_blank");
+        window.location.href = paypalURL.toString();
       });
 
       byId('checkBtn')?.addEventListener('click', () => { byId('checkInstructions').style.display = 'block'; byId('checkInstructions').scrollIntoView({ behavior: 'smooth' }); });
