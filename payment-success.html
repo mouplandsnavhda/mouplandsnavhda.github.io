@@ -73,9 +73,7 @@
                         <p class="card-text lead mb-4">
                             Thank you for your payment to Missouri Uplands NAVHDA. Your transaction has been completed successfully.
                         </p>
-                        <p class="card-text mb-4">
-                            You will receive a confirmation email from PayPal shortly. Please keep this for your records.
-                        </p>
+                       
                         <div class="alert alert-info" role="alert">
                             <strong>What's Next?</strong><br>
                             • You'll receive a PayPal confirmation email<br>
@@ -112,18 +110,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    
-    <script>
-        // Check for test mode
-        const urlParams = new URLSearchParams(window.location.search);
-        const isTestMode = urlParams.get('test') === 'true';
-        
-        // Show test mode indicator if in test mode
-        if (isTestMode) {
-            document.getElementById('testModeIndicator').style.display = 'block';
-        }
-    </script>
+   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <script>
+    // Check for test mode in the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const isTestMode = urlParams.get('test') === 'true';
+
+    // Show test mode indicator if in test mode
+    if (isTestMode) {
+      const indicator = document.getElementById('testModeIndicator');
+      if (indicator) {
+        indicator.style.display = 'block';
+      }
+    }
+  </script>
 </body>
-</html> 
+</html>
 
