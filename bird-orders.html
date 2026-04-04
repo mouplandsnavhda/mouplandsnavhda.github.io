@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Calculate and pay for your bird order with Missouri Uplands NAVHDA. Secure PayPal payment for quail, chukar, duck, and training services.">
@@ -12,10 +16,9 @@
   
   <link rel="icon" href="./mouplands_cover_files/images/mouplands_logo_white.png" sizes="192x192">
   
-  <!-- Bootstrap CSS -->
-  <link href="./mouplands_cover_files/bootstrap.min.css" rel="stylesheet">
-  <link href="./mouplands_cover_files/theme.min.css" rel="stylesheet">
-  <link href="./mouplands_cover_files/custom.css" rel="stylesheet">
+  <link href="./mouplands_cover_files/bootstrap.min.css?v=1.1" rel="stylesheet">
+  <link href="./mouplands_cover_files/theme.min.css?v=1.1" rel="stylesheet">
+  <link href="./mouplands_cover_files/custom.css?v=1.1" rel="stylesheet">
   
   <style>
     body {
@@ -108,7 +111,6 @@
       }
     }
   </style>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-53FZKBWVS3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -121,7 +123,8 @@
  <div id="navbar-placeholder"></div>
 
 <script>
-  fetch('navbar.html')
+  // Added a timestamp to the fetch URL so the Navbar never caches
+  fetch('navbar.html?t=' + new Date().getTime())
     .then(r => r.text())
     .then(html => {
       document.getElementById('navbar-placeholder').innerHTML = html;
@@ -160,7 +163,6 @@
             <hr>
             <h5 class="text-secondary mb-3">Payment Calculator</h5>
             <form id="paymentForm">
-            <!-- Bird Quantities -->
             <div class="mb-4">
               <h5 class="text-secondary mb-3">Select Bird Quantities</h5>
               
@@ -174,7 +176,7 @@
                 <input type="number" class="form-control" id="chukar" min="0" value="0">
               </div>
               
-                              <div class="form-group">
+              <div class="form-group">
                   <label for="pheasant" class="form-label">Pheasant ($16.00 each)</label>
                   <input type="number" class="form-control" id="pheasant" min="0" value="0">
                 </div>
@@ -187,29 +189,26 @@
 
             <hr>
 
-
-
-            <!-- Total Section -->
             <div class="total-section">
               <h5 class="text-secondary mb-3">Order Summary</h5>
               
               <div class="price-item">
-                <span>Quail NOT AVAILABLE (0 × $8.00):</span>
+                <span>Quail NOT AVAILABLE ($8.00):</span>
                 <span id="quailTotal">$0.00</span>
               </div>
               
               <div class="price-item">
-                <span>Chukar (0 × $11.00):</span>
+                <span>Chukar ($11.00):</span>
                 <span id="chukarTotal">$0.00</span>
               </div>
               
               <div class="price-item">
-                <span>Pheasant (0 × $16.00):</span>
+                <span>Pheasant ($16.00):</span>
                 <span id="pheasantTotal">$0.00</span>
               </div>
               
               <div class="price-item">
-                <span>Duck (0 × $16.50):</span>
+                <span>Duck ($16.50):</span>
                 <span id="duckTotal">$0.00</span>
               </div>
               
@@ -239,10 +238,8 @@
     </div>
   </div>
 
-  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
-  <!-- Footer -->
   <footer class="bg-dark text-light py-4 mt-5">
     <div class="container">
       <div class="row">
@@ -282,12 +279,13 @@
     crossorigin="anonymous"></script>
 
   <script>
+    // UPDATED PRICES to match HTML Labels
     const prices = { 
-      quail: 7.5, 
-      chukar: 10, 
-      pheasant: 14, 
-      duck: 16.5, 
-      training: 10
+      quail: 8.00, 
+      chukar: 11.00, 
+      pheasant: 16.00, 
+      duck: 16.50, 
+      training: 10.00
     };
 
     const inputs = document.querySelectorAll("input");
@@ -364,5 +362,3 @@
   </script>
 </body>
 </html>
-
-
