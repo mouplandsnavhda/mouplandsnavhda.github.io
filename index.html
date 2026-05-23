@@ -67,7 +67,7 @@
 
     .btn-join {
       background-color: #f12639;
-      color: #fff;
+      color: #fff !important;
       border: none;
       padding: 14px 30px;
       font-size: 1.1rem;
@@ -75,12 +75,23 @@
       text-transform: uppercase;
       border-radius: 6px;
       display: inline-block;
+      min-width: 280px;
     }
 
     .btn-join:hover {
       background-color: #d91f31;
-      color: #fff;
       text-decoration: none;
+    }
+
+    .btn-member {
+      padding: 14px 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      border-radius: 6px;
+      display: inline-block;
+      min-width: 280px;
+      border-width: 2px;
     }
   </style>
 
@@ -139,14 +150,20 @@
     Save your money, grab a six-pack on the way home, and purchase your membership below!
   </p>
 
-  <h2>Become a Member</h2>
-  <p>$35/year • Includes chapter updates, training day emails, and member access.</p>
+  <div class="container mt-5">
+    <h2>Become a Member</h2>
+    <p class="mb-4">$35/year • Includes chapter updates, training day emails, and member access.</p>
 
-  <a href="https://members.mouplands.org/membership-levels/" class="btn-join">JOIN TODAY</a>
-
-  <p style="margin-top: 12px; font-size: 0.9rem;">
-    Already a member in the new portal? <a href="https://members.mouplands.org/login">Renew here</a>
-  </p>
+    <div class="row justify-content-center">
+      <div class="col-auto mb-3">
+        <a href="https://members.mouplands.org/membership-levels/" class="btn-join">Join Today</a>
+      </div>
+      <div class="col-auto mb-3">
+        <a href="https://members.mouplands.org/login" class="btn btn-outline-dark btn-member">Member Login / Renew</a>
+      </div>
+    </div>
+    <p class="mt-2 small text-muted italic">Securely managed via the MoUplands Member Portal</p>
+  </div>
 
   <section id="footprint">
     <div class="container">
@@ -381,7 +398,7 @@
         <div class="col-sm"><div class="card" style="border:none; padding-bottom:20px;"><img style="max-width: 18rem; margin: auto;" src="./mouplands_cover_files/images/sponsor_logos/dakota_283_blue.png" class="card-img-top" alt="Dakota Logo"></div></div>
       </div>
     </div>
-    <span class="badge badge-primary">v1.4.0</span>
+    <span class="badge badge-primary">v1.4.2</span>
   </section>
 
   <footer class="bg-dark text-light py-4 mt-5">
@@ -390,7 +407,7 @@
         <div class="col-md-6">
           <h5>Missouri Uplands NAVHDA</h5>
           <p class="mb-2">A passionate group of versatile dog enthusiasts with decades of experience.</p>
-          <p class="small text-muted">Last updated: January 2026</p>
+          <p class="small text-muted">Last updated: May 2026</p>
         </div>
         <div class="col-md-6 text-md-right">
           <h6>Connect With Us</h6>
@@ -401,6 +418,7 @@
           <div class="mt-2">
             <a href="bird-vendors.html" class="text-light mr-3">Bird Vendors</a>
             <a href="bird-orders.html" class="text-light mr-3">Bird Orders</a>
+            <a href="bylaws.html" class="text-light mr-3">Chapter Bylaws</a>
             <a href="pay.html" class="text-light">Payment</a>
           </div>
         </div>
@@ -411,7 +429,6 @@
   <button id="backToTop" title="Back to Top" style="display:none;position:fixed;bottom:40px;right:40px;z-index:9999;background:#f12639;color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.2);cursor:pointer;transition:opacity 0.3s;">&uarr;</button>
 
   <script>
-    // BACK TO TOP LOGIC
     const backToTopBtn = document.getElementById('backToTop');
     window.addEventListener('scroll', function() {
       if (window.scrollY > 200) {
@@ -426,7 +443,6 @@
       window.scrollTo({top: 0, behavior: 'smooth'});
     });
 
-    // COUNTDOWN TIMER LOGIC
     const testDate = new Date("October 2, 2026 07:30:00").getTime();
     const endDate = new Date("October 4, 2026 17:00:00").getTime();
 
