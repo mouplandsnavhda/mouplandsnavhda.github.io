@@ -100,8 +100,8 @@
                 <input type="number" class="form-control" id="chukar" min="0" value="0">
               </div>
               <div class="form-group">
-                <label for="pheasant">Pheasant ($17.00 each)</label>
-                <input type="number" class="form-control" id="pheasant" min="0" value="0">
+                <label for="pheasant" class="text-muted text-muted-strike">Pheasant (Currently Unavailable)</label>
+                <input type="number" class="form-control" id="pheasant" min="0" value="0" disabled>
               </div>
               <div class="form-group">
                 <label for="duck">Duck ($16.50 each)</label>
@@ -113,7 +113,7 @@
               <h5 class="text-secondary mb-3">Order Summary</h5>
               <div class="price-item text-muted"><span>Quail Total:</span> <span id="quailTotal">$0.00</span></div>
               <div class="price-item"><span>Chukar Total:</span> <span id="chukarTotal">$0.00</span></div>
-              <div class="price-item"><span>Pheasant Total:</span> <span id="pheasantTotal">$0.00</span></div>
+              <div class="price-item text-muted"><span>Pheasant Total:</span> <span id="pheasantTotal">$0.00</span></div>
               <div class="price-item"><span>Duck Total:</span> <span id="duckTotal">$0.00</span></div>
               <div class="price-item"><span>Training Day Fee:</span> <span>$10.00</span></div>
               <div class="price-item"><span>Total:</span> <span id="total">$10.00</span></div>
@@ -146,8 +146,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
   <script>
-    // Updated price object to match new parameters (Quail set to 0 since unavailable)
-    const prices = { quail: 0, chukar: 7.00, pheasant: 17.00, duck: 16.50, training: 10.00 };
+    // Quail and Pheasant set to 0 since they are unavailable
+    const prices = { quail: 0, chukar: 7.00, pheasant: 0, duck: 16.50, training: 10.00 };
 
     // Test Mode logic
     const urlParams = new URLSearchParams(window.location.search);
@@ -225,5 +225,3 @@
   </script>
 </body>
 </html>
-
-```
