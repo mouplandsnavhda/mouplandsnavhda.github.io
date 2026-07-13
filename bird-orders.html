@@ -87,15 +87,15 @@
             <form id="paymentForm">
             <div class="mb-4">
               <div class="form-group">
-                <label for="quail">Quail ($8.50 each)</label>
+                <label for="quail">Quail ($6.50 each)</label>
                 <input type="number" class="form-control" id="quail" min="0" value="0">
               </div>
               <div class="form-group">
-                <label for="chukar">Chukar ($11.00 each)</label>
+                <label for="chukar">Chukar ($9.00 each)</label>
                 <input type="number" class="form-control" id="chukar" min="0" value="0">
               </div>
               <div class="form-group">
-                <label for="pheasant">Pheasant ($17.00 each)</label>
+                <label for="pheasant">Pheasant ($16.50 each)</label>
                 <input type="number" class="form-control" id="pheasant" min="0" value="0">
               </div>
               <div class="form-group">
@@ -139,7 +139,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
   <script>
-    const prices = { quail: 8.50, chukar: 11.00, pheasant: 17.00, duck: 16.50, training: 10.00 };
+    const prices = { quail: 6.50, chukar: 9.00, pheasant: 16.50, duck: 16.50, training: 10.00 };
 
     const urlParams = new URLSearchParams(window.location.search);
     const isTestMode = urlParams.get('test') === 'true';
