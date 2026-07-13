@@ -27,14 +27,11 @@
     .card-header { background-color: #1f2749; color: white; border-bottom: none; padding: 1rem 1.25rem; }
     .form-control { border-radius: 0; border: 1px solid #cdced3; }
     .form-control:focus { border-color: #f99ea6; box-shadow: 0 0 0 0.2rem rgba(241, 38, 57, 0.25); }
-    .form-control:disabled { background-color: #e9ecef; cursor: not-allowed; }
     .btn-primary { background-color: #f12639; border-color: #f12639; border-radius: 0; padding: 0.625rem 1.5rem; font-size: 1.125rem; font-weight: 500; }
     .btn-primary:hover { background-color: #d60e21; border-color: #d60e21; }
     .total-section { background-color: #f8f9fa; border: 1px solid #dee2e6; padding: 1rem; margin: 1rem 0; }
     .price-item { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
     .price-item:last-child { border-top: 1px solid #dee2e6; padding-top: 0.5rem; margin-top: 0.5rem; font-weight: bold; font-size: 1.1rem; }
-    .form-check-input:checked { background-color: #f12639; border-color: #f12639; }
-    .text-muted-strike { text-decoration: line-through; color: #6c757d; }
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-53FZKBWVS3"></script>
   <script>
@@ -63,9 +60,7 @@
         <div class="card-body">
           
           <div id="testModeIndicator" class="alert alert-warning" style="display:none; text-align:left;">
-            <strong>TEST MODE ACTIVE</strong> — Redirecting to PayPal Sandbox for testing.
-            <br />
-            <small>Buyer login: sb-giw2o587526@personal.example.com</small>
+            <strong>TEST MODE ACTIVE</strong>
           </div>
 
           <div class="mb-4">
@@ -75,12 +70,12 @@
             <div class="row justify-content-center mb-4">
               <div class="col-md-5 d-flex flex-column align-items-end mb-2 mb-md-0" style="max-width: 280px;">
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3BSCwSGJXQl152vS81BWxQzAjfArPJQUXgtg-CQEG0sRu_A/viewform?usp=header" target="_blank" class="btn btn-danger btn-lg w-100 font-weight-bold">
-                  <i class="fab fa-google mr-2"></i>ORDER FORM
+                  ORDER FORM
                 </a>
               </div>
               <div class="col-md-5 d-flex flex-column align-items-start" style="max-width: 280px;">
                 <button type="button" class="btn btn-success btn-lg w-100 font-weight-bold" onclick="showPaymentForm()">
-                  <i class="fab fa-paypal mr-2"></i>PAYMENT
+                  PAYMENT
                 </button>
               </div>
             </div>
@@ -92,16 +87,16 @@
             <form id="paymentForm">
             <div class="mb-4">
               <div class="form-group">
-                <label for="quail" class="text-muted text-muted-strike">Quail ($6.50 each)</label>
-                <input type="number" class="form-control" id="quail" min="0" value="0" disabled>
+                <label for="quail">Quail ($8.50 each)</label>
+                <input type="number" class="form-control" id="quail" min="0" value="0">
               </div>
               <div class="form-group">
-                <label for="chukar">Chukar ($7.00 each)</label>
+                <label for="chukar">Chukar ($11.00 each)</label>
                 <input type="number" class="form-control" id="chukar" min="0" value="0">
               </div>
               <div class="form-group">
-                <label for="pheasant" class="text-muted text-muted-strike">Pheasant ($16.50 each)</label>
-                <input type="number" class="form-control" id="pheasant" min="0" value="0" disabled>
+                <label for="pheasant">Pheasant ($17.00 each)</label>
+                <input type="number" class="form-control" id="pheasant" min="0" value="0">
               </div>
               <div class="form-group">
                 <label for="duck">Duck ($16.50 each)</label>
@@ -111,9 +106,9 @@
 
             <div class="total-section">
               <h5 class="text-secondary mb-3">Order Summary</h5>
-              <div class="price-item text-muted"><span>Quail Total:</span> <span id="quailTotal">$0.00</span></div>
+              <div class="price-item"><span>Quail Total:</span> <span id="quailTotal">$0.00</span></div>
               <div class="price-item"><span>Chukar Total:</span> <span id="chukarTotal">$0.00</span></div>
-              <div class="price-item text-muted"><span>Pheasant Total:</span> <span id="pheasantTotal">$0.00</span></div>
+              <div class="price-item"><span>Pheasant Total:</span> <span id="pheasantTotal">$0.00</span></div>
               <div class="price-item"><span>Duck Total:</span> <span id="duckTotal">$0.00</span></div>
               <div class="price-item"><span>Training Day Fee:</span> <span>$10.00</span></div>
               <div class="price-item"><span>Total:</span> <span id="total">$10.00</span></div>
@@ -121,7 +116,7 @@
 
             <div class="text-center">
               <button type="button" class="btn btn-success btn-lg" onclick="submitPayment()">
-                <i class="fab fa-paypal"></i> Pay with PayPal
+                Pay with PayPal
               </button>
               <button type="button" class="btn btn-secondary btn-lg ml-2" onclick="hidePaymentForm()">
                 Back
@@ -134,8 +129,6 @@
     </div>
   </div>
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
-
   <footer class="bg-dark text-light py-4 mt-5">
     <div class="container text-center">
       <p>Missouri Uplands NAVHDA &copy; 2026</p>
@@ -146,16 +139,13 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
   <script>
-    // Quail and Pheasant set to 0 since they are unavailable
-    const prices = { quail: 0, chukar: 7.00, pheasant: 0, duck: 16.50, training: 10.00 };
+    const prices = { quail: 8.50, chukar: 11.00, pheasant: 17.00, duck: 16.50, training: 10.00 };
 
-    // Test Mode logic
     const urlParams = new URLSearchParams(window.location.search);
     const isTestMode = urlParams.get('test') === 'true';
     if (isTestMode) document.getElementById('testModeIndicator').style.display = 'block';
 
-    const inputs = document.querySelectorAll("input");
-    inputs.forEach(input => {
+    document.querySelectorAll("input").forEach(input => {
       input.addEventListener("input", updateTotal);
     });
 
@@ -200,8 +190,6 @@
       paypalURL.searchParams.set("amount", total.toFixed(2));
       paypalURL.searchParams.set("currency_code", "USD");
       paypalURL.searchParams.set("no_shipping", "1");
-      
-      // REDIRECTS
       paypalURL.searchParams.set("return", "https://mouplands.org/payment-success.html");
       paypalURL.searchParams.set("cancel_return", "https://mouplands.org/bird-orders.html");
       paypalURL.searchParams.set("rm", "1"); 
