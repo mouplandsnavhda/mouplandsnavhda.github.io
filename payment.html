@@ -7,7 +7,7 @@
   <meta http-equiv="Expires" content="0">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="Missouri Uplands NAVHDA - Payment and Registration Form. Pay camping, training days, and events." />
+  <meta name="description" content="Missouri Uplands NAVHDA - Payment and Registration Form. Pay camping, training days, tests, and meals." />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:;" />
   <title>Payment & Registration - MoUplands NAVHDA</title>
 
@@ -51,10 +51,13 @@
           <small>Buyer login: sb-giw2o587526@personal.example.com</small>
         </div>
 
-        <p class="lead">Select the services you need and provide your contact information below.</p>
+        <p class="lead">Select the services and meals you need and provide your contact information below.</p>
 
         <div class="payment-form">
           <form id="paymentForm">
+
+            <!-- CAMPING OPTIONS -->
+            <h4 class="mb-3 text-left">Camping</h4>
 
             <div class="service-item">
               <div class="form-check">
@@ -81,6 +84,133 @@
                 <input type="number" class="form-control quantity-input ml-2" id="tentNights" min="1" max="14" value="1" />
               </div>
             </div>
+
+            <!-- MEAL OPTIONS (GENERALIZED) -->
+            <h4 class="mt-4 mb-3 text-left">Test Meals <small class="text-muted font-weight-normal" style="font-size: 0.85rem;">(Children under 12 eat free)</small></h4>
+
+            <!-- Thursday -->
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="thursDinner" />
+                <label class="form-check-label" for="thursDinner">
+                  <strong>Thursday Dinner</strong> — $16/person
+                </label>
+              </div>
+              <div class="ml-4 mt-2 hidden" id="thursDinnerDetails">
+                <label for="thursDinnerQty">Number of meals:</label>
+                <input type="number" class="form-control quantity-input ml-2" id="thursDinnerQty" min="1" max="20" value="1" />
+              </div>
+            </div>
+
+            <!-- Friday -->
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="friBreakfast" />
+                <label class="form-check-label" for="friBreakfast">
+                  <strong>Friday Breakfast</strong> — $6/person
+                </label>
+              </div>
+              <div class="ml-4 mt-2 hidden" id="friBreakfastDetails">
+                <label for="friBreakfastQty">Number of meals:</label>
+                <input type="number" class="form-control quantity-input ml-2" id="friBreakfastQty" min="1" max="20" value="1" />
+              </div>
+            </div>
+
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="friLunch" />
+                <label class="form-check-label" for="friLunch">
+                  <strong>Friday Lunch</strong> — $10/person
+                </label>
+              </div>
+              <div class="ml-4 mt-2 hidden" id="friLunchDetails">
+                <label for="friLunchQty">Number of meals:</label>
+                <input type="number" class="form-control quantity-input ml-2" id="friLunchQty" min="1" max="20" value="1" />
+              </div>
+            </div>
+
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="friDinner" />
+                <label class="form-check-label" for="friDinner">
+                  <strong>Friday Dinner</strong> — $17/person
+                </label>
+              </div>
+              <div class="ml-4 mt-2 hidden" id="friDinnerDetails">
+                <label for="friDinnerQty">Number of meals:</label>
+                <input type="number" class="form-control quantity-input ml-2" id="friDinnerQty" min="1" max="20" value="1" />
+              </div>
+            </div>
+
+            <!-- Saturday -->
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="satBreakfast" />
+                <label class="form-check-label" for="satBreakfast">
+                  <strong>Saturday Breakfast</strong> — $6/person
+                </label>
+              </div>
+              <div class="ml-4 mt-2 hidden" id="satBreakfastDetails">
+                <label for="satBreakfastQty">Number of meals:</label>
+                <input type="number" class="form-control quantity-input ml-2" id="satBreakfastQty" min="1" max="20" value="1" />
+              </div>
+            </div>
+
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="satLunch" />
+                <label class="form-check-label" for="satLunch">
+                  <strong>Saturday Lunch</strong> — $10/person
+                </label>
+              </div>
+              <div class="ml-4 mt-2 hidden" id="satLunchDetails">
+                <label for="satLunchQty">Number of meals:</label>
+                <input type="number" class="form-control quantity-input ml-2" id="satLunchQty" min="1" max="20" value="1" />
+              </div>
+            </div>
+
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="satDinner" />
+                <label class="form-check-label" for="satDinner">
+                  <strong>Saturday Dinner</strong> — $22/person
+                </label>
+              </div>
+              <div class="ml-4 mt-2 hidden" id="satDinnerDetails">
+                <label for="satDinnerQty">Number of meals:</label>
+                <input type="number" class="form-control quantity-input ml-2" id="satDinnerQty" min="1" max="20" value="1" />
+              </div>
+            </div>
+
+            <!-- Sunday -->
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="sunBreakfast" />
+                <label class="form-check-label" for="sunBreakfast">
+                  <strong>Sunday Breakfast</strong> — $7/person
+                </label>
+              </div>
+              <div class="ml-4 mt-2 hidden" id="sunBreakfastDetails">
+                <label for="sunBreakfastQty">Number of meals:</label>
+                <input type="number" class="form-control quantity-input ml-2" id="sunBreakfastQty" min="1" max="20" value="1" />
+              </div>
+            </div>
+
+            <div class="service-item">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="sunLunch" />
+                <label class="form-check-label" for="sunLunch">
+                  <strong>Sunday Lunch</strong> — $10/person
+                </label>
+              </div>
+              <div class="ml-4 mt-2 hidden" id="sunLunchDetails">
+                <label for="sunLunchQty">Number of meals:</label>
+                <input type="number" class="form-control quantity-input ml-2" id="sunLunchQty" min="1" max="20" value="1" />
+              </div>
+            </div>
+
+            <!-- TEST OPTIONS -->
+            <h4 class="mt-4 mb-3 text-left">NAVHDA Tests</h4>
 
             <div class="service-item">
               <div class="form-check">
@@ -198,7 +328,7 @@
               </div>
               <div class="form-group">
                 <label for="notes">Additional Notes</label>
-                <textarea class="form-control" id="notes" rows="3" placeholder="Any special requests..."></textarea>
+                <textarea class="form-control" id="notes" rows="3" placeholder="Any special requests or dietary restrictions..."></textarea>
               </div>
             </div>
 
@@ -245,6 +375,15 @@
     const PRICES = {
       rvCamping: 25,
       tentCamping: 10,
+      thursDinner: 16,
+      friBreakfast: 6,
+      friLunch: 10,
+      friDinner: 17,
+      satBreakfast: 6,
+      satLunch: 10,
+      satDinner: 22,
+      sunBreakfast: 7,
+      sunLunch: 10,
       naTest: 155,
       naTestNonMember: 180,
       utGdtTest: 190,
@@ -296,6 +435,7 @@
       const lines = [];
       const services = [];
 
+      // Camping
       if (byId('rvCamping')?.checked) {
         const n = getQty('rvNights');
         total += PRICES.rvCamping * n;
@@ -310,6 +450,29 @@
         services.push(`Tent (${n}n)`);
       }
 
+      // Meals mapping helper
+      const mealMap = [
+        { cb: 'thursDinner', qty: 'thursDinnerQty', price: PRICES.thursDinner, label: 'Thursday Dinner' },
+        { cb: 'friBreakfast', qty: 'friBreakfastQty', price: PRICES.friBreakfast, label: 'Friday Breakfast' },
+        { cb: 'friLunch', qty: 'friLunchQty', price: PRICES.friLunch, label: 'Friday Lunch' },
+        { cb: 'friDinner', qty: 'friDinnerQty', price: PRICES.friDinner, label: 'Friday Dinner' },
+        { cb: 'satBreakfast', qty: 'satBreakfastQty', price: PRICES.satBreakfast, label: 'Saturday Breakfast' },
+        { cb: 'satLunch', qty: 'satLunchQty', price: PRICES.satLunch, label: 'Saturday Lunch' },
+        { cb: 'satDinner', qty: 'satDinnerQty', price: PRICES.satDinner, label: 'Saturday Dinner' },
+        { cb: 'sunBreakfast', qty: 'sunBreakfastQty', price: PRICES.sunBreakfast, label: 'Sunday Breakfast' },
+        { cb: 'sunLunch', qty: 'sunLunchQty', price: PRICES.sunLunch, label: 'Sunday Lunch' }
+      ];
+
+      for (const meal of mealMap) {
+        if (byId(meal.cb)?.checked) {
+          const n = getQty(meal.qty);
+          total += meal.price * n;
+          lines.push(`${meal.label}: x${n}`);
+          services.push(`${meal.label} (x${n})`);
+        }
+      }
+
+      // Tests
       for (const t of TESTS) {
         const cb = byId(t.id);
         if (!cb || !cb.checked) continue;
@@ -365,13 +528,21 @@
       const isTestMode = urlParams.get('test') === 'true';
       if (isTestMode) byId('testModeIndicator').style.display = 'block';
 
+      // Camping listeners
       byId('rvCamping')?.addEventListener('change', () => { show('rvCampingDetails', byId('rvCamping').checked); renderTotals(); });
       byId('tentCamping')?.addEventListener('change', () => { show('tentCampingDetails', byId('tentCamping').checked); renderTotals(); });
+
+      // Meal listeners
+      const mealIds = ['thursDinner', 'friBreakfast', 'friLunch', 'friDinner', 'satBreakfast', 'satLunch', 'satDinner', 'sunBreakfast', 'sunLunch'];
+      mealIds.forEach(id => {
+        byId(id)?.addEventListener('change', () => { show(id + 'Details', byId(id).checked); renderTotals(); });
+      });
 
       enforceExclusive('naTest', 'naTestNonMember');
       enforceExclusive('utGdtTest', 'utGdtTestNonMember');
 
-      ['rvNights','tentNights','naTestQty','naTestNonMemberQty','utGdtTestQty','utGdtTestNonMemberQty','naTestDogs','naTestNonMemberDogs','utGdtTestDogs','utGdtTestNonMemberDogs'].forEach(id => {
+      const inputIds = ['rvNights','tentNights','thursDinnerQty','friBreakfastQty','friLunchQty','friDinnerQty','satBreakfastQty','satLunchQty','satDinnerQty','sunBreakfastQty','sunLunchQty','naTestQty','naTestNonMemberQty','utGdtTestQty','utGdtTestNonMemberQty','naTestDogs','naTestNonMemberDogs','utGdtTestDogs','utGdtTestNonMemberDogs'];
+      inputIds.forEach(id => {
         byId(id)?.addEventListener('input', renderTotals);
       });
 
