@@ -2,20 +2,27 @@
 <html lang="en">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Missouri Uplands NAVHDA - A passionate group of versatile dog enthusiasts with decades of experience. Join our family for training at Mallard Valley Outfitters and testing across the Midwest.">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:;">
+  <!-- Removed 'unsafe-eval' from CSP for better security and script performance -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline'; img-src 'self' https: data:;">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
   <title>MoUplands · NAVHDA</title>
 
+  <!-- Preconnect to critical domains to speed up third-party loading -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://use.fontawesome.com">
+
   <link rel="icon" href="./mouplands_cover_files/images/mouplands_logo_white.png" sizes="192x192">
 
+  <!-- Core CSS -->
   <link href="./mouplands_cover_files/bootstrap.min.css" rel="stylesheet">
   <link href="./mouplands_cover_files/theme.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+  <!-- Load FontAwesome asynchronously to prevent render-blocking -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" media="print" onload="this.media='all'">
   <link href="./mouplands_cover_files/custom.css" rel="stylesheet">
 
   <style>
@@ -39,6 +46,12 @@
       padding: 0 !important;
     }
 
+    /* Consolidated smooth scrolling and padding to prevent JS conflict jitters */
+    html {
+      scroll-padding-top: 70px !important;
+      scroll-behavior: smooth;
+    }
+
     .navbar {
       margin-bottom: 0 !important;
       border-bottom: none !important;
@@ -54,11 +67,6 @@
 
     section.py-0.overflow-hidden.text-center:first-of-type {
       margin-top: 60px !important;
-    }
-
-    html {
-      scroll-padding-top: 70px !important;
-      scroll-behavior: smooth;
     }
 
     #join, #grounds {
@@ -120,12 +128,16 @@
       flex-direction: column;
       justify-content: space-between;
     }
+
+    /* CSS-based Parallax to replace CPU-heavy JS calculations */
+    .css-parallax {
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   </style>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-53FZKBWVS3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -136,27 +148,23 @@
 </head>
 
 <body class="text-center">
-  <div id="navbar-placeholder"></div>
-
-  <script>
-    fetch('navbar.html')
-      .then(r => r.text())
-      .then(html => {
-        document.getElementById('navbar-placeholder').innerHTML = html;
-      })
-      .catch(err => console.error('Navbar failed to load:', err));
-  </script>
+  <!-- Paste your raw navbar.html code here directly to stop the navbar from flashing/jumping on load -->
+  <div id="navbar-placeholder">
+    <!-- <nav>...</nav> -->
+  </div>
 
   <section class="py-0 overflow-hidden text-center">
-    <div class="bg-container parallax" data-rellax-percentage="0.5" style="background-image: url('./mouplands_cover_files/images/birds_on_tractor_tire.JPG'); transform: translate3d(0px, 0px, 0px); background-color: transparent !important;">
+    <!-- Replaced JS parallax with smoother CSS background-attachment: fixed -->
+    <div class="bg-container css-parallax" style="background-image: url('./mouplands_cover_files/images/birds_on_tractor_tire.JPG'); background-color: transparent !important; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
     </div>
     <div class="container">
       <div class="row h-100vh justify-content-center align-items-center">
         <div class="col-lg-8">
-          <img src="./mouplands_cover_files/images/mouplands_logo_white.png" class="img-fluid" style="max-width:80%" alt="Missouri Uplands NAVHDA Logo">
+          <!-- Eager load critical above-the-fold image -->
+          <img src="./mouplands_cover_files/images/mouplands_logo_white.png" class="img-fluid" style="max-width:80%" alt="Missouri Uplands NAVHDA Logo" fetchpriority="high">
         </div>
         <div class="move d-none d-lg-block">
-          <a href="#section-2" class="text-white" data-smooth-scroll="" data-smooth-scroll-hash="false">
+          <a href="#join" class="text-white">
             <i class="zmdi zmdi-long-arrow-down zmdi-hc-2x"></i>
           </a>
         </div>
@@ -235,7 +243,8 @@
         </div>
         <div class="col-lg-6">
           <div class="rounded shadow-lg overflow-hidden border">
-             <img src="./mouplands_cover_files/images/Mallard Valley.jpg" alt="Mallard Valley Outfitters" class="img-fluid" style="width: 100%; height: auto;">
+             <!-- Added loading="lazy" -->
+             <img src="./mouplands_cover_files/images/Mallard Valley.jpg" alt="Mallard Valley Outfitters" class="img-fluid" loading="lazy" decoding="async" style="width: 100%; height: auto;">
           </div>
         </div>
       </div>
@@ -252,13 +261,14 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <iframe width="800" height="450" src="https://datastudio.google.com/embed/reporting/a612986d-0135-46fe-b06e-36f840837fbb/page/3FOxC" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <!-- Added loading="lazy" to Looker Studio iframe -->
+        <iframe loading="lazy" width="800" height="450" src="https://datastudio.google.com/embed/reporting/a612986d-0135-46fe-b06e-36f840837fbb/page/3FOxC" frameborder="0" style="border:0" allowfullscreen></iframe>
       </div>
     </div>
   </section>
 
   <section id="tests" class="py-0 overflow-hidden text-center">
-    <div class="bg-container overlay overlay-20 parallax" data-rellax-percentage="0.5" style="background-image: url('./mouplands_cover_files/images/checking_the_undercarriage.jpg'); transform: translate3d(0px, 0px, 0px);">
+    <div class="bg-container overlay overlay-20 css-parallax" style="background-image: url('./mouplands_cover_files/images/checking_the_undercarriage.jpg'); position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
     </div>
     <div class="container">
       <div class="row h-100vh justify-content-center align-items-center">
@@ -276,10 +286,10 @@
 
           <div class="row justify-content-center">
             <div class="col-auto pad-it">
-              <a href="https://www.navhda.org/test-calendar/" class="btn btn-outline-light" data-aos="fade-down" data-aos-delay="100" data-aos-duration="1000" data-smooth-scroll="" data-smooth-scroll-hash="false">Find a NAVHDA Test</a>
+              <a href="https://www.navhda.org/test-calendar/" class="btn btn-outline-light" data-aos="fade-down" data-aos-delay="100" data-aos-duration="1000">Find a NAVHDA Test</a>
             </div>
             <div class="col-auto pad-it">
-              <a href="./test/" class="btn btn-outline-light" data-aos="fade-down" data-aos-delay="100" data-aos-duration="1000" data-smooth-scroll="" data-smooth-scroll-hash="false">View MoUplands Tests</a>
+              <a href="./test/" class="btn btn-outline-light" data-aos="fade-down" data-aos-delay="100" data-aos-duration="1000">View MoUplands Tests</a>
             </div>
           </div>
         </div>
@@ -288,7 +298,7 @@
   </section>
 
   <section id="events" class="py-0 overflow-hidden text-center">
-    <div class="bg-container overlay overlay-20 parallax" data-rellax-percentage="0.5" style="background-image: url('./mouplands_cover_files/images/mike_rick_jr_handler.jpg'); transform: translate3d(0px, 0px, 0px);">
+    <div class="bg-container overlay overlay-20 css-parallax" style="background-image: url('./mouplands_cover_files/images/mike_rick_jr_handler.jpg'); position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
     </div>
     <div class="container">
       <div class="row h-100vh justify-content-center align-items-center">
@@ -307,7 +317,8 @@
           <h3 class="my-0 fs-1 fw-medium text-primary text-uppercase">Event</h3>
           <h2 class="mb-5 fw-medium text-secondary text-uppercase">Schedule</h2>
           <div class="col-auto pad-it">
-            <iframe style="width: 100%;height: 700px" src="https://calendar.google.com/calendar/embed?src=d2g6lspige81nt8atjsbf4i0dg%40group.calendar.google.com&ctz=America%2FChicago" frameborder="0" scrolling="no"></iframe>
+            <!-- Added loading="lazy" to Calendar iframe -->
+            <iframe loading="lazy" style="width: 100%;height: 700px" src="https://calendar.google.com/calendar/embed?src=d2g6lspige81nt8atjsbf4i0dg%40group.calendar.google.com&ctz=America%2FChicago" frameborder="0" scrolling="no"></iframe>
           </div>
         </div>
       </div>
@@ -325,10 +336,11 @@
       </div>
 
       <div class="row justify-content-center">
+        <!-- Officer Cards: Added loading="lazy" and decoding="async" to all images -->
         <!-- Fred Rice -->
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card shadow-sm officer-card">
-            <img src="./mouplands_cover_files/images/fred_rice.jpg" class="card-img-top" alt="Fred Rice, MoUplands President">
+            <img src="./mouplands_cover_files/images/fred_rice.jpg" loading="lazy" decoding="async" class="card-img-top" alt="Fred Rice, MoUplands President">
             <div class="card-body text-center">
               <div>
                 <h3 class="h4 mb-1">President</h3>
@@ -346,7 +358,7 @@
         <!-- Daniel Mallory -->
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card shadow-sm officer-card">
-            <img src="./mouplands_cover_files/images/Daniel.jpg" class="card-img-top" alt="Daniel Mallory, MoUplands Vice President">
+            <img src="./mouplands_cover_files/images/Daniel.jpg" loading="lazy" decoding="async" class="card-img-top" alt="Daniel Mallory, MoUplands Vice President">
             <div class="card-body text-center">
               <div>
                 <h3 class="h4 mb-1">Vice President</h3>
@@ -360,7 +372,7 @@
         <!-- Sarah Purcell -->
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card shadow-sm officer-card">
-            <img src="./mouplands_cover_files/images/Sarah.jpg" class="card-img-top" alt="Sarah Purcell, MoUplands Treasurer">
+            <img src="./mouplands_cover_files/images/Sarah.jpg" loading="lazy" decoding="async" class="card-img-top" alt="Sarah Purcell, MoUplands Treasurer">
             <div class="card-body text-center">
               <div>
                 <h3 class="h4 mb-1">Treasurer</h3>
@@ -374,7 +386,7 @@
         <!-- Lee Abbott -->
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card shadow-sm officer-card">
-            <img src="./mouplands_cover_files/images/lee.jpeg" class="card-img-top" alt="Lee Abbott, MoUplands Test Secretary">
+            <img src="./mouplands_cover_files/images/lee.jpeg" loading="lazy" decoding="async" class="card-img-top" alt="Lee Abbott, MoUplands Test Secretary">
             <div class="card-body text-center">
               <div>
                 <h3 class="h4 mb-1">Test Secretary</h3>
@@ -388,7 +400,7 @@
         <!-- Jennifer Lalonde -->
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card shadow-sm officer-card">
-            <img src="./mouplands_cover_files/images/jen_lalonde.jpg" class="card-img-top" alt="Jennifer Lalonde, MoUplands Secretary">
+            <img src="./mouplands_cover_files/images/jen_lalonde.jpg" loading="lazy" decoding="async" class="card-img-top" alt="Jennifer Lalonde, MoUplands Secretary">
             <div class="card-body text-center">
               <div>
                 <h3 class="h4 mb-1">Secretary</h3>
@@ -402,7 +414,7 @@
         <!-- Christy Langston -->
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card shadow-sm officer-card">
-            <img src="./mouplands_cover_files/images/christy_sodak_thumbnail.jpg" class="card-img-top" alt="Christy Langston, MoUplands Social Media">
+            <img src="./mouplands_cover_files/images/christy_sodak_thumbnail.jpg" loading="lazy" decoding="async" class="card-img-top" alt="Christy Langston, MoUplands Social Media">
             <div class="card-body text-center">
               <div>
                 <h3 class="h4 mb-1">Social Media</h3>
@@ -421,7 +433,7 @@
         <!-- Brandon Whitfield -->
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card shadow-sm officer-card">
-            <img src="./mouplands_cover_files/images/brandon_thumbnail.jpg" class="card-img-top" alt="Brandon Whitfield, MoUplands IT">
+            <img src="./mouplands_cover_files/images/brandon_thumbnail.jpg" loading="lazy" decoding="async" class="card-img-top" alt="Brandon Whitfield, MoUplands IT">
             <div class="card-body text-center">
               <div>
                 <h3 class="h4 mb-1">IT</h3>
@@ -438,7 +450,7 @@
         <!-- Alex Hovis -->
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card shadow-sm officer-card">
-            <img src="./mouplands_cover_files/images/Alex.jpg" class="card-img-top" alt="Alex Hovis, MoUplands IT Director">
+            <img src="./mouplands_cover_files/images/Alex.jpg" loading="lazy" decoding="async" class="card-img-top" alt="Alex Hovis, MoUplands IT Director">
             <div class="card-body text-center">
               <div>
                 <h3 class="h4 mb-1">IT</h3>
@@ -455,7 +467,7 @@
         <!-- Steve Remspecher -->
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card shadow-sm officer-card">
-            <img src="./mouplands_cover_files/images/remspecher.JPG" class="card-img-top" alt="Steve Remspecher, Token Retired Guy">
+            <img src="./mouplands_cover_files/images/remspecher.JPG" loading="lazy" decoding="async" class="card-img-top" alt="Steve Remspecher, Token Retired Guy">
             <div class="card-body text-center">
               <div>
                 <h3 class="h4 mb-1">Token Retired Guy</h3>
@@ -483,15 +495,16 @@
 
   <section>
     <div class="container">
+      <!-- Sponsor Logos: Added loading="lazy" and decoding="async" -->
       <div class="row">
-        <div class="col-sm"><div class="card" style="border:none; padding-bottom:20px;"><img style="max-width: 18rem; margin: auto;" src="./mouplands_cover_files/images/sponsor_logos/garmin_logo.png" class="card-img-top" alt="Garmin Logo"></div></div>
-        <div class="col-sm"><div class="card" style="border:none; padding-bottom:20px;"><img style="max-width: 18rem; margin: auto;" src="./mouplands_cover_files/images/sponsor_logos/rgs_logo.png" class="card-img-top" alt="RGS Logo"></div></div>
-        <div class="col-sm"><div class="card" style="border:none; padding-bottom:20px;"><img style="max-width: 18rem; margin: auto;" src="./mouplands_cover_files/images/sponsor_logos/pf_qf_logo.gif" class="card-img-top" alt="Pheasants Forever Quail Forever Logo"></div></div>
+        <div class="col-sm"><div class="card" style="border:none; padding-bottom:20px;"><img style="max-width: 18rem; margin: auto;" src="./mouplands_cover_files/images/sponsor_logos/garmin_logo.png" loading="lazy" decoding="async" class="card-img-top" alt="Garmin Logo"></div></div>
+        <div class="col-sm"><div class="card" style="border:none; padding-bottom:20px;"><img style="max-width: 18rem; margin: auto;" src="./mouplands_cover_files/images/sponsor_logos/rgs_logo.png" loading="lazy" decoding="async" class="card-img-top" alt="RGS Logo"></div></div>
+        <div class="col-sm"><div class="card" style="border:none; padding-bottom:20px;"><img style="max-width: 18rem; margin: auto;" src="./mouplands_cover_files/images/sponsor_logos/pf_qf_logo.gif" loading="lazy" decoding="async" class="card-img-top" alt="Pheasants Forever Quail Forever Logo"></div></div>
       </div>
       <div class="row">
-        <div class="col-sm"><div class="card" style="border:none; padding-bottom:20px;"><img style="max-width: 18rem; margin: auto;" src="./mouplands_cover_files/images/sponsor_logos/ugly_dog_logo.png" class="card-img-top" alt="Ugly Dog Logo"></div></div>
-        <div class="col-sm"><div class="card" style="border:none; padding-bottom:20px;"><img style="max-width: 18rem; margin: auto;" src="./mouplands_cover_files/images/sponsor_logos/pro_plan_logo_4C_2019.jpg" class="card-img-top" alt="Pro Plan Logo"></div></div>
-        <div class="col-sm"><div class="card" style="border:none; padding-bottom:20px;"><img style="max-width: 18rem; margin: auto;" src="./mouplands_cover_files/images/sponsor_logos/dakota_283_blue.png" class="card-img-top" alt="Dakota Logo"></div></div>
+        <div class="col-sm"><div class="card" style="border:none; padding-bottom:20px;"><img style="max-width: 18rem; margin: auto;" src="./mouplands_cover_files/images/sponsor_logos/ugly_dog_logo.png" loading="lazy" decoding="async" class="card-img-top" alt="Ugly Dog Logo"></div></div>
+        <div class="col-sm"><div class="card" style="border:none; padding-bottom:20px;"><img style="max-width: 18rem; margin: auto;" src="./mouplands_cover_files/images/sponsor_logos/pro_plan_logo_4C_2019.jpg" loading="lazy" decoding="async" class="card-img-top" alt="Pro Plan Logo"></div></div>
+        <div class="col-sm"><div class="card" style="border:none; padding-bottom:20px;"><img style="max-width: 18rem; margin: auto;" src="./mouplands_cover_files/images/sponsor_logos/dakota_283_blue.png" loading="lazy" decoding="async" class="card-img-top" alt="Dakota Logo"></div></div>
       </div>
     </div>
     <span class="badge badge-primary">v1.5.0</span>
@@ -524,7 +537,14 @@
 
   <button id="backToTop" title="Back to Top" style="display:none;position:fixed;bottom:40px;right:40px;z-index:9999;background:#f12639;color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.2);cursor:pointer;transition:opacity 0.3s;">↑</button>
 
+  <!-- Heavy third-party scripts moved to bottom of body to prevent render blocking -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <!-- Inlined Functional JS -->
   <script>
+    // Back to top button logic
     const backToTopBtn = document.getElementById('backToTop');
     window.addEventListener('scroll', function() {
       if (window.scrollY > 200) {
@@ -539,6 +559,7 @@
       window.scrollTo({top: 0, behavior: 'smooth'});
     });
 
+    // Countdown timer logic
     const testDate = new Date("October 2, 2026 07:30:00").getTime();
     const endDate = new Date("October 4, 2026 17:00:00").getTime();
 
