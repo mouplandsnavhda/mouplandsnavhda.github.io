@@ -1,114 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Test Registration | MoUplands · NAVHDA</title>
+  <meta name="description" content="Missouri Uplands NAVHDA Test Registration and Schedule.">
+  <title>Test Registration · MoUplands NAVHDA</title>
 
-  <!-- Core CSS -->
-  <link href="./mouplands_cover_files/bootstrap.min.css" rel="stylesheet">
-  <link href="./mouplands_cover_files/theme.min.css" rel="stylesheet">
-  <link href="./mouplands_cover_files/custom.css" rel="stylesheet">
+  <!-- Preconnect to critical domains -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://use.fontawesome.com">
+
+  <link rel="icon" href="../mouplands_cover_files/images/mouplands_logo_white.png" sizes="192x192">
+
+  <!-- Core CSS (Updated paths with ../ to target root folder) -->
+  <link href="../mouplands_cover_files/bootstrap.min.css" rel="stylesheet">
+  <link href="../mouplands_cover_files/theme.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+  <link href="../mouplands_cover_files/custom.css" rel="stylesheet">
 
   <style>
-    body { padding-top: 70px; } /* Space for fixed navbar */
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    html {
+      scroll-padding-top: 70px !important;
+      scroll-behavior: smooth;
+    }
+
+    .navbar {
+      margin-bottom: 0 !important;
+      border-bottom: none !important;
+    }
+
+    nav > a {
+      color: white;
+    }
+
     .btn-join {
       background-color: #f12639;
       color: #fff !important;
       border: none;
-      padding: 14px 30px;
-      font-size: 1.1rem;
+      padding: 12px 24px;
+      font-size: 1rem;
       font-weight: 600;
       text-transform: uppercase;
       border-radius: 6px;
       display: inline-block;
-      min-width: 280px;
+      transition: background-color 0.2s ease;
     }
-    .btn-join:hover { background-color: #d91f31; color: #fff; text-decoration: none; }
-    .hero-section { background-color: #343a40; color: white; padding: 60px 0; }
+
+    .btn-join:hover {
+      background-color: #d91f31;
+      color: #fff !important;
+      text-decoration: none;
+    }
+
+    .hero-header {
+      background-color: #2b3035;
+      color: #ffffff;
+      padding: 100px 15px 60px 15px;
+      border-bottom: 4px solid #f12639;
+    }
   </style>
 </head>
 
-<body>
+<body class="text-center bg-light">
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-    <div class="container">
-      <a class="navbar-brand text-uppercase font-weight-bold" href="index.html">MoUplands</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+  <!-- Embedded Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" style="opacity: .95;">
+    <div class="container-fluid">
+      <a class="navbar-brand text-uppercase font-weight-bold" href="../index.html">MoUplands</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html#join">Join</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.html#tests">Tests</a></li>
-          <li class="nav-item"><a class="nav-link" href="payment.html">Payment</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html#join">Join</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html#grounds">The Grounds</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html#training">Training</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="../index.html#tests">Tests</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="chapterDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Chapter
+            </a>
+            <div class="dropdown-menu dropdown-menu-right bg-dark border-secondary" aria-labelledby="chapterDropdown">
+              <a class="dropdown-item text-light" href="../index.html#events">Events</a>
+              <a class="dropdown-item text-light" href="../index.html#schedule">Schedule</a>
+              <a class="dropdown-item text-light" href="../index.html#officers">Officers</a>
+              <a class="dropdown-item text-light" href="../index.html#sponsors">Sponsors</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-warning font-weight-bold" href="#" id="resourceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Member Tools
+            </a>
+            <div class="dropdown-menu dropdown-menu-right bg-dark border-secondary" aria-labelledby="resourceDropdown">
+              <a class="dropdown-item text-light" href="../bird-vendors.html">Bird Vendors</a>
+              <a class="dropdown-item text-light" href="../bird-orders.html">Bird Orders</a>
+              <a class="dropdown-item text-light" href="../payment.html">Payment</a>
+              <div class="dropdown-divider border-secondary"></div>
+              <a class="dropdown-item text-warning font-weight-bold" target="_blank" href="https://stores.ameriprintapparel.com/NAVHDA_MISSOURI_UPLANDS/shop/home">Chapter Store</a>
+              <div class="dropdown-divider border-secondary" style="border-top: 1px solid #495057;"></div>
+              <a class="dropdown-item text-light" target="_blank" href="../mouplands_cover_files/images/2026_Final_Bylaws.pdf">Chapter Bylaws</a>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Header -->
-  <section class="hero-section text-center">
+  <!-- Page Header -->
+  <header class="hero-header">
     <div class="container">
-      <h1 class="display-4 font-weight-bold">Missouri Uplands NAVHDA Tests</h1>
-      <p class="lead">Spring & Fall Natural Ability, Utility Prep, and Utility Tests</p>
+      <h1 class="text-uppercase font-weight-bold display-4">Missouri Uplands NAVHDA Tests</h1>
+      <p class="lead mb-0 text-white-50">Spring &amp; Fall Natural Ability, Utility Prep, and Utility Tests</p>
+    </div>
+  </header>
+
+  <!-- How to Register Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h3 class="my-0 fs-1 fw-medium text-primary text-uppercase">Registration Process</h3>
+        <h2 class="fw-medium text-secondary text-uppercase mb-0">How to Register</h2>
+        <div style="width: 60px; height: 3px; background-color: #f12639; margin: 10px auto 0 auto;"></div>
+      </div>
+
+      <div class="row justify-content-center">
+        <!-- Step 1 -->
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100 shadow-sm border-0 p-4">
+            <div class="card-body d-flex flex-column text-center">
+              <div class="mb-3">
+                <i class="fas fa-globe fa-3x" style="color: #f12639;"></i>
+              </div>
+              <h4 class="h5 font-weight-bold mb-3">1. Join NAVHDA</h4>
+              <p class="text-muted small mb-4">You must hold an active membership with NAVHDA International.</p>
+              <div class="mt-auto">
+                <a href="https://www.navhda.org/join-or-renew/" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark btn-block font-weight-bold">
+                  Join International
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100 shadow-sm border-0 p-4">
+            <div class="card-body d-flex flex-column text-center">
+              <div class="mb-3">
+                <i class="fas fa-id-card fa-3x" style="color: #f12639;"></i>
+              </div>
+              <h4 class="h5 font-weight-bold mb-3">2. Register Your Dog</h4>
+              <p class="text-muted small mb-4">Ensure your dog is officially registered with NAVHDA International.</p>
+              <div class="mt-auto">
+                <a href="https://www.navhda.org/register-your-dog/" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark btn-block font-weight-bold">
+                  Dog Reg Form (PDF)
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Direct Link to Portal -->
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100 shadow-sm border-0 p-4" style="border-top: 4px solid #f12639 !important;">
+            <div class="card-body d-flex flex-column text-center">
+              <div class="mb-3">
+                <i class="fas fa-file-signature fa-3x" style="color: #f12639;"></i>
+              </div>
+              <h4 class="h5 font-weight-bold mb-3">3. Submit Test Entry</h4>
+              <p class="text-muted small mb-4">Log in to the official NAVHDA Portal to submit your test entry online.</p>
+              <div class="mt-auto">
+                <a href="https://www.navhda.org/login/?redirect_to=https%3A%2F%2Fwww.navhda.org%2F%3Frest_route%3D%252Fnavhda_portal_auth%252Fv1%252FGenTradeOff" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="btn-join btn-block font-weight-bold text-white">
+                   Sign Up For Test
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Main Content -->
-  <div class="container my-5">
-    
-    <h2 class="text-secondary text-uppercase mb-4 text-center">How to Register</h2>
-    
-    <div class="row">
-      <div class="col-md-4 text-center mb-4">
-        <div class="card p-3 h-100 shadow-sm">
-          <h4>1. Join NAVHDA</h4>
-          <p>You must hold an active membership with NAVHDA International.</p>
-          <a href="#" class="btn btn-outline-primary">Join International</a>
+  <!-- Details Section -->
+  <section class="py-5 bg-white border-top">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-left mb-4 mb-md-0">
+          <h3 class="my-0 fs-1 fw-medium text-primary text-uppercase">Upcoming Dates</h3>
+          <h2 class="mb-3 fw-medium text-secondary text-uppercase">Test Schedule</h2>
+          <div class="p-3 bg-light rounded border mb-3">
+            <i class="fas fa-calendar-alt mr-2 text-danger"></i>
+            <strong class="h5 mb-0">May 1st, 2nd, &amp; 3rd 2026</strong>
+          </div>
+          <p class="text-muted">Spring Natural Ability, Utility Prep, and Utility Tests hosted at Mallard Valley Outfitters.</p>
         </div>
-      </div>
-      <div class="col-md-4 text-center mb-4">
-        <div class="card p-3 h-100 shadow-sm">
-          <h4>2. Register Your Dog</h4>
-          <p>Ensure your dog is officially registered with NAVHDA International.</p>
-          <a href="#" class="btn btn-outline-primary">Dog Reg Form (PDF)</a>
-        </div>
-      </div>
-      <div class="col-md-4 text-center mb-4">
-        <div class="card p-3 h-100 shadow-sm">
-          <h4>3. Complete Entry Form</h4>
-          <p>Fill out the official test entry form and submit it to the test secretary.</p>
-          <a href="#" class="btn btn-outline-primary">Test Entry Form (PDF)</a>
+        <div class="col-md-6 text-left">
+          <h3 class="my-0 fs-1 fw-medium text-primary text-uppercase">Contact</h3>
+          <h2 class="mb-3 fw-medium text-secondary text-uppercase">Test Secretary</h2>
+          <div class="card p-3 shadow-sm border-0">
+            <h4 class="h5 font-weight-bold mb-1">Lee Abbott</h4>
+            <p class="text-muted small mb-0">For questions regarding entry status or test logistics, please reach out directly to the test secretary.</p>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="row mt-5">
-      <div class="col-md-6">
-        <h3 class="text-primary text-uppercase">Upcoming Test Dates</h3>
-        <div class="alert alert-warning">
-          <strong>May 1st, 2nd, 3rd 2026</strong>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <h3 class="text-primary text-uppercase">Test Secretary</h3>
-        <p><strong>Lee Abbott</strong></p>
-        <p>For questions regarding test registration, please contact the test secretary directly.</p>
-      </div>
-    </div>
-  </div>
+  </section>
 
   <!-- Footer -->
   <footer class="bg-dark text-light py-4">
-    <div class="container text-center">
-      <p>Missouri Uplands NAVHDA &copy; 2026</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-md-left">
+          <h5>Missouri Uplands NAVHDA</h5>
+          <p class="mb-0 small text-muted">A passionate group of versatile dog enthusiasts with decades of experience.</p>
+        </div>
+        <div class="col-md-6 text-md-right mt-3 mt-md-0">
+          <a href="https://www.facebook.com/pg/NavhdaMoUplands/events/" target="_blank" class="text-light mr-3" rel="noopener noreferrer"><i class="fab fa-facebook-f fa-lg"></i></a>
+          <a href="https://www.navhda.org/" target="_blank" class="text-light" rel="noopener noreferrer"><i class="fas fa-globe fa-lg"></i></a>
+        </div>
+      </div>
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
+
 </html>
