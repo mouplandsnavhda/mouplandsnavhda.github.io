@@ -1,297 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline'; img-src 'self' https: data:;">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    
-    <title>NAVHDA Test Registration - Missouri Uplands</title>
-    <meta name="description" content="Register for Missouri Uplands NAVHDA tests. Natural Ability, Utility, and Versatile Champion tests available. Contact test secretary for availability.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Test Registration | MoUplands · NAVHDA</title>
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="../mouplands_cover_files/grid.css" rel="stylesheet">
-    <link rel="icon" href="../mouplands_cover_files/images/mouplands_logo_white.png" sizes="192x192">
+  <!-- Core CSS -->
+  <link href="./mouplands_cover_files/bootstrap.min.css" rel="stylesheet">
+  <link href="./mouplands_cover_files/theme.min.css" rel="stylesheet">
+  <link href="./mouplands_cover_files/custom.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
-    <style>
-        :root {
-            --mouplands-dark: #1b2a1e;
-            --mouplands-green: #2c4230;
-            --mouplands-accent: #c48b36;
-        }
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
-        .navbar-brand img {
-            height: 40px;
-        }
-        .hero-banner {
-            background: linear-gradient(rgba(27, 42, 30, 0.85), rgba(27, 42, 30, 0.85)), url('../mouplands_cover_files/images/mouplands_logo_white.png') center/cover;
-            color: #fff;
-            padding: 60px 0;
-            border-bottom: 4px solid var(--mouplands-accent);
-        }
-        .section-title {
-            color: var(--mouplands-dark);
-            font-weight: 700;
-            border-bottom: 2px solid var(--mouplands-accent);
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 20px;
-        }
-        .card-custom {
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease;
-        }
-        .card-custom:hover {
-            transform: translateY(-3px);
-        }
-        .badge-date {
-            background-color: var(--mouplands-green);
-            color: #fff;
-            font-size: 0.95rem;
-            padding: 8px 14px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 8px;
-        }
-        .btn-mouplands {
-            background-color: var(--mouplands-green);
-            color: #fff;
-            font-weight: 600;
-            border: none;
-        }
-        .btn-mouplands:hover {
-            background-color: var(--mouplands-dark);
-            color: #fff;
-        }
-    </style>
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-53FZKBWVS3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-53FZKBWVS3');
-    </script>
+  <style>
+    body { padding-top: 70px; } /* Space for fixed navbar */
+    .btn-join {
+      background-color: #f12639;
+      color: #fff !important;
+      border: none;
+      padding: 14px 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      border-radius: 6px;
+      display: inline-block;
+      min-width: 280px;
+    }
+    .btn-join:hover { background-color: #d91f31; color: #fff; text-decoration: none; }
+    .hero-section { background-color: #343a40; color: white; padding: 60px 0; }
+  </style>
 </head>
 
 <body>
 
-    <!-- Main Site Header & Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand font-weight-bold" href="../index.html">
-                <img src="../mouplands_cover_files/images/mouplands_logo_white.png" alt="MoUplands" class="mr-2">
-                MoUplands NAVHDA
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-                    <li class="nav-item active"><a class="nav-link" href="#">Tests</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../bird-vendors.html">Bird Vendors</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../bird-orders.html">Bird Orders</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../pay.html">Payment</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-outline-light btn-sm ml-lg-2 px-3" href="https://members.mouplands.org/" target="_blank">Member Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Header -->
-    <header class="hero-banner text-center mb-5">
-        <div class="container">
-            <h1 class="display-4 font-weight-bold">Missouri Uplands NAVHDA Tests</h1>
-            <p class="lead text-light mb-0">Spring & Fall Natural Ability, Utility Prep, and Utility Tests</p>
-        </div>
-    </header>
-
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <div class="container">
-        
-        <!-- Registration Steps -->
-        <section class="mb-5">
-            <h3 class="section-title">How to Register</h3>
-            <div class="row mt-3">
-                <div class="col-md-4 mb-3">
-                    <div class="card card-custom h-100 p-4 text-center">
-                        <div class="mb-3 text-success"><i class="fas fa-globe fa-2x"></i></div>
-                        <h5>1. Join NAVHDA</h5>
-                        <p class="small text-muted">You must hold an active membership with NAVHDA International.</p>
-                        <a href="https://www.navhda.org/join-navhda/" target="_blank" class="btn btn-sm btn-outline-dark mt-auto">Join International</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card card-custom h-100 p-4 text-center">
-                        <div class="mb-3 text-success"><i class="fas fa-id-card fa-2x"></i></div>
-                        <h5>2. Register Your Dog</h5>
-                        <p class="small text-muted">Ensure your dog is officially registered with NAVHDA International.</p>
-                        <a href="https://www.navhda.org/wp-content/uploads/2018/08/Reg_SingleRegApp-Rev-2024_0514.pdf" target="_blank" class="btn btn-sm btn-outline-dark mt-auto">Dog Reg Form (PDF)</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card card-custom h-100 p-4 text-center">
-                        <div class="mb-3 text-success"><i class="fas fa-file-alt fa-2x"></i></div>
-                        <h5>3. Complete Entry Form</h5>
-                        <p class="small text-muted">Fill out the official test entry form and submit it to the test secretary.</p>
-                        <a href="https://www.navhda.org/wp-content/uploads/2018/11/Test-Entry-Form-2025-01.pdf" target="_blank" class="btn btn-sm btn-outline-dark mt-auto">Test Entry Form (PDF)</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <a class="navbar-brand text-uppercase font-weight-bold" href="index.html">MoUplands</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html#join">Join</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#tests">Tests</a></li>
+          <li class="nav-item"><a class="nav-link" href="payment.html">Payment</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-        <!-- Dates & Grounds -->
-        <section class="mb-5">
-            <div class="row">
-                <div class="col-lg-7 mb-4">
-                    <h3 class="section-title">Upcoming Test Dates</h3>
-                    <div class="card card-custom p-4">
-                        <div class="mb-3">
-                            <span class="badge-date"><i class="fas fa-calendar-alt mr-2"></i> May 1st, 2nd, 3rd 2026</span>
-                        </div>
-                        <div class="mb-3">
-                            <span class="badge-date"><i class="fas fa-calendar-alt mr-2"></i> Oct 2nd, 3rd, 4th 2026</span>
-                        </div>
-                        <div>
-                            <span class="badge-date"><i class="fas fa-calendar-alt mr-2"></i> April 30th – May 2nd 2027</span>
-                        </div>
-                        <hr>
-                        <h5><i class="fas fa-map-marker-alt text-danger mr-2"></i> Testing Grounds</h5>
-                        <p class="mb-1"><strong><a href="https://www.mallardvalley.com/" target="_blank" class="text-dark">Mallard Valley Outfitters</a></strong></p>
-                        <p class="text-muted small mb-0">26886 Monroe Rd. 1103 Madison, MO 65260</p>
-                    </div>
-                </div>
+  <!-- Header -->
+  <section class="hero-section text-center">
+    <div class="container">
+      <h1 class="display-4 font-weight-bold">Missouri Uplands NAVHDA Tests</h1>
+      <p class="lead">Spring & Fall Natural Ability, Utility Prep, and Utility Tests</p>
+    </div>
+  </section>
 
-                <div class="col-lg-5 mb-4">
-                    <h3 class="section-title">Test Secretary</h3>
-                    <div class="card card-custom p-4 h-100">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-light rounded-circle p-3 mr-3"><i class="fas fa-user-tie fa-2x text-secondary"></i></div>
-                            <div>
-                                <h5 class="mb-0">Lee Abbott</h5>
-                                <small class="text-muted">Missouri Uplands Test Secretary</small>
-                            </div>
-                        </div>
-                        <p class="small text-muted">Before submitting payment, you <strong>must</strong> contact the test secretary to confirm entry availability.</p>
-                        <ul class="list-unstyled mb-0">
-                            <li class="mb-2"><i class="fas fa-envelope text-muted mr-2"></i> <a href="mailto:leepabbott@gmail.com">leepabbott@gmail.com</a></li>
-                            <li><i class="fas fa-phone text-muted mr-2"></i> (716) 353-3781</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Pricing & Payment -->
-        <section class="mb-5">
-            <h3 class="section-title">Entry Fees & Payment</h3>
-            
-            <div class="alert alert-warning card-custom p-3 mb-4">
-                <i class="fas fa-exclamation-triangle mr-2"></i> <strong>Refund Policy:</strong> All refunds are subject to a $25 processing fee. No refunds will be issued within 30 days of the scheduled test date.
-            </div>
-
-            <div class="row">
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card card-custom text-center h-100">
-                        <div class="card-header bg-transparent font-weight-bold">Member NA</div>
-                        <div class="card-body d-flex flex-column">
-                            <h2 class="card-title my-2">$155</h2>
-                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="mt-auto pt-3">
-                                <input type="hidden" name="cmd" value="_s-xclick">
-                                <input type="hidden" name="hosted_button_id" value="LNBCZ6HGWZQGN">
-                                <button type="submit" class="btn btn-mouplands btn-block">Pay with PayPal</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card card-custom text-center h-100">
-                        <div class="card-header bg-transparent font-weight-bold">Member GDT / UT</div>
-                        <div class="card-body d-flex flex-column">
-                            <h2 class="card-title my-2">$190</h2>
-                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="mt-auto pt-3">
-                                <input type="hidden" name="cmd" value="_s-xclick">
-                                <input type="hidden" name="hosted_button_id" value="4C3VCNGJX3UYJ">
-                                <button type="submit" class="btn btn-mouplands btn-block">Pay with PayPal</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card card-custom text-center h-100">
-                        <div class="card-header bg-transparent font-weight-bold">Non-Member NA</div>
-                        <div class="card-body d-flex flex-column">
-                            <h2 class="card-title my-2">$180</h2>
-                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="mt-auto pt-3">
-                                <input type="hidden" name="cmd" value="_s-xclick">
-                                <input type="hidden" name="hosted_button_id" value="SXHYM7K5LLC5N">
-                                <button type="submit" class="btn btn-mouplands btn-block">Pay with PayPal</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card card-custom text-center h-100">
-                        <div class="card-header bg-transparent font-weight-bold">Non-Member GDT / UT</div>
-                        <div class="card-body d-flex flex-column">
-                            <h2 class="card-title my-2">$215</h2>
-                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="mt-auto pt-3">
-                                <input type="hidden" name="cmd" value="_s-xclick">
-                                <input type="hidden" name="hosted_button_id" value="GVVXB56VUMX9Y">
-                                <button type="submit" class="btn btn-mouplands btn-block">Pay with PayPal</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sponsors -->
-        <section class="text-center my-5 pt-4 border-top">
-            <h5 class="text-muted mb-4 text-uppercase" style="letter-spacing: 1px;">Our Proud Sponsors</h5>
-            <div class="row align-items-center justify-content-center">
-                <div class="col-4 col-md-2 mb-3"><img src="../mouplands_cover_files/images/sponsor_logos/garmin_logo.png" class="img-fluid px-2" alt="Garmin"></div>
-                <div class="col-4 col-md-2 mb-3"><img src="../mouplands_cover_files/images/sponsor_logos/rgs_logo.png" class="img-fluid px-2" alt="RGS"></div>
-                <div class="col-4 col-md-2 mb-3"><img src="../mouplands_cover_files/images/sponsor_logos/pf_qf_logo.gif" class="img-fluid px-2" alt="PF QF"></div>
-                <div class="col-4 col-md-2 mb-3"><img src="../mouplands_cover_files/images/sponsor_logos/ugly_dog_logo.png" class="img-fluid px-2" alt="Ugly Dog"></div>
-                <div class="col-4 col-md-2 mb-3"><img src="../mouplands_cover_files/images/sponsor_logos/pro_plan_logo_4C_2019.jpg" class="img-fluid px-2" alt="Pro Plan"></div>
-                <div class="col-4 col-md-2 mb-3"><img src="../mouplands_cover_files/images/sponsor_logos/dakota_283_blue.png" class="img-fluid px-2" alt="Dakota 283"></div>
-            </div>
-        </section>
-
+  <!-- Main Content -->
+  <div class="container my-5">
+    
+    <h2 class="text-secondary text-uppercase mb-4 text-center">How to Register</h2>
+    
+    <div class="row">
+      <div class="col-md-4 text-center mb-4">
+        <div class="card p-3 h-100 shadow-sm">
+          <h4>1. Join NAVHDA</h4>
+          <p>You must hold an active membership with NAVHDA International.</p>
+          <a href="#" class="btn btn-outline-primary">Join International</a>
+        </div>
+      </div>
+      <div class="col-md-4 text-center mb-4">
+        <div class="card p-3 h-100 shadow-sm">
+          <h4>2. Register Your Dog</h4>
+          <p>Ensure your dog is officially registered with NAVHDA International.</p>
+          <a href="#" class="btn btn-outline-primary">Dog Reg Form (PDF)</a>
+        </div>
+      </div>
+      <div class="col-md-4 text-center mb-4">
+        <div class="card p-3 h-100 shadow-sm">
+          <h4>3. Complete Entry Form</h4>
+          <p>Fill out the official test entry form and submit it to the test secretary.</p>
+          <a href="#" class="btn btn-outline-primary">Test Entry Form (PDF)</a>
+        </div>
+      </div>
     </div>
 
-    <!-- Main Footer -->
-    <footer class="bg-dark text-light py-4 mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mb-3 mb-md-0">
-                    <h5>Missouri Uplands NAVHDA</h5>
-                    <p class="small text-muted mb-0">A passionate group of versatile dog enthusiasts with decades of experience spread across versatile hunting breeds.</p>
-                </div>
-                <div class="col-md-6 text-md-right">
-                    <div class="mb-2">
-                        <a href="https://www.facebook.com/pg/NavhdaMoUplands/events/" target="_blank" class="text-light mr-3"><i class="fab fa-facebook-f fa-lg"></i></a>
-                        <a href="https://www.navhda.org/" target="_blank" class="text-light"><i class="fas fa-globe fa-lg"></i></a>
-                    </div>
-                    <p class="small text-muted mb-0">&copy; 2026 Missouri Uplands NAVHDA. All rights reserved.</p>
-                </div>
-            </div>
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <h3 class="text-primary text-uppercase">Upcoming Test Dates</h3>
+        <div class="alert alert-warning">
+          <strong>May 1st, 2nd, 3rd 2026</strong>
         </div>
-    </footer>
+      </div>
+      <div class="col-md-6">
+        <h3 class="text-primary text-uppercase">Test Secretary</h3>
+        <p><strong>Lee Abbott</strong></p>
+        <p>For questions regarding test registration, please contact the test secretary directly.</p>
+      </div>
+    </div>
+  </div>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-4">
+    <div class="container text-center">
+      <p>Missouri Uplands NAVHDA &copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
