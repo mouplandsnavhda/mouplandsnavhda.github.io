@@ -123,12 +123,27 @@
       justify-content: space-between;
     }
 
-    /* CSS-based Parallax */
+    /* CSS-based Parallax with Mobile Fix */
     .css-parallax {
-      background-attachment: fixed;
-      background-position: center;
+      background-attachment: scroll;
+      background-position: center center;
       background-repeat: no-repeat;
       background-size: cover;
+    }
+
+    @media (min-width: 992px) {
+      .css-parallax {
+        background-attachment: fixed;
+      }
+    }
+
+    /* Fix mobile section height scaling */
+    @media (max-width: 991px) {
+      .row.h-100vh {
+        min-height: 80vh !important;
+        height: auto !important;
+        padding: 80px 0;
+      }
     }
   </style>
 
